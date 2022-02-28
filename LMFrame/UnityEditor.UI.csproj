@@ -315,9 +315,6 @@
     <Reference Include="DOTweenEditor">
       <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/DOTween/Editor/DOTweenEditor.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.27f1c1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
     </Reference>
@@ -677,14 +674,6 @@
     <ProjectReference Include="UnityEngine.UI.csproj">
       <Project>{1B98D1F4-1ACE-D972-E043-FFE3D84BEF8E}</Project>
       <Name>UnityEngine.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEditor.TestRunner.csproj">
-      <Project>{ED55C5B3-1BD7-0023-7767-03A13F2D97FE}</Project>
-      <Name>UnityEditor.TestRunner</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.TestRunner.csproj">
-      <Project>{AF024CE4-484C-1A3A-D16A-7008E71B36F5}</Project>
-      <Name>UnityEngine.TestRunner</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
