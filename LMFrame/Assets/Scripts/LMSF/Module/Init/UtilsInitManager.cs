@@ -11,7 +11,7 @@ public class UtilsInitManager : MonoSingleton<UtilsInitManager>
     public void InitManager()
     {
         TimeManager.Instance.InitGameFunc();
-        LocalDataManager.InitLocalDataFunc();
+        LocalDataUtils.InitLocalDataFunc();
         RvCoinManager.Instance.RefeshRvCoinFunc();
         if (IAPManager.Instance.NeedShop)
         {
@@ -45,11 +45,11 @@ public class UtilsInitManager : MonoSingleton<UtilsInitManager>
     public void RefeshEveryDay()
     {
         ////今天是否进入过每日签到 签到相关
-        //LocalDataManager.SetLocalData("DailySignInTodayIsEnter", 1);
-        //LocalDataManager.SetLocalData("TodayDailySingnInRewardIsGet", 1);
+        //LocalDataUtils.SetLocalData("DailySignInTodayIsEnter", 1);
+        //LocalDataUtils.SetLocalData("TodayDailySingnInRewardIsGet", 1);
         ////今天是否进入过转盘
-        //LocalDataManager.SetLocalData("IsEnterTurnTableInToday", 1);
+        //LocalDataUtils.SetLocalData("IsEnterTurnTableInToday", 1);
         ////刷新转盘次数
-        //LocalDataManager.SetLocalData("RemindWheelNumberEveryDay", ConstConfig.TurnTableNum);
+        //LocalDataUtils.SetLocalData("RemindWheelNumberEveryDay", ConstConfig.TurnTableNum);
     }
 }

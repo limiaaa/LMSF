@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+namespace LMSF.Utils
+{
     public static class DebugUtils
     {
         public static bool IsOpenLog = true;
@@ -15,7 +16,7 @@ using UnityEngine;
             {
                 return;
             }
-            string temp = String.Format(msg , objects);
+            string temp = String.Format(msg, objects);
             Debug.Log(string.Format(logTemplate, temp, ColorUtility.ToHtmlStringRGB(color)));
         }
         public static void Log(string msg)
@@ -26,7 +27,7 @@ using UnityEngine;
             }
             Log(msg, Color.white);
         }
-        public static void LogWarning(string fmt , params object[] objects)
+        public static void LogWarning(string fmt, params object[] objects)
         {
             if (!IsOpenLog)
             {
@@ -34,7 +35,7 @@ using UnityEngine;
             }
             Log(fmt, Color.yellow, objects);
         }
-        public static void LogError(string fmt , params object[] objects)
+        public static void LogError(string fmt, params object[] objects)
         {
             if (!IsOpenLog)
             {
@@ -43,4 +44,4 @@ using UnityEngine;
             Log(fmt, Color.red, objects);
         }
     }
-
+}

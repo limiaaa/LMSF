@@ -9,12 +9,12 @@ public class RvCoinManager : MonoSingleton<RvCoinManager>
     bool HasBuyOrAdBehaviour;
     public void RefeshRvCoinFunc()
     {
-        //RvCoin = LocalDataManager.GetLocalData("RvCoin", ConstConfig.Rvcoin[0]);
+        //RvCoin = LocalDataUtils.GetLocalData("RvCoin", ConstConfig.Rvcoin[0]);
     }
     public void AddRvCoin()
     {
         //RvCoin += ConstConfig.Rvcoin[1];
-        //LocalDataManager.SetLocalData("RvCoin", RvCoin);
+        //LocalDataUtils.SetLocalData("RvCoin", RvCoin);
         ////SendAct.ActRVcoin("add","rv_revive");
         //Debug.Log("Rvcoin增加********************************：" + RvCoin);
         ////HasBuyOrAdBehaviour = true;
@@ -33,7 +33,7 @@ public class RvCoinManager : MonoSingleton<RvCoinManager>
         ////}
         //RvCoin-= ConstConfig.Rvcoin[2];
         //if (RvCoin <= 0) RvCoin = 0;
-        //LocalDataManager.SetLocalData("RvCoin", RvCoin);
+        //LocalDataUtils.SetLocalData("RvCoin", RvCoin);
         //Debug.Log("Rvcoin减少********************************：" + RvCoin);
     }
     public int GetRvCoin()

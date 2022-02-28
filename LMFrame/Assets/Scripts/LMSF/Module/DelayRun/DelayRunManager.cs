@@ -22,7 +22,7 @@ public class DelayRunManager : MonoSingleton<DelayRunManager>
         Debug.Log("----------------开始体力迭代----------------");
         int timer = 0;
         //过去了多久+跑了多久
-        long Usetime = TimeManager.Instance.ThisLoginAndLastExit+ LocalDataManager.GetLocalData("HeartTime", 0);
+        long Usetime = TimeManager.Instance.ThisLoginAndLastExit+ LocalDataUtils.GetLocalData("HeartTime", 0);
 
         //先算出过去时间需要加多少体力
         AddHeart(Usetime);
@@ -34,7 +34,7 @@ public class DelayRunManager : MonoSingleton<DelayRunManager>
         TimeManager.Instance.AddFuncToTime("AddHeart", (Time) =>
         {
             //如果体力满了
-            //if (LocalDataManager.GetItemNum(GameItemType.Heart) >= ConstConfig.BeginingHp)
+            //if (LocalDataUtils.GetItemNum(GameItemType.Heart) >= ConstConfig.BeginingHp)
             //{
             //    RemindHeartTime = -1;
             //    timer = 0;
@@ -75,8 +75,8 @@ public class DelayRunManager : MonoSingleton<DelayRunManager>
     {
         //long timer = 0;
         ////过去了多久+跑了多久
-        //timer = TimeManager.Instance.ThisLoginAndLastExit + LocalDataManager.GetLocalData("CoinByAdTime", 0);
-        //if (LocalDataManager.GetLocalData("CoinByAdTime", 0) != 0)
+        //timer = TimeManager.Instance.ThisLoginAndLastExit + LocalDataUtils.GetLocalData("CoinByAdTime", 0);
+        //if (LocalDataUtils.GetLocalData("CoinByAdTime", 0) != 0)
         //{
         //    IsCoinByAdColdTime=true;
         //}

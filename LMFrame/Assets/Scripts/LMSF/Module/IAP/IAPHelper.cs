@@ -230,7 +230,7 @@ public class IAPHelper : MonoSingleton<IAPHelper>, IStoreListener
         }
         var confirmpendstate = ConfirmPendingPurchase(p);
         Debug.Log("IAP_进行延时");
-        DelayTimeManager.delay_time_run_without_timescale(2,()=> {
+        DelayTimeUtils.delay_time_run_without_timescale(2,()=> {
             Debug.Log("IAP_进入订单验证_" + confirmpendstate);
             if (confirmpendstate == PurchaseProcessingResult.Pending)
             {

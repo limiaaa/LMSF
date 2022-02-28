@@ -168,7 +168,7 @@ public class TimeManager : MonoSingleton<TimeManager>
             }
             else
             {
-                return DelayTimeManager.delay_time_run_loop(timeSpace,
+                return DelayTimeUtils.delay_time_run_loop(timeSpace,
                 () =>
                 {
                     left = endTimeTs - GetTimeOffsetUtc();
@@ -314,11 +314,11 @@ public class TimeManager : MonoSingleton<TimeManager>
     }
     long GetTimeDataByKey(string key,string defaultNumber="0")
     {
-        return long.Parse(LocalDataManager.GetLocalData(key, defaultNumber));
+        return long.Parse(LocalDataUtils.GetLocalData(key, defaultNumber));
     }
     void SetTimeDataByKey(string key,long number)
     {
-        LocalDataManager.SetLocalData(key, number.ToString());
+        LocalDataUtils.SetLocalData(key, number.ToString());
     }
 
 }

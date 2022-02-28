@@ -35,14 +35,14 @@ public class UIMaskPage
     //            MaskEndFunc();
     //        }
     //    }
-    //    DelayTimeManager.Instance.cancel_delay_run(SingleDelayTimeId);
+    //    DelayTimeUtils.Instance.cancel_delay_run(SingleDelayTimeId);
     //    if (this.gameObject.activeSelf == false)
     //    {
     //        this.gameObject.SetActive(true);
     //    }
     //    SingleMask.SetActive(true);
     //    AniWithMask.SetActive(false);
-    //    SingleDelayTimeId = DelayTimeManager.Instance.delay_time_run(DelayTime, () =>
+    //    SingleDelayTimeId = DelayTimeUtils.Instance.delay_time_run(DelayTime, () =>
     //    {
     //        if (MaskEndFunc != null)
     //        {
@@ -62,10 +62,10 @@ public class UIMaskPage
     //            AniMaskFunc();
     //        }
     //    }
-    //    DelayTimeManager.Instance.cancel_delay_run(AniDelayTimeId);
+    //    DelayTimeUtils.Instance.cancel_delay_run(AniDelayTimeId);
     //    AniWithMask.SetActive(true);
     //    SingleMask.SetActive(false);
-    //    AniDelayTimeId = DelayTimeManager.Instance.delay_time_run(DelayTime, () =>
+    //    AniDelayTimeId = DelayTimeUtils.Instance.delay_time_run(DelayTime, () =>
     //    {
     //        if (AniMaskFunc != null)
     //        {
@@ -78,12 +78,12 @@ public class UIMaskPage
     //}
     //public void CloseSingleMask()
     //{
-    //    DelayTimeManager.Instance.cancel_delay_run(SingleDelayTimeId);
+    //    DelayTimeUtils.Instance.cancel_delay_run(SingleDelayTimeId);
     //    SingleMask.SetActive(false);
     //}
     //public void CloseAniMask()
     //{
-    //    DelayTimeManager.Instance.cancel_delay_run(AniDelayTimeId);
+    //    DelayTimeUtils.Instance.cancel_delay_run(AniDelayTimeId);
     //    AniWithMask.SetActive(false);
     //}
 
