@@ -12,6 +12,7 @@ namespace LMSF.Utils
 {
     public static class CommonUtils
     {
+#region 本机设备信息相关
         public static int GetRunPlatform()
         {
             switch (Application.platform)
@@ -31,6 +32,68 @@ namespace LMSF.Utils
                     return 4;
             }
         }
+        //获得设备信息Json
+        public static string GetDeviceSystemInfo()
+        {
+            string systeminfo = "";
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            try
+            {
+                Type t = typeof(SystemInfo);
+                System.Reflection.PropertyInfo[] infos = t.GetProperties();
+                foreach (var item in infos)
+                {
+                    object v = item.GetValue(null);
+                    dic.Add(item.Name, v.ToString());
+                }
+                systeminfo = LitJson.JsonMapper.ToJson(dic);
+            }
+            catch (Exception e)
+            {
+                DebugUtils.LogError("获取硬件信息失败！！");
+            }
+            return systeminfo;
+        }
+        //获取本地国家等数据
+        public static IEnumerator getCountryCode()
+        {
+            string Url = "http://ip-api.com/json";
+            UnityWebRequest webRequest = UnityWebRequest.Get(Url);
+            yield return webRequest.SendWebRequest();
+            if (webRequest.downloadHandler.isDone)
+            {
+                var jsondata = JsonMapper.ToObject<JsonData>(webRequest.downloadHandler.text);
+                foreach (var item in jsondata)
+                {
+                    Debug.Log(item.ToString());
+                }
+                Debug.Log(jsondata["country"].ToString());
+            }
+        }
+#endregion
+#region LitJson相关
+        //从结构体获取字符串
+        public static string GetJsonFormIEnum(object dic)
+        {
+            if (dic != null)
+            {
+                return LitJson.JsonMapper.ToJson(dic);
+            }
+            DebugUtils.LogError("需要转为json的字典为空");
+            return "";
+        }
+        //从字符串获取结构体
+        public static T GetDataFormJson<T>(string Json)
+        {
+            if (Json != "" && Json!=null)
+            {
+                return LitJson.JsonMapper.ToObject<T>(Json);
+            }
+            DebugUtils.LogError("需要转为JsonData的结构为空");
+            return default;
+        }
+#endregion
+#region 查看复杂结构体(可能失败)
         public static string LookDic(IDictionary dic,string LookTitle = "LookDic",bool ExternalUse=true)
         {
             //if (!SG.SettingReader.ScriptableObject.IsLogEnabled)
@@ -170,6 +233,8 @@ namespace LMSF.Utils
             }
             return sb.ToString();
         }
+#endregion
+#region 射线检测
         //检测点击的是否是此预制体
         public static bool IsPointTarget(GameObject target)
         {
@@ -202,6 +267,8 @@ namespace LMSF.Utils
 
             return null;
         }
+#endregion
+#region 时间相关
         //时间参数变为秒数
         public static float GetSubSeconds(DateTime startTime, DateTime endTime)
         {
@@ -218,22 +285,32 @@ namespace LMSF.Utils
             System.TimeSpan subSpan = endSpan.Subtract(startSpan).Duration();
             return (float)subSpan.TotalSeconds * 1000;
         }
-        //获取本地国家等数据
-        public static IEnumerator getCountryCode()
+        //传入秒数，展示倒计时;
+        public static List<string> FormatTime(long second)
         {
-            string Url = "http://ip-api.com/json";
-            UnityWebRequest webRequest = UnityWebRequest.Get(Url);
-            yield return webRequest.SendWebRequest();
-            if (webRequest.downloadHandler.isDone)
-            {
-                var jsondata = JsonMapper.ToObject<JsonData>(webRequest.downloadHandler.text);
-                foreach (var item in jsondata)
-                {
-                    Debug.Log(item.ToString());
-                }
-                Debug.Log(jsondata["country"].ToString());
-            }
+            long hour = second / 3600;
+            second = second % 3600;
+            long minute = second / 60;
+            second = second % 60;
+            List<string> li = new List<string>();
+            li.Add(string.Format("{0:D2}", second));
+            li.Add(string.Format("{0:D2}", minute));
+            li.Add(string.Format("{0:D2}", hour));
+            return li;
         }
+        public static List<string> FormatTimeOnlyMin(long second)
+        {
+            long hour = second / 3600;
+            second = second % 3600;
+            long minute = second / 60 + hour * 60;
+            second = second % 60;
+            List<string> li = new List<string>();
+            li.Add(string.Format("{0:D2}", second));
+            li.Add(string.Format("{0:D2}", minute));
+            li.Add(string.Format("{0:D2}", 0));
+            return li;
+        }
+        #endregion
     }
 }
 

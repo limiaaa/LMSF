@@ -642,9 +642,6 @@
     <Compile Include="Assets\Scripts\LMSF\Module\Mask\UIMask.cs" />
     <Compile Include="Assets\Scripts\LMSF\Module\Mask\UIMaskManager.cs" />
     <Compile Include="Assets\Scripts\LMSF\Module\ModulePath.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Module\RvCoin\RvCoinManager.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Module\Sound\SoundMgr.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Module\Time\TimeManager.cs" />
     <Compile Include="Assets\Scripts\LMSF\Module\_NeedlocalizedModule\FlyText\Script\TextFlyTip.cs" />
     <Compile Include="Assets\Scripts\LMSF\Module\_NeedlocalizedModule\RedPoint\RedPointManager.cs" />
     <Compile Include="Assets\Scripts\LMSF\Plugins\LitJson\IJsonWrapper.cs" />
@@ -664,6 +661,9 @@
     <Compile Include="Assets\Scripts\LMSF\Scripts\Extends\Vector3Extend.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Helper\CoroutineHelper.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Helper\DelayTimeHelper.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Manager\RvCoinManager.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Manager\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Manager\TimeManager.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Test\SingleTonTest.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Test\Test.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\CommonUtils.cs" />
@@ -678,7 +678,7 @@
     <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\UIUtils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Scripts\LMSF\CommRes\Gray\Gray.shader" />
+    <None Include="Assets\CommRes\Gray\Gray.shader" />
     <None Include="Assets\Scripts\LMSF\Plugins\DOTween\DOTween.XML" />
     <None Include="Assets\Scripts\LMSF\Plugins\DOTween\DOTween.dll" />
     <None Include="Assets\Scripts\LMSF\Plugins\DOTween\DOTween43.dll" />

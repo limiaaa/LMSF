@@ -13,6 +13,16 @@ public class Test : MonoBehaviour
         //this.gameObject.E_IsNull();
         //this.transform.E_IsNull();
         //this.Img1.GetComponent<Image>().E_IsNull();
+        //***************************************************************************
+        //DebugUtils.Log(CommonUtils.GetDeviceSystemInfo());
+        //***************************************************************************
+        //LitJsonTest ltest = new LitJsonTest();
+        //ltest.age = "1";
+        //ltest.name = "1";
+        //ltest.from = "1";
+        //Debug.LogError(CommonUtils.GetJsonFormIEnum(ltest));
+        //***************************************************************************
+        SoundManager.Instance.Init();
     }
 
     void StartTest()
@@ -26,4 +36,11 @@ public class Test : MonoBehaviour
     {
         
     }
+}
+
+public class LitJsonTest
+{
+    public string name;
+    public string age;
+    public string from;
 }

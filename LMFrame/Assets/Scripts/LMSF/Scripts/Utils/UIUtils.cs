@@ -57,7 +57,6 @@ namespace LMSF.Utils
                     }
                 }
             }
-
         }
 
         //动态打开一个窗口
@@ -107,8 +106,7 @@ namespace LMSF.Utils
             }
         }
 
-
-        public static void UICloseWithAniName(Animator ani, string name, Action act = null)
+        public static void UICloseWithAniName(Animator ani, string name,float callBackTime, Action act = null)
         {
             UIMaskManager.Instance.OpenSingleMask(0.25f);
             if (ani == null)
@@ -120,7 +118,7 @@ namespace LMSF.Utils
 
             ani.Play(name);
             //SoundMgr.Instance.PlaySoundEffect(SoundTypes.tap_button.ToString());
-            DelayTimeUtils.delay_time_run(0.25f, () =>
+            DelayTimeUtils.delay_time_run(callBackTime, () =>
             {
                 act?.Invoke();
             });

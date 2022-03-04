@@ -9,14 +9,17 @@ namespace LMSF.Utils
     {
         public static bool IsOpenLog = true;
         private static string logTemplate = "<color=#{1}>{0}</color>";
-
         public static void Log(string msg, Color color, params object[] objects)
         {
             if (!IsOpenLog)
             {
                 return;
             }
-            string temp = String.Format(msg, objects);
+            string temp = msg;
+            if (objects.Length > 0)
+            {
+                temp = String.Format(msg, objects);
+            }
             Debug.Log(string.Format(logTemplate, temp, ColorUtility.ToHtmlStringRGB(color)));
         }
         public static void Log(string msg)

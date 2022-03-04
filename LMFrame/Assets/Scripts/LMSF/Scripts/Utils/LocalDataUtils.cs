@@ -35,14 +35,13 @@ namespace LMSF.Utils
             }
             PlayerPrefs.SetInt(Key, localNumber);
         }
-        public static void SetLocalData(string Key, float localNumber)
+        public static void SetLocalFloatData(string Key, float localNumber)
         {
             if (!LocalDataList.Contains(Key))
             {
                 LocalDataList.Add(Key);
             }
             PlayerPrefs.SetFloat(Key, localNumber);
-
         }
         public static void SetLocalData(string Key, string localString)
         {
@@ -60,7 +59,7 @@ namespace LMSF.Utils
             }
             return PlayerPrefs.GetInt(Key, DefaultData);
         }
-        public static float GetLocalData(string Key, float DefaultData)
+        public static float GetLocalFloatData(string Key, float DefaultData)
         {
             if (!LocalDataList.Contains(Key))
             {

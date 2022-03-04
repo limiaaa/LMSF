@@ -50,9 +50,8 @@ namespace LMSF.Utils
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
         /// <returns></returns>
-        public static List<T> GetRandomListIndex<T>(List<T> list)
+        public static List<T> GetRandomListFromList<T>(List<T> list)
         {
-            Random random = new Random();
             var newList = new List<T>();
             foreach (var item in list)
             {
@@ -147,9 +146,5 @@ namespace LMSF.Utils
             }
             return ResultList;
         }
-
-
-
-
     }
 }

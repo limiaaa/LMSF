@@ -38,10 +38,8 @@ public class DelayTimeHelper : MonoSingleton<DelayTimeHelper>
             if (loop_num == -1) { return true; }
             if (loop_num > 0) { loop_num--; return true; }
             return false;
-
         }
     }
-
     private ArrayList mList = new ArrayList();
     private int index = 0;
     public int delay_time_run(float time, Action callback)
@@ -68,7 +66,6 @@ public class DelayTimeHelper : MonoSingleton<DelayTimeHelper>
             }
         }
     }
-
     public void Clear()
     {
         mList.Clear();
