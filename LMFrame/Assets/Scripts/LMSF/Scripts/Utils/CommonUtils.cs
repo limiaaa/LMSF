@@ -311,6 +311,35 @@ namespace LMSF.Utils
             return li;
         }
         #endregion
+#region 邮件相关
+        //唤起本地邮件应用并自动填充部分信息
+        public static void SendEmail()
+        {
+            string content =
+                 "Dear players, for your benefit, please do not delete the following information:<br>\r\n" +
+                 "PackageName:{0}<br>\r\n" +
+                 "AppVersion:{1}<br>\r\n" +
+                 "DeviceId:{2}<br>\r\n" +
+                 "Device:{3}<br>\r\n" +
+                 "Platform:{4}<br>\r\n" +
+                 "OS Version:{5}<br>\r\n" +
+                 "Country:{6}<br>\r\n" +
+                 "Please write your feedback below, your support is our biggest motivation:<br>\r\n";
+            string body = string.Format(content,
+                Application.identifier,
+                Application.version,
+                SystemInfo.deviceUniqueIdentifier,
+                SystemInfo.deviceName,
+                Application.platform,
+                SystemInfo.operatingSystem,
+                Application.systemLanguage);
+            string Tital = "{0}/{1}/{2}/feedback";
+            string TitalFormat = string.Format(Tital, Application.identifier, Application.platform, Application.version);
+            Uri uri = new Uri(string.Format("mailto:{0}?subject={1}&body={2}", "", TitalFormat, body));
+            //第二个参数是邮件的标题 Application.OpenURL(uri.AbsoluteUri);
+            Application.OpenURL(uri.AbsoluteUri);
+        }
+#endregion
     }
 }
 

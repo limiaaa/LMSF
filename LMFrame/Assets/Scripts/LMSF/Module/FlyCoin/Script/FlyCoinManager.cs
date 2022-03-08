@@ -10,7 +10,7 @@ namespace LMSF.Module
 
     public class FlyCoinManager : MonoSingleton<FlyCoinManager>
     {
-        string FlyObjPath = ModulePath.FlyCoinPath;
+        string FlyObjPath = Global.FlyCoinPath;
         //public void FlyCoin(Vector3 StartPos, Vector3 EndPos, int FlyCoin, Action EndFunc = null)
         //{
         //    GameObject FlyObj = ResourcesManager.Load(FlyObjPath) as GameObject;

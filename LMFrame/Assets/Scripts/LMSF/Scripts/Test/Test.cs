@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using LMSF.Utils;
+using UnityEngine.UI;
 
 public class Test : MonoBehaviour
 {
     public GameObject Img1;
     public GameObject Img2;
+    public Button btn;
     void Start()
     {
         StartTest();
@@ -22,6 +24,10 @@ public class Test : MonoBehaviour
         //ltest.from = "1";
         //Debug.LogError(CommonUtils.GetJsonFormIEnum(ltest));
         //***************************************************************************
+        btn.AddButtonFunc(true,()=>{
+            Debug.Log("1111");
+            btn.RemoveButtonFunc();
+        });
         SoundManager.Instance.Init();
     }
 

@@ -94,16 +94,23 @@ public class IAPHelper : MonoSingleton<IAPHelper>, IStoreListener
                     Debug.Log("IAP_the product should have a valid receipt");
                 }
 #endif
-            }
+            }       
         }
 
         AddProducts(m_Controller.products.all);
         IAPManager.Instance.IapInitSuccessful();
+        //for(int i = 0; i <= 5; i++)
+        //{
+        //    DoRestore();
+        //}
+        IAPManager.Instance.IapFirstInit(m_ProductDic);
     }
     //延期
     private void OnDeferred(Product item)
     {
         Debug.Log("IAP_Purchase deferred: " + item.definition.id);
+        //IAP3_GPA.3311-1167-2197-85267
+        //IAP5_gghjfbjemlennagnhbappkkf.AO-J1OyfxefCWrFr2G03qetBI1XTNSpF7tSiPnCDgY29Q_GdbB7DcUQ3_zmB5wQ1hYbOh-a8WbmpaXbdwAeVr2Q-yuaeWRGanA
     }
     //订阅管理
 #if SUBSCRIPTION_MANAGER
@@ -175,6 +182,8 @@ public class IAPHelper : MonoSingleton<IAPHelper>, IStoreListener
     //购买失败
     public void OnPurchaseFailed(Product item, PurchaseFailureReason failureReason)
     {
+        UIMaskManager.Instance.CloseAniMask();
+        UIMaskManager.Instance.CloseSingleMask();
         Debug.Log("IAP_购买失败+ID: " + item.definition.id);
         Debug.Log("IAP_购买失败+原因: "+failureReason);
         Debug.Log("IAP_Store specific error code: " + m_TransactionHistoryExtensions.GetLastStoreSpecificPurchaseErrorCode());
@@ -190,11 +199,13 @@ public class IAPHelper : MonoSingleton<IAPHelper>, IStoreListener
         {
         }
         m_PurchaseInProgress = false;
-        IAPManager.Instance.IapPurchaseFailed(item);
+        IAPManager.Instance.IapPurchaseFailed(item, failureReason.ToString());
     }
     //购买成功后会调用此方法，需继续处理
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
     {
+        UIMaskManager.Instance.CloseAniMask();
+        UIMaskManager.Instance.CloseSingleMask();
         Debug.Log("IAP_购买成功+ID: " + purchaseEvent.purchasedProduct.definition.id);
         Debug.Log("IAP_购买成功+Receipt: " + purchaseEvent.purchasedProduct.receipt);
         m_PurchaseInProgress = false;
@@ -230,8 +241,43 @@ public class IAPHelper : MonoSingleton<IAPHelper>, IStoreListener
         }
         var confirmpendstate = ConfirmPendingPurchase(p);
         Debug.Log("IAP_进行延时");
-        DelayTimeUtils.delay_time_run_without_timescale(2,()=> {
-            Debug.Log("IAP_进入订单验证_" + confirmpendstate);
+        //是游戏内购买验证，反之则是IAP初始化自动调用
+        if (IAPManager.Instance.isPlayerClick)
+        {
+            UIMaskManager.Instance.OpenAniMask(2.1f);
+            DelayTimeManager.Instance.delay_time_run_without_timescale(2, () => {
+                Debug.Log("IAP_进入订单验证_" + confirmpendstate);
+                if (confirmpendstate == PurchaseProcessingResult.Pending)
+                {
+                    SaveTime = 0;
+                    Debug.Log("IAP_订单验证成功,手动处理订单");
+                    m_Controller.ConfirmPendingPurchase(p);
+                    if (m_PendingProducts.ContainsKey(p.definition.id))
+                    {
+                        m_PendingProducts.Remove(p.definition.id);
+                    }
+                    IAPManager.Instance.IapPurchaseSuccessful(p);
+                }
+                else
+                {
+                    Debug.Log("IAP_订单验证出错,重新开始验证：" + SaveTime);
+                    if (SaveTime < 3)
+                    {
+                        SaveTime++;
+                        SavePendingPurchase(p);
+                    }
+                    else
+                    {
+                        SaveTime = 0;
+                        Debug.Log("IAP_执行购买失败回调：订单验证不通过");
+                        IAPManager.Instance.IapPurchaseFailed(p, "IAP_订单验证出错,重新开始验证");
+                    }
+                }
+            });
+        }
+        else
+        {
+            Debug.Log("进入IAP自动调用验证");
             if (confirmpendstate == PurchaseProcessingResult.Pending)
             {
                 SaveTime = 0;
@@ -241,7 +287,7 @@ public class IAPHelper : MonoSingleton<IAPHelper>, IStoreListener
                 {
                     m_PendingProducts.Remove(p.definition.id);
                 }
-                IAPManager.Instance.IapPurchaseSuccessful(p);
+                IAPManager.Instance.IapPurchaseSuccessful(p,true, p.definition.id);
             }
             else
             {
@@ -255,19 +301,23 @@ public class IAPHelper : MonoSingleton<IAPHelper>, IStoreListener
                 {
                     SaveTime = 0;
                     Debug.Log("IAP_执行购买失败回调：订单验证不通过");
-                    IAPManager.Instance.IapPurchaseFailed(p);
+                    IAPManager.Instance.IapPurchaseFailed(p, "IAP_恢复订单验证出错,重新开始验证", true, p.definition.id);
                 }
             }
-        });
+        }
+        
     }
 
     private PurchaseProcessingResult ConfirmPendingPurchase(Product p)
     {
-        string appIdentifier;
-        appIdentifier = Application.identifier;
-        //传入RSA后会生成
+        return VerifyByRepecit(p);
+    }
+    public PurchaseProcessingResult VerifyByRepecit(Product p)
+    {
+        string appIdentifier = Application.identifier;
+        //传入RSA生成
         //validator = new CrossPlatformValidator(GooglePlayTangle.Data(), AppleTangle.Data(), appIdentifier);
-        validator = new CrossPlatformValidator(null, null, appIdentifier);
+
         if (m_IsGooglePlayStoreSelected ||
             Application.platform == RuntimePlatform.IPhonePlayer ||
             Application.platform == RuntimePlatform.OSXPlayer ||
@@ -275,19 +325,20 @@ public class IAPHelper : MonoSingleton<IAPHelper>, IStoreListener
         {
             try
             {
+                Debug.Log("IAP订单验证凭证_" + p.receipt);
                 var result = validator.Validate(p.receipt);
                 Debug.Log("IAP_Receipt is valid. Contents:");
                 foreach (IPurchaseReceipt productReceipt in result)
                 {
-                    Debug.Log("IAP1_" + productReceipt.productID);
-                    Debug.Log("IAP2_" + productReceipt.purchaseDate);
-                    Debug.Log("IAP3_" + productReceipt.transactionID);
+                    Debug.Log("*********IAP1_" + productReceipt.productID);
+                    Debug.Log("*********IAP2_" + productReceipt.purchaseDate);
+                    Debug.Log("*********IAP3_" + productReceipt.transactionID);
 
                     GooglePlayReceipt google = productReceipt as GooglePlayReceipt;
                     if (null != google)
                     {
-                        Debug.Log("IAP4_" + google.purchaseState);
-                        Debug.Log("IAP5_" + google.purchaseToken);
+                        Debug.Log("*********IAP4_" + google.purchaseState);
+                        Debug.Log("*********IAP5_" + google.purchaseToken);
                     }
 
                     AppleInAppPurchaseReceipt apple = productReceipt as AppleInAppPurchaseReceipt;
@@ -298,6 +349,7 @@ public class IAPHelper : MonoSingleton<IAPHelper>, IStoreListener
                         Debug.Log("IAP8_" + apple.cancellationDate);
                         Debug.Log("IAP9_" + apple.quantity);
                     }
+
                 }
             }
             catch (IAPSecurityException ex)
@@ -307,6 +359,56 @@ public class IAPHelper : MonoSingleton<IAPHelper>, IStoreListener
             return PurchaseProcessingResult.Pending;
         }
         return PurchaseProcessingResult.Pending;
+    }
+
+    public string VerifyByRepecit(Product p,bool IsCheck)
+    {
+        string appIdentifier = Application.identifier;
+        //传入RSA生成
+        //validator = new CrossPlatformValidator(GooglePlayTangle.Data(), AppleTangle.Data(), appIdentifier);
+        string productId ="";
+        if (m_IsGooglePlayStoreSelected ||
+            Application.platform == RuntimePlatform.IPhonePlayer ||
+            Application.platform == RuntimePlatform.OSXPlayer ||
+            Application.platform == RuntimePlatform.tvOS)
+        {
+            try
+            {
+                Debug.Log("IAP订单验证凭证_" + p.receipt);
+                var result = validator.Validate(p.receipt);
+                Debug.Log("IAP_Receipt is valid. Contents:");
+                foreach (IPurchaseReceipt productReceipt in result)
+                {
+                    productId = productReceipt.productID;
+                    Debug.Log("*********IAP1_" + productReceipt.productID);
+                    Debug.Log("*********IAP2_" + productReceipt.purchaseDate);
+                    Debug.Log("*********IAP3_" + productReceipt.transactionID);
+
+                    GooglePlayReceipt google = productReceipt as GooglePlayReceipt;
+                    if (null != google)
+                    {
+                        Debug.Log("*********IAP4_" + google.purchaseState);
+                        Debug.Log("*********IAP5_" + google.purchaseToken);
+                    }
+
+                    AppleInAppPurchaseReceipt apple = productReceipt as AppleInAppPurchaseReceipt;
+                    if (null != apple)
+                    {
+                        Debug.Log("IAP6_" + apple.originalTransactionIdentifier);
+                        Debug.Log("IAP7_" + apple.subscriptionExpirationDate);
+                        Debug.Log("IAP8_" + apple.cancellationDate);
+                        Debug.Log("IAP9_" + apple.quantity);
+                    }
+
+                }
+            }
+            catch (IAPSecurityException ex)
+            {
+                return "";
+            }
+            return productId;
+        }
+        return productId;
     }
     //交易记录恢复输出
     private void OnTransactionsRestored(bool success)
@@ -411,6 +513,7 @@ public class IAPHelper : MonoSingleton<IAPHelper>, IStoreListener
         Time.timeScale = 0;
         productID = productID.ToLower();
         Debug.Log("购买商品：" + productID);
+        UIMaskManager.Instance.OpenAniMask(20);
         m_Controller.InitiatePurchase(m_Controller.products.WithID(productID),MiniJson.JsonEncode("XiaoMai"));
     }
     //恢复购买

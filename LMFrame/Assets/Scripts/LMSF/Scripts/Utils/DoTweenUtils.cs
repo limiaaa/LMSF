@@ -114,6 +114,151 @@ namespace LMSF.Utils
                 }
             }
         }
+
+        public static void DoRotate(Transform trans, float rotateValue, float time, string moduleKey = "", string key = "", Action updateFunc=null
+            , Action EndFunc=null)
+        {
+            if (trans == null)
+            {
+                Debug.Log("需要做DoRotate的Transform组件为空");
+                return;
+            }
+            Tween tween=trans.DORotate(new Vector3(0, 0, rotateValue), time).OnUpdate(() =>
+            {
+                updateFunc?.Invoke();
+            }).SetEase(Ease.InOutCirc).OnComplete(() =>
+            {
+                EndFunc?.Invoke();
+            });
+            if (moduleKey != "")
+            {
+                if (!ModuleTweenDic.ContainsKey(moduleKey))
+                {
+                    ModuleTweenDic.Add(moduleKey, new Dictionary<string, Tween>());
+                }
+            }
+            if (key != "")
+            {
+                if (!ModuleTweenDic[moduleKey].ContainsKey(key))
+                {
+                    ModuleTweenDic[moduleKey].Add(key, tween);
+                }
+                else
+                {
+                    ModuleTweenDic[moduleKey][key] = tween;
+                }
+            }
+        }
+        public static void DoRotateWithSurpass360(Transform trans, float rotateValue, float time, string moduleKey = "", string key = "", Action updateFunc = null
+            , Action EndFunc = null)
+        {
+            if (trans == null)
+            {
+                Debug.Log("需要做DoRotateWithSurpass360的Transform组件为空");
+                return;
+            }
+            Tween tween = trans.DORotate(new Vector3(0, 0, rotateValue), time,RotateMode.Fast).OnUpdate(() =>
+            {
+                updateFunc?.Invoke();
+            }).SetEase(Ease.InOutCirc).OnComplete(() =>
+            {
+                EndFunc?.Invoke();
+            });
+            if (moduleKey != "")
+            {
+                if (!ModuleTweenDic.ContainsKey(moduleKey))
+                {
+                    ModuleTweenDic.Add(moduleKey, new Dictionary<string, Tween>());
+                }
+            }
+            if (key != "")
+            {
+                if (!ModuleTweenDic[moduleKey].ContainsKey(key))
+                {
+                    ModuleTweenDic[moduleKey].Add(key, tween);
+                }
+                else
+                {
+                    ModuleTweenDic[moduleKey][key] = tween;
+                }
+            }
+        }
+        //做贝塞尔曲线运动
+        public static void DoBezierAnim(Transform obj, Transform startObj, Transform controlObj, Transform endObj, float duration, int pointCount = 10, string moduleKey = "", string key = "", Action callback = null)
+        {
+            obj.position = startObj.transform.position;
+            Vector3[] pathvec = Bezier2Path(startObj.transform.position, controlObj.transform.position, endObj.transform.position, pointCount);
+            Tween tween = obj.DOPath(pathvec, duration).OnComplete(() => callback?.Invoke());
+            if (moduleKey != "")
+            {
+                if (!ModuleTweenDic.ContainsKey(moduleKey))
+                {
+                    ModuleTweenDic.Add(moduleKey, new Dictionary<string, Tween>());
+                }
+            }
+            if (key != "")
+            {
+                if (!ModuleTweenDic[moduleKey].ContainsKey(key))
+                {
+                    ModuleTweenDic[moduleKey].Add(key, tween);
+                }
+                else
+                {
+                    ModuleTweenDic[moduleKey][key] = tween;
+                }
+            }
+        }
+        public static void DoBezierAnim(Transform obj, Vector3 startPos, Vector3 controlPos, Vector3 endPos, float duration, string moduleKey = "", string key = "", Action callback = null)
+        {
+            obj.position = startPos;
+            Vector3[] pathvec = Bezier2Path(startPos, controlPos, endPos);
+            Tween tween=obj.DOPath(pathvec, duration).OnComplete(() => callback?.Invoke());
+            if (moduleKey != "")
+            {
+                if (!ModuleTweenDic.ContainsKey(moduleKey))
+                {
+                    ModuleTweenDic.Add(moduleKey, new Dictionary<string, Tween>());
+                }
+            }
+            if (key != "")
+            {
+                if (!ModuleTweenDic[moduleKey].ContainsKey(key))
+                {
+                    ModuleTweenDic[moduleKey].Add(key, tween);
+                }
+                else
+                {
+                    ModuleTweenDic[moduleKey][key] = tween;
+                }
+            }
+        }
+        //获取二阶贝塞尔曲线路径数组
+        private static Vector3[] Bezier2Path(Vector3 startPos, Vector3 controlPos, Vector3 endPos, int pointCount = 3)
+        {
+            Vector3[] path = new Vector3[(int)pointCount];
+            for (int i = 1; i <= pointCount; i++)
+            {
+                float t = i / pointCount;
+                path[i - 1] = Bezier2(startPos, controlPos, endPos, t);
+            }
+            return path;
+        }
+        // 2阶贝塞尔曲线
+        public static Vector3 Bezier2(Vector3 startPos, Vector3 controlPos, Vector3 endPos, float t)
+        {
+            return (1 - t) * (1 - t) * startPos + 2 * t * (1 - t) * controlPos + t * t * endPos;
+        }
+        // 3阶贝塞尔曲线
+        public static Vector3 Bezier3(Vector3 startPos, Vector3 controlPos1, Vector3 controlPos2, Vector3 endPos, float t)
+        {
+            float t2 = 1 - t;
+            return t2 * t2 * t2 * startPos
+                   + 3 * t * t2 * t2 * controlPos1
+                   + 3 * t * t * t2 * controlPos2
+                   + t * t * t * endPos;
+        }
+        
+        
         public static void RunNumber(float StartNumber, float EndNumber, float time, string moduleKey = "", string key = "", Action<float> UpdateFunc = null, Action EndFunc = null)
         {
             Tween tween = DOTween.To(() => StartNumber, x => StartNumber = x, EndNumber, time).SetEase(Ease.Linear).OnUpdate(() =>

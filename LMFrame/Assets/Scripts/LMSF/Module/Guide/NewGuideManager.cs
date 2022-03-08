@@ -36,11 +36,11 @@ public class NewGuideManager : MonoSingleton<NewGuideManager>
     }
    public void StartGuide(GuideSteps Step,IListenerGuide IGuide)
     {
-        //if (IsOnGuide)
-        //{
-        //    Debug.Log("正在进行新手引导：" + m_currentGuideStep);
-        //}
-        //Debug.Log("StartGuide_" + Step);
+        if (IsOnGuide)
+        {
+            DebugUtils.Log("正在进行新手引导：" + m_currentGuideStep);
+        }
+        //DebugUtils.Log("StartGuide_" + Step);
         //IsOnGuide = true;
         //m_currentGuideStep = Step;
         //UIGuide?.InitGuideUI();
@@ -52,10 +52,10 @@ public class NewGuideManager : MonoSingleton<NewGuideManager>
     {
         if (GetCurrentGuideStep() != Step)
         {
-            Debug.Log("想结束的新手引导与正在进行的新手引导不一致：" + Step + "--" + GetCurrentGuideStep());
+            DebugUtils.Log("想结束的新手引导与正在进行的新手引导不一致：" + Step + "--" + GetCurrentGuideStep());
             return;
         }
-        Debug.Log("EndGuide_" + Step);
+        DebugUtils.Log("EndGuide_" + Step);
         SetGuideStepOver(Step);
         IsOnGuide = false;
         m_currentGuideStep = GuideSteps.Guide_0;

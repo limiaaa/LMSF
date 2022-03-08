@@ -156,7 +156,7 @@ public class TimeManager : MonoSingleton<TimeManager>
             }
             else
             {
-                return DelayTimeUtils.delay_time_run_loop(timeSpace,
+                return DelayTimeManager.Instance.delay_time_run_loop(timeSpace,
                 () =>
                 {
                     left = endTimeTs - GetTimeOffsetUtc();

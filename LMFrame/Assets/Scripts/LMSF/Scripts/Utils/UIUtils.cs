@@ -26,7 +26,6 @@ namespace LMSF.Utils
                 });
             });
         }
-
         //图片置灰
         public static void GrayToImage(Image image, bool IsGray, bool CtrlEnabled = false)
         {
@@ -58,7 +57,6 @@ namespace LMSF.Utils
                 }
             }
         }
-
         //动态打开一个窗口
         public static void UIShowWithScale(Transform obj)
         {
@@ -105,7 +103,6 @@ namespace LMSF.Utils
                 });
             }
         }
-
         public static void UICloseWithAniName(Animator ani, string name,float callBackTime, Action act = null)
         {
             UIMaskManager.Instance.OpenSingleMask(0.25f);
@@ -115,10 +112,9 @@ namespace LMSF.Utils
                 act?.Invoke();
                 return;
             }
-
             ani.Play(name);
             //SoundMgr.Instance.PlaySoundEffect(SoundTypes.tap_button.ToString());
-            DelayTimeUtils.delay_time_run(callBackTime, () =>
+            DelayTimeManager.Instance.delay_time_run(callBackTime, () =>
             {
                 act?.Invoke();
             });
@@ -133,5 +129,34 @@ namespace LMSF.Utils
             //UIManager.Instance.OpenPage<TextFlyTip>(key, FormatNumber);
         }
 
+        static float clickTime = 0;
+        static float clickInterval = 0.2f;
+        public static void AddButtonFunc(this Button clickButton,bool OpenIntervalCheck,Action clickAction)
+        {
+            if (clickButton == null)
+            {
+                DebugUtils.Log("想要添加方法的Button为空");
+                return;
+            }
+            clickButton.onClick.AddListener(() =>
+            {
+                if (Time.realtimeSinceStartup - clickTime < clickInterval && OpenIntervalCheck)
+                {
+                    Debug.Log("点击间隔太短");
+                    return;
+                }
+                clickTime = Time.realtimeSinceStartup;
+                clickAction?.Invoke();
+            });
+        }
+        public static void RemoveButtonFunc(this Button clickButton)
+        {
+            if (clickButton == null)
+            {
+                DebugUtils.Log("想要移除方法的Button为空");
+                return;
+            }
+            clickButton.onClick.RemoveAllListeners();
+        }
     }
 }

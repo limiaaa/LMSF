@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\LMSF\Module\DelayRun\DelayRunManager.cs" />
     <Compile Include="Assets\Scripts\LMSF\Module\FlyCoin\Script\FlyCoinHelper.cs" />
     <Compile Include="Assets\Scripts\LMSF\Module\FlyCoin\Script\FlyCoinManager.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Module\FlyText\Script\TextFlyTip.cs" />
     <Compile Include="Assets\Scripts\LMSF\Module\Guide\NewGuideManager.cs" />
     <Compile Include="Assets\Scripts\LMSF\Module\Guide\UINewGuide.cs" />
     <Compile Include="Assets\Scripts\LMSF\Module\IAP\IAPHelper.cs" />
@@ -74,9 +75,8 @@
     <Compile Include="Assets\Scripts\LMSF\Module\Init\UtilsInitManager.cs" />
     <Compile Include="Assets\Scripts\LMSF\Module\Mask\UIMask.cs" />
     <Compile Include="Assets\Scripts\LMSF\Module\Mask\UIMaskManager.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Module\ModulePath.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Module\_NeedlocalizedModule\FlyText\Script\TextFlyTip.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Module\_NeedlocalizedModule\RedPoint\RedPointManager.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Module\RedPoint\RedPointManager.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Plugins\JsonNet\JsonNetSample\JsonNetSample.cs" />
     <Compile Include="Assets\Scripts\LMSF\Plugins\LitJson\IJsonWrapper.cs" />
     <Compile Include="Assets\Scripts\LMSF\Plugins\LitJson\JsonData.cs" />
     <Compile Include="Assets\Scripts\LMSF\Plugins\LitJson\JsonException.cs" />
@@ -88,22 +88,34 @@
     <Compile Include="Assets\Scripts\LMSF\Plugins\LitJson\Lexer.cs" />
     <Compile Include="Assets\Scripts\LMSF\Plugins\LitJson\Netstandard15Polyfill.cs" />
     <Compile Include="Assets\Scripts\LMSF\Plugins\LitJson\ParserToken.cs" />
+    <Compile Include="Assets\Scripts\LMSF\SafeArea.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Extends\GameObjectExtend.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Extends\IenumerableExtend.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Extends\TransformExtend.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Extends\Vector3Extend.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Global.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Helper\CoroutineHelper.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Helper\DelayTimeHelper.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Helper\DeviceHelper.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\LocalData\GameData.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\LocalData\LocalDataUtils.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\LocalData\LocalJsonDataUtils.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Main.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Manager\DelayTimeManager.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Manager\PreloadManager.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Manager\RvCoinManager.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Manager\SoundManager.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Manager\TimeManager.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Path\ResourcePath.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Test\MonoBehaviourTest.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Test\SingleTonTest.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Test\Test.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Ui\BaseUI.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Ui\BaseUIAnimation.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\CommonUtils.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\DebugUtils.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\DelayTimeUtils.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\DoTweenUtils.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\LocalDataUtils.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\File\LocalFileUtils.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\MathUtils.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\Singleton.cs" />
@@ -309,6 +321,9 @@
     </Reference>
     <Reference Include="DOTween50">
       <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/DOTween/DOTween50.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.27f1c1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -696,6 +711,10 @@
     <ProjectReference Include="Unity.2D.Sprite.Editor.csproj">
       <Project>{F78635AB-D753-8933-72DE-F21F9D62338C}</Project>
       <Name>Unity.2D.Sprite.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="SevenZip.csproj">
+      <Project>{51246899-FF8A-0F5E-13D0-E0CD360AE285}</Project>
+      <Name>SevenZip</Name>
     </ProjectReference>
     <ProjectReference Include="spine-unity-editor.csproj">
       <Project>{75F42622-B6BF-43E3-5ACA-2E08FAAC0ABE}</Project>

@@ -9,6 +9,9 @@ public class SoundManager : MonoSingleton<SoundManager>
     AudioSource Audio_Bgm;
     AudioSource Audio_Effect;
 
+    List<AudioClip> moduleList = null;
+    Dictionary<string, List<AudioClip>> soundDic = new Dictionary<string, List<AudioClip>>();
+
     string AudioPath = "Assets/MainApp/Audio/{0}.mp3";
     public void Init()
     {
@@ -56,14 +59,20 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         return Audio_Bgm.volume;
     }
-    public void PlaySoundEffect(string name,bool Loop=false)
+    public void PlaySoundEffect(string name,bool Loop=false,string moduleKey="")
     {
         //if (!LocalDataMgr.Instance.GetSoundState())
         //    SetSoundEffectVolume(0);
-        //AudioClip audioClip = ResourcesManager.Load<AudioClip>(string.Format(AudioPath , name));
-        //Audio_Effect.clip = audioClip;
-        //Audio_Effect.loop = Loop;
-        //Audio_Effect.Play();
+        //AudioClip audioClip = ResourcesManager.Load<AudioClip>(string.Format(AudioPath, name));
+        AudioClip audioClip = null;
+        Audio_Effect.clip = audioClip;
+        Audio_Effect.loop = Loop;
+        Audio_Effect.Play();
+        if (moduleKey!="" && !soundDic.ContainsKey(moduleKey))
+        {
+            soundDic.Add(moduleKey, new List<AudioClip>());
+        }
+        soundDic[moduleKey].Add(audioClip);
     }
     public void PlaySoundEffectWithPosition(string name , bool loop = false)
     {
@@ -88,4 +97,13 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         return Audio_Effect.volume;
     }
+
+    public void CloseSoundByModule(string moduleKey)
+    {
+        if (soundDic.ContainsKey(moduleKey))
+        {
+            soundDic.Remove(moduleKey);
+        }
+    }
+
 }

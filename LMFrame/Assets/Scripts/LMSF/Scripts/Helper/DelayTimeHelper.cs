@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using LMSF.Utils;
 
-public class DelayTimeHelper : MonoSingleton<DelayTimeHelper>
+public class DelayTimeHelper : MonoBehaviour
 {
     private class TimeInfo
     {
