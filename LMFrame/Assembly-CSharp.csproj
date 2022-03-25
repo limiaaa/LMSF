@@ -89,6 +89,9 @@
     <Compile Include="Assets\Scripts\LMSF\Plugins\LitJson\Netstandard15Polyfill.cs" />
     <Compile Include="Assets\Scripts\LMSF\Plugins\LitJson\ParserToken.cs" />
     <Compile Include="Assets\Scripts\LMSF\SafeArea.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Example\LinqExample.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Example\UIManagerExample\MonoBehaviourTest.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Example\UIManagerExample\TestBaseUI.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Extends\GameObjectExtend.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Extends\IenumerableExtend.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Extends\TransformExtend.cs" />
@@ -107,11 +110,11 @@
     <Compile Include="Assets\Scripts\LMSF\Scripts\Manager\SoundManager.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Manager\TimeManager.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Path\ResourcePath.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Test\MonoBehaviourTest.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Test\SingleTonTest.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Test\Test.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Ui\BaseUI.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Ui\BaseUIAnimation.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Ui\Base\BaseUI.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Ui\Load\UILoadingAsset.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Ui\UIManager.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\CommonUtils.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\DebugUtils.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\DoTweenUtils.cs" />

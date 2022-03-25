@@ -39,8 +39,10 @@ namespace LMSF.Utils
             skele.gameObject.SetActive(false);
             skele.gameObject.SetActive(true);
         }
-
-
+        public static float GetSpineAniDuartion(SkeletonGraphic spine, string AniName)
+        {
+            return spine.skeletonDataAsset.GetSkeletonData(false).FindAnimation(AniName).Duration;
+        }
 
     }
 }

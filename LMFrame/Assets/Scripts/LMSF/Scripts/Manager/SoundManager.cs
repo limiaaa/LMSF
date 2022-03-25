@@ -59,6 +59,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         return Audio_Bgm.volume;
     }
+    //同一时间只能存在一个
     public void PlaySoundEffect(string name,bool Loop=false,string moduleKey="")
     {
         //if (!LocalDataMgr.Instance.GetSoundState())
@@ -74,6 +75,7 @@ public class SoundManager : MonoSingleton<SoundManager>
         }
         soundDic[moduleKey].Add(audioClip);
     }
+    //同一时间可以存在多个
     public void PlaySoundEffectWithPosition(string name , bool loop = false)
     {
         //if (!LocalDataMgr.Instance.GetSoundState())
