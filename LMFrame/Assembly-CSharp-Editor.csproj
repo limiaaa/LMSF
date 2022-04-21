@@ -64,7 +64,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Ui\Editor\UIHelperEditor.cs" />
+    <Compile Include="Assets\Editor\CreatModule\CreatModule.cs" />
+    <Compile Include="Assets\Editor\EditorHelper.cs" />
+    <Compile Include="Assets\Editor\EditorUtils.cs" />
+    <Compile Include="Assets\Editor\FindResReferences.cs" />
+    <Compile Include="Assets\Editor\Font\ArtistFont.cs" />
+    <Compile Include="Assets\Editor\Font\BMFont.cs" />
+    <Compile Include="Assets\Editor\Font\BMFontReader.cs" />
+    <Compile Include="Assets\Editor\Font\BMGlyph.cs" />
+    <Compile Include="Assets\Editor\Font\BetterList.cs" />
+    <Compile Include="Assets\Editor\Font\ByteReader.cs" />
+    <Compile Include="Assets\Editor\FontMakerWizard.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\UI\Editor\UIHelperEditor.cs" />
+    <None Include="Assets\Editor\CreatModule\ModuleTemp\TempData.txt" />
+    <None Include="Assets\Editor\CreatModule\ModuleTemp\TempModuleNameList.txt" />
+    <None Include="Assets\Editor\CreatModule\ModuleTemp\TempView.txt" />
+    <None Include="Assets\Editor\CreatModule\ModuleTemp\TempModule.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.27f1c1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -262,6 +277,12 @@
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleJson">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/SimpleJson.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
       <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/DOTween/DOTween.dll</HintPath>

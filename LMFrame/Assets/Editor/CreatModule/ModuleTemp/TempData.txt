@@ -1,0 +1,23 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class D_#MODULENAME# 
+{
+	
+	public void Init()
+	{
+	
+	}
+
+	public void Refesh()
+	{
+	
+	}
+
+	public void Dispose()
+	{
+	
+	}
+
+}

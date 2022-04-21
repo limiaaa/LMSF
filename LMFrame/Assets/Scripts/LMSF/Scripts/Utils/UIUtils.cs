@@ -128,6 +128,19 @@ namespace LMSF.Utils
             }
             //UIManager.Instance.OpenPage<TextFlyTip>(key, FormatNumber);
         }
+        public static void TextFlyNotKey(string key, string FormatNumber = "")
+        {
+            //if (FormatNumber == "")
+            //{
+            //    UIManager.Instance.OpenPage<TextFlyTip>(key, "", true);
+            //    return;
+            //}
+            //UIManager.Instance.OpenPage<TextFlyTip>(key, FormatNumber, true);
+        }
+        //public static void TextFlyByArtText(FlyTip flyTip)
+        //{
+        //    UIManager.Instance.OpenPage<TextFlyTip>(true, flyTip);
+        //}
 
         static float clickTime = 0;
         static float clickInterval = 0.2f;
@@ -158,5 +171,14 @@ namespace LMSF.Utils
             }
             clickButton.onClick.RemoveAllListeners();
         }
+        public static void SetGameObjectLayer(Transform target, int layer)
+        {
+            foreach (var item in target.GetComponentsInChildren<Transform>())
+            {
+                item.gameObject.layer = layer;
+            }
+        }
+
+
     }
 }

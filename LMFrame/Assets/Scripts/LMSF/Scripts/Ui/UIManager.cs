@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 using System.Reflection;
 
 public class UIManager : MonoSingleton<UIManager>
-{
+{ 
     string UIRootPath = "UI_Root.prefab";
     string UIAtlasPath = "Assets/MainApp/Atlas/UI/";
     Dictionary<string, BaseUI> AllPages;
@@ -279,7 +279,8 @@ public class UIManager : MonoSingleton<UIManager>
     }
     private GameObject LoadPrefab(string resName)
     {
-        GameObject prefab = ResourcesManager.Load<GameObject>(resName);
+        //GameObject prefab = ResourcesManager.Load<GameObject>(resName);
+        GameObject prefab = null;
         if (prefab == null)
         {
             Debug.LogError("资源加载失败:[" + resName + "] 请检查资源是否存在或名称是否正确!!!");

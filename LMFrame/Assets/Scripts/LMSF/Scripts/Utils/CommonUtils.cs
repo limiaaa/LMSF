@@ -7,6 +7,7 @@ using System.Reflection;
 using UnityEngine.EventSystems;
 using UnityEngine.Networking;
 using LitJson;
+using SG.Haptics;
 
 namespace LMSF.Utils
 {
@@ -339,7 +340,23 @@ namespace LMSF.Utils
             //第二个参数是邮件的标题 Application.OpenURL(uri.AbsoluteUri);
             Application.OpenURL(uri.AbsoluteUri);
         }
-#endregion
+        #endregion
+        public static void MoreTimeVrate(int size, int time = 1)
+        {
+            //if (LocalJsonDataUtils.Instance.gameData.IsVibration)
+            //{
+            //    Debug.Log("嗡嗡嗡");
+                CoroutineHelper.Instance.StartCoroutine(MoreTimeVibrate(size, time));
+            //}
+        }
+        static IEnumerator MoreTimeVibrate(int size, int time)
+        {
+            for (int i = 1; i <= time; i++)
+            {
+                HapticsManager.Vibrate(size);
+                yield return new WaitForSeconds(0.2f);
+            }
+        }
     }
 }
 

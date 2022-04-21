@@ -11,6 +11,7 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     List<AudioClip> moduleList = null;
     Dictionary<string, List<AudioClip>> soundDic = new Dictionary<string, List<AudioClip>>();
+    Dictionary<string, AudioSource> AudioSourceDic = new Dictionary<string, AudioSource>();
 
     string AudioPath = "Assets/MainApp/Audio/{0}.mp3";
     public void Init()
@@ -20,13 +21,14 @@ public class SoundManager : MonoSingleton<SoundManager>
         if (listener == null)
             listener = gameObject.AddComponent<AudioListener>();
     }
+    GameObject Effect;
     private void ObjInit()
     {
         GameObject Bgm = new GameObject("Audio_Bgm");
         Bgm.transform.SetParent(transform);
         Bgm.AddComponent<AudioSource>();
         Audio_Bgm = Bgm.GetComponent<AudioSource>();
-        GameObject Effect = new GameObject("Audio_Effect");
+        Effect = new GameObject("Audio_Effect");
         Effect.transform.SetParent(transform);
         Effect.AddComponent<AudioSource>();
         Audio_Effect = Effect.GetComponent<AudioSource>();
@@ -83,6 +85,36 @@ public class SoundManager : MonoSingleton<SoundManager>
         //AudioClip audioClip = ResourcesManager.Load<AudioClip>(string.Format(AudioPath , name));
         //AudioSource.PlayClipAtPoint(audioClip , transform.position , GetSoundEffectVolume());
     }
+
+    public void PlaySoundEffectWithNotRepetition(string name)
+    {
+        //if (!LocalDataManager.Instance.GetSoundState())
+        //    SetSoundEffectVolume(0);
+
+        //AudioClip audioClip = ResourcesManager.Load<AudioClip>(string.Format(AudioPath, name));
+
+        //if (!AudioSourceDic.ContainsKey(name))
+        //{
+        //    AudioSourceDic.Add(name, Effect.AddComponent<AudioSource>());
+        //}
+        //if (AudioSourceDic[name].clip != null)
+        //{
+        //    if (AudioSourceDic[name].clip.name != audioClip.name || !AudioSourceDic[name].isPlaying)
+        //    {
+        //        AudioSourceDic[name].clip = audioClip;
+        //        AudioSourceDic[name].loop = false;
+        //        AudioSourceDic[name].Play();
+        //    }
+        //}
+        //else
+        //{
+        //    AudioSourceDic[name].clip = audioClip;
+        //    AudioSourceDic[name].loop = false;
+        //    AudioSourceDic[name].Play();
+        //}
+
+    }
+
     public void StopSoundEffect()
     {
         Audio_Effect.Pause();

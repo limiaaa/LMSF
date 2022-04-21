@@ -117,14 +117,14 @@ public class BaseUI : MonoBehaviour
         onClose?.Invoke();
         this.OnClosePage(parmas);
     }
-    public virtual void OnInit(object[] parmas) { }
-    public virtual void OnOpenPage(object[] parmas) { }
-    public virtual void OnClosePage(object[] parmas) { }
+    protected virtual void OnInit(object[] parmas) { }
+    protected virtual void OnOpenPage(object[] parmas) { }
+    protected virtual void OnClosePage(object[] parmas) { }
 
-    public virtual void OnDestroy() { }
+    protected virtual void OnDestroy() { }
 
     public virtual void RefreshPage(params object[] parmas) { }
-    public virtual void CloseSelf(bool forceDestroy =false,params object[] o)
+    protected virtual void CloseSelf(bool forceDestroy =false,params object[] o)
     {
         string name = this.GetType().Name;
         UIManager.Instance.ClosePage(this.GetType(), forceDestroy, o);
