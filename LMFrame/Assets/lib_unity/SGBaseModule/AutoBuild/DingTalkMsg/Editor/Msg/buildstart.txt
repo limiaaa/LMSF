@@ -1,0 +1,15 @@
+{
+    "at": {
+        "atMobiles":[
+            ""
+        ],
+        "atUserIds":[
+            ""
+        ],
+        "isAtAll": false
+    },
+    "text": {
+        "content":"帅气打包机器人上线，puzzlex 打包开始..."
+    },
+    "msgtype":"text"
+}
