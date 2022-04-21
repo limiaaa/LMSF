@@ -1,21 +1,22 @@
-﻿using System.Collections;
+﻿using SG.Utils;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using LMSF.Utils;
+using SG.UI;
+using SG.AssetBundleBrowser.AssetBundlePacker;
 
 public class SoundManager : MonoSingleton<SoundManager>
 {
+
     AudioSource Audio_Bgm;
     AudioSource Audio_Effect;
-
-    List<AudioClip> moduleList = null;
-    Dictionary<string, List<AudioClip>> soundDic = new Dictionary<string, List<AudioClip>>();
-    Dictionary<string, AudioSource> AudioSourceDic = new Dictionary<string, AudioSource>();
-
     string AudioPath = "Assets/MainApp/Audio/{0}.mp3";
-    public void Init()
+    Dictionary<string, AudioSource> AudioSourceDic = new Dictionary<string, AudioSource>();
+    List<AudioSource> AduioSourceList = new List<AudioSource>();
+    protected override void Init()
     {
+        base.Init();
         ObjInit();
         AudioListener listener = transform.GetComponent<AudioListener>();
         if (listener == null)
@@ -32,112 +33,131 @@ public class SoundManager : MonoSingleton<SoundManager>
         Effect.transform.SetParent(transform);
         Effect.AddComponent<AudioSource>();
         Audio_Effect = Effect.GetComponent<AudioSource>();
+        //AudioClip bgm = ResourcesManager.Load<AudioClip>(AudioPath + "bgm.wav");
+        //Audio_Bgm.clip = bgm;
+        //PlayBGM();
     }
-    public void PlayBgm(string name = "bgm.wav", bool Loop = true, bool IsReplay = true)
+
+    public void PlayBGM(string name = "bgm_main.wav", bool Loop = true)
     {
-        //if (!LocalDataMgr.Instance.GetMusicState())
+        //if (!LocalDataManager.Instance.GetMusicState())
         //    SetBgmVolume(0);
-        //AudioClip bgm = ResourcesManager.Load<AudioClip>(string.Format(AudioPath, name));
-        //if (bgm != Audio_Bgm.clip || IsReplay)
-        //{
-        //    Audio_Bgm.clip = bgm;
-        //    Audio_Bgm.loop = Loop;
-        //    Audio_Bgm.Play();
-        //}
+        AudioClip bgm = ResourcesManager.Load<AudioClip>(string.Format(AudioPath, name));
+        if (bgm != Audio_Bgm.clip)
+        {
+            Audio_Bgm.clip = bgm;
+            Audio_Bgm.loop = Loop;
+            Audio_Bgm.Play();
+        }
     }
+    public void RePlayBGM(string name = "bgm.wav", bool Loop = true)
+    {
+        //if (!LocalDataManager.Instance.GetMusicState())
+        //    SetBgmVolume(0);
+        AudioClip bgm = ResourcesManager.Load<AudioClip>(string.Format(AudioPath, name));
+        Audio_Bgm.clip = bgm;
+        Audio_Bgm.loop = Loop;
+        Audio_Bgm.Play();
+    }
+
+
     public void StopBgm()
     {
         Audio_Bgm.Pause();
     }
-    public void MuteBgm()
+    public void BgmMute()
     {
         Audio_Bgm.volume = 0;
     }
-    public void SetVolumeBgm(float vule)
+    public void SetBgmVolume(float vule)
     {
         Audio_Bgm.volume = vule;
     }
-    public float GetVolumeBgm()
+
+    public float GetBgmVolume()
     {
         return Audio_Bgm.volume;
     }
-    //同一时间只能存在一个
-    public void PlaySoundEffect(string name,bool Loop=false,string moduleKey="")
+    public void PlaySoundEffect(string name, bool Loop = false)
     {
-        //if (!LocalDataMgr.Instance.GetSoundState())
-        //    SetSoundEffectVolume(0);
-        //AudioClip audioClip = ResourcesManager.Load<AudioClip>(string.Format(AudioPath, name));
-        AudioClip audioClip = null;
-        Audio_Effect.clip = audioClip;
-        Audio_Effect.loop = Loop;
-        Audio_Effect.Play();
-        if (moduleKey!="" && !soundDic.ContainsKey(moduleKey))
-        {
-            soundDic.Add(moduleKey, new List<AudioClip>());
-        }
-        soundDic[moduleKey].Add(audioClip);
+        PlaySoundMixEffect(name, Loop);
     }
-    //同一时间可以存在多个
-    public void PlaySoundEffectWithPosition(string name , bool loop = false)
-    {
-        //if (!LocalDataMgr.Instance.GetSoundState())
-        //    SetSoundEffectVolume(0);
-        //AudioClip audioClip = ResourcesManager.Load<AudioClip>(string.Format(AudioPath , name));
-        //AudioSource.PlayClipAtPoint(audioClip , transform.position , GetSoundEffectVolume());
-    }
-
     public void PlaySoundEffectWithNotRepetition(string name)
     {
         //if (!LocalDataManager.Instance.GetSoundState())
         //    SetSoundEffectVolume(0);
 
-        //AudioClip audioClip = ResourcesManager.Load<AudioClip>(string.Format(AudioPath, name));
+        AudioClip audioClip = ResourcesManager.Load<AudioClip>(string.Format(AudioPath, name));
+        if (audioClip != null)
+        {
+            if (!AudioSourceDic.ContainsKey(name))
+            {
+                AudioSourceDic.Add(name, Effect.AddComponent<AudioSource>());
+            }
+            if (AudioSourceDic[name].clip != null)
+            {
+                if (AudioSourceDic[name].clip.name != audioClip.name || !AudioSourceDic[name].isPlaying)
+                {
+                    AudioSourceDic[name].clip = audioClip;
+                    AudioSourceDic[name].loop = false;
+                    AudioSourceDic[name].volume = GetSoundEffectVolume();
+                    AudioSourceDic[name].Play();
+                }
+            }
+            else
+            {
+                AudioSourceDic[name].clip = audioClip;
+                AudioSourceDic[name].loop = false;
+                AudioSourceDic[name].volume = GetSoundEffectVolume();
+                AudioSourceDic[name].Play();
+            }
+        }
 
-        //if (!AudioSourceDic.ContainsKey(name))
-        //{
-        //    AudioSourceDic.Add(name, Effect.AddComponent<AudioSource>());
-        //}
-        //if (AudioSourceDic[name].clip != null)
-        //{
-        //    if (AudioSourceDic[name].clip.name != audioClip.name || !AudioSourceDic[name].isPlaying)
-        //    {
-        //        AudioSourceDic[name].clip = audioClip;
-        //        AudioSourceDic[name].loop = false;
-        //        AudioSourceDic[name].Play();
-        //    }
-        //}
-        //else
-        //{
-        //    AudioSourceDic[name].clip = audioClip;
-        //    AudioSourceDic[name].loop = false;
-        //    AudioSourceDic[name].Play();
-        //}
+    }
 
+    public void PlaySoundMixEffect(string name, bool loop = false)
+    {
+        //if (!LocalDataManager.Instance.GetSoundState())
+        //    SetSoundEffectVolume(0);
+        AudioClip audioClip = ResourcesManager.Load<AudioClip>(string.Format(AudioPath, name));
+        if (audioClip != null)
+        {
+            AudioSource audioSource = null;
+            foreach (var source in AduioSourceList)
+            {
+                if (!source.isPlaying)
+                {
+                    audioSource = source;
+                    break;
+                }
+            }
+            if (audioSource == null)
+            {
+                audioSource = Effect.AddComponent<AudioSource>();
+                AduioSourceList.Add(audioSource);
+            }
+            audioSource.clip = audioClip;
+            audioSource.loop = false;
+            audioSource.volume = GetSoundEffectVolume();
+            audioSource.Play();
+        }
     }
 
     public void StopSoundEffect()
     {
         Audio_Effect.Pause();
     }
-    public void MuteSoundEffect()
+    public void SoundEffectMute()
     {
         Audio_Effect.volume = 0;
     }
-    public void SetVolumeSoundEffect(float vule)
+    public void SetSoundEffectVolume(float vule)
     {
         Audio_Effect.volume = vule;
     }
-    public float GetVolumeSoundEffect()
+
+    public float GetSoundEffectVolume()
     {
         return Audio_Effect.volume;
     }
-
-    public void CloseSoundByModule(string moduleKey)
-    {
-        if (soundDic.ContainsKey(moduleKey))
-        {
-            soundDic.Remove(moduleKey);
-        }
-    }
-
 }

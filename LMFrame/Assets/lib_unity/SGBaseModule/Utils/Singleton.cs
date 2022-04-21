@@ -11,27 +11,27 @@ namespace SG.Utils
 		{
 			get
 			{
-				if (Singleton<T>.m_instance == null)
+				if (m_instance == null)
 				{
 					lock (syslock)
 					{
-						Singleton<T>.m_instance = Activator.CreateInstance<T>();
-						if (Singleton<T>.m_instance != null)
+						m_instance = Activator.CreateInstance<T>();
+						if (m_instance != null)
 						{
-							(Singleton<T>.m_instance as Singleton<T>).Init();
+							(m_instance as Singleton<T>).Init();
 						}
 					}
 				}
 
-				return Singleton<T>.m_instance;
+				return m_instance;
 			}
 		}
 
 		public static void Release()
 		{
-			if (Singleton<T>.m_instance != null)
+			if (m_instance != null)
 			{
-				Singleton<T>.m_instance = (T)((object)null);
+				m_instance = (T)((object)null);
 			}
 		}
 

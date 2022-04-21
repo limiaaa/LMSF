@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-
-
     public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
     {
         private static T mInstance = null;
@@ -13,32 +11,26 @@
             {
                 if (mInstance == null && !applicationIsQuitting)
                 {
-                    mInstance = GameObject.FindObjectOfType(typeof(T)) as T;
+                    if (parent == null)
+                    {
+                        parent = GameObject.Find("Boot");
+                        if (parent == null)
+                        {
+                            parent = new GameObject("Boot");
+                            DontDestroyOnLoad(parent);
+                        }
+                    }
+                    mInstance = parent.GetComponent<T>();
                     if (mInstance == null)
                     {
                         GameObject go = new GameObject(typeof(T).Name);
                         mInstance = go.AddComponent<T>();
-                        if (!parent)
-                        {
-                            parent = GameObject.Find("Boot");
-                            if (!parent)
-                            {
-                                parent = new GameObject("Boot");
-                            }
-                        }
-
-#if UNITY_EDITOR
-                        if (Application.isPlaying)
-#endif
-                            GameObject.DontDestroyOnLoad(parent);
-
                         if (parent)
                         {
-                            go.transform.parent = parent.transform;
+                            go.transform.SetParent(parent.transform);
                         }
                     }
                 }
-
                 return mInstance;
             }
         }
@@ -64,12 +56,8 @@
                                  this.transform.parent.childCount + " child(ren)");
                 Destroy(this.gameObject);
             }
-
-#if UNITY_EDITOR
-            if (Application.isPlaying)
-#endif
-                if (gameObject.transform.parent)
-                    DontDestroyOnLoad(gameObject.transform.parent.gameObject);
+            if (gameObject.transform.parent)
+                DontDestroyOnLoad(gameObject.transform.parent.gameObject);
 
             Init();
         }
