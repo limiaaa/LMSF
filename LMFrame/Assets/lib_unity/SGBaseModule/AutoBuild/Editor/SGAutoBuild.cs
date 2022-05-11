@@ -8,6 +8,7 @@ using SG.AssetBundleBrowser;
 using SG.UI;
 using SG.Utils;
 using UnityEditor;
+using UnityEditor.Android;
 using UnityEngine;
 
 namespace SG.AutoBuild.Editor
@@ -65,6 +66,8 @@ namespace SG.AutoBuild.Editor
         private static string errormsg =
             "[keyword:{0}]打包参数没有设置，请在Unity编辑器中通过 SG->AutoBuild->生成安卓打包参数模板 菜单生成配置文件，然后在文件【{1}】中填好对应参数";
 
+        private static string error_notIL2CPP = "[keyword:{0}]自动打包失败，未正确设置IL2CPP\n信息:{1}\n打包设备：{2}";
+        
         [MenuItem("SG/AutoBuild/打包：Android Debug")]
         public static void AutomationBuild()
         {
@@ -86,6 +89,7 @@ namespace SG.AutoBuild.Editor
         private static void BuildAndroid(AutoAndroidBuildType buildType)
         {
             BuildTarget mBuildTarget = EditorUserBuildSettings.activeBuildTarget;
+            
             if (mBuildTarget != BuildTarget.Android)
             {
                 EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, BuildTarget.Android);
@@ -100,38 +104,56 @@ namespace SG.AutoBuild.Editor
             }
             else
             {
-                string path = GameName;
+                // 检查输出目录
+                if (!Directory.Exists(OutPutPath))
+                {
+                    Directory.CreateDirectory(OutPutPath);
+                }
+
+                string path = "";
                 string msg = "";
                 bool isDevelopment = false;
                 string file_path = "debug/";
                 string endpx = ".apk";
                 GameName = PlayerSettings.productName.Replace(" ", "_") + "_" + data.mVersion + "_" +
                            data.mBundleVersionCode + "_" + DateTime.Now.ToString("yyyyMMddHHmm");
-                string ApkPath = string.Format("{0}{1}.apk", OutPutPath, GameName);
-                string AABPath = string.Format("{0}{1}.aab", OutPutPath, GameName);
+                //string ApkPath = string.Format("{0}{1}.apk", OutPutPath, GameName);
+                //string AABPath = string.Format("{0}{1}.aab", OutPutPath, GameName);
                 EditorUserBuildSettings.exportAsGoogleAndroidProject = false;
                 EditorUserBuildSettings.buildAppBundle = false;
+                
+                AndroidArchitecture architecture = AndroidArchitecture.All;
+                SetAndroidIL2CPP(BuildTargetGroup.Android , architecture , true);
+                
+                if (!CheckAndroidIL2CPPSettings(BuildTargetGroup.Android))
+                {
+                    string _errormsg = string.Format(error_notIL2CPP, talkParam.keyWord, GameName+endpx,
+                        SystemInfo.deviceName);
+                    DingDingTalk.ErrorBuildDingTalk(talkParam.token, _errormsg);
+                    Debug.LogError(_errormsg);
+                    return;
+                }
+                
                 switch (buildType)
                 {
                     case AutoAndroidBuildType.Debug_APK:
-                        path = ApkPath;
                         file_path = "debug/";
                         msg = "安卓Debug--apk";
                         SettingReader.ScriptableObject.IsLogEnabled = true;
                         SettingReader.ScriptableObject.isDebug = true;
-                        isDevelopment = true;
+                        isDevelopment = false;//正常打测试包也关掉这个
+                        endpx = "debug.apk";
                         break;
                     case AutoAndroidBuildType.Release_APK:
-                        path = ApkPath;
                         file_path = "release/";
                         msg = "安卓release--apk";
-                        isDevelopment = false;
+                        isDevelopment = false; 
+                        endpx = "release.apk";
                         SettingReader.ScriptableObject.IsLogEnabled = false;
                         SettingReader.ScriptableObject.isDebug = false;
                         break;
                     case AutoAndroidBuildType.Release_AAB:
-                        path = AABPath;
-                        endpx = ".aab";
+                        endpx = "release.aab";
                         file_path = "release/";
                         msg = "安卓release--aab";
                         isDevelopment = false;
@@ -143,13 +165,13 @@ namespace SG.AutoBuild.Editor
                         SettingReader.ScriptableObject.IsLogEnabled = false;
                         SettingReader.ScriptableObject.isDebug = false;
                         isDevelopment = false;
-                        path = AABPath;
-                        endpx = ".aab";
+                        endpx = "release.aab";
                         file_path = "release/";
                         msg = "安卓release--aab->apk";
                         break;
                 }
 
+                path = string.Format("{0}{1}{2}", OutPutPath, GameName, endpx);
                 SettingReader.ScriptableObject.isLoadFromAssetBundle = true;
                 if (SettingReader.ScriptableObject.IsBuildNotify)
                 {
@@ -174,7 +196,6 @@ namespace SG.AutoBuild.Editor
 
                 BuildPipeline.BuildPlayer(EditorBuildSettings.scenes, path, BuildTarget.Android, buildOption);
                 DebugUtils.Log("------------- 结束 BuildAPK -------------");
-                DebugUtils.Log("Build目录：" + ApkPath);
                 if (SettingReader.ScriptableObject.IsBuildNotify)
                 {
                     DingDingTalk.EndBuildDingTalk(file_path + GameName + endpx,
@@ -198,11 +219,50 @@ namespace SG.AutoBuild.Editor
                 }
             }
         }
+        
+        private static bool CheckAndroidIL2CPPSettings(BuildTargetGroup targetGroup)
+        {
+            var curScriptingType = PlayerSettings.GetScriptingBackend(targetGroup);
+            if (curScriptingType != ScriptingImplementation.IL2CPP)
+            {
+                return false;
+            }
+            
+            int architecture = PlayerSettings.GetArchitecture(targetGroup);
+            if ((AndroidArchitecture)architecture != AndroidArchitecture.All)
+            {
+                return false;
+            }
+
+            if (PlayerSettings.Android.targetArchitectures == (AndroidArchitecture.ARMv7 | AndroidArchitecture.ARM64))
+            {
+                return true;
+            }
+            else return false;
+        }
+        
+        private static void SetAndroidIL2CPP(BuildTargetGroup targetGroup ,AndroidArchitecture architecture, bool incrementall)
+        {
+            PlayerSettings.SetScriptingBackend(targetGroup , ScriptingImplementation.IL2CPP);
+            PlayerSettings.SetArchitecture(targetGroup , (int)architecture);
+            bool curIncrementall =  PlayerSettings.GetIncrementalIl2CppBuild(targetGroup);
+            if (curIncrementall != incrementall)
+            {
+                PlayerSettings.SetIncrementalIl2CppBuild(targetGroup, incrementall);
+            }
+
+            if (targetGroup == BuildTargetGroup.Android)
+            {
+                PlayerSettings.Android.targetArchitectures = (AndroidArchitecture.ARMv7 | AndroidArchitecture.ARM64);
+            }
+
+            PlayerSettings.SetIl2CppCompilerConfiguration(targetGroup , Il2CppCompilerConfiguration.Release);
+        }
 
         [MenuItem("SG/AutoBuild/打包：测试函数")]
         public static void TestFunc()
         {
-            RunShell("java");
+            Debug.Log(CheckAndroidIL2CPPSettings(BuildTargetGroup.Android));
         }
 
         /// <summary>

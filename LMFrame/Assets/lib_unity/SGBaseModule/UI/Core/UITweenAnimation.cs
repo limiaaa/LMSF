@@ -22,7 +22,8 @@ namespace SG.UI
                 return;
             }
             mUIPanel.localScale = Vector3.zero;
-            mUIPanel.DOScale(Vector3.one, 0.5f).SetEase(Ease.InSine).OnComplete(()=>OnComplated?.Invoke());
+            mUIPanel.DOScale(Vector3.one, 0.5f).SetEase(Ease.InSine);
+            UIManager.Instance.mUILogicTimer.Delay(0.5f, OnComplated);
         }
 
         public override void PlayEndAnimation(string name , Action OnComplated=null)
@@ -33,7 +34,8 @@ namespace SG.UI
                 return;
             }
             mUIPanel.localScale = Vector3.one;
-            mUIPanel.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutSine).OnComplete(()=>OnComplated?.Invoke());
+            mUIPanel.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutSine);
+            UIManager.Instance.mUILogicTimer.Delay(0.5f, OnComplated);
         }
     }
 }

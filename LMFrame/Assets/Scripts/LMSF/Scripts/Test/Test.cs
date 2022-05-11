@@ -28,7 +28,6 @@ public class Test : MonoBehaviour
             Debug.Log("1111");
             btn.RemoveButtonFunc();
         });
-        SoundManager.Instance.Init();
     }
 
     void StartTest()

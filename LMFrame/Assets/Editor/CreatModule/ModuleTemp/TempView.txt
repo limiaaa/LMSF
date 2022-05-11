@@ -3,10 +3,11 @@ using SG.EventSystem.EventDispatcher;
 using SG.SDK;
 using SG.UI;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[UIResPath(Global.PFB_UI_ROOT_PATH + "UI_#MODULENAME#Page.prefab", PageType.#LAYER#,#SAFEAREA#,#ANIMATION#)]
+[UIResPath(Global.PFB_UI_ROOT_PATH + "UI_#MODULENAME#Page.prefab", PageType.#LAYER#,#SAFEAREA##ANIMATION#)]
 public class V_#MODULENAME# : ABaseUI#REWARDADINTERFACE##INSERTADINTERFACE#
 {
     #DATA#
@@ -14,22 +15,24 @@ public class V_#MODULENAME# : ABaseUI#REWARDADINTERFACE##INSERTADINTERFACE#
     protected override void OnInit(params object[] parmas)
     {
         base.OnInit(parmas);
+        Init();
         AddUIEvent();
         AddEvent();
-        Init();
     }
     protected override void OnOpenPage(params object[] parmas)
     {
         base.OnOpenPage(parmas);
-        Refesh();
+        Open();
     }
     protected override void OnClosePage(params object[] parmas)
     {
         base.OnClosePage(parmas);
+        Close();
     }
     public override void OnDestroy()
     {
         base.OnDestroy();
+        Dispose();
         RemoveUIEvent();
         RemoveEvent();
     }
@@ -40,7 +43,6 @@ public class V_#MODULENAME# : ABaseUI#REWARDADINTERFACE##INSERTADINTERFACE#
         //button.AddButtonFunc(()=>{
         //    clickfunc();
         //});
-
     }
     //添加事件
     public void AddEvent()
@@ -52,7 +54,7 @@ public class V_#MODULENAME# : ABaseUI#REWARDADINTERFACE##INSERTADINTERFACE#
     public void RemoveUIEvent()
     {
         //移除点击事件模板
-        //button.RemoveButtonFunc(});
+        //button.RemoveButtonFunc();
     }
     //移除事件(在模块UI摧毁时关闭)
     public void RemoveEvent()
@@ -60,13 +62,23 @@ public class V_#MODULENAME# : ABaseUI#REWARDADINTERFACE##INSERTADINTERFACE#
         //移除事件模板
         //GameEventMgr.Instance.ClearAllMsg(GameEventType.XX);
     }
-    //初始化UI,逻辑入口
+    //关闭时调用
+    public void Close()
+    {
+
+    }
+    //摧毁时调用
+    public void Dispose()
+    {
+
+    }
+    //初始化UI,创建时调用
     public void Init()
     {
         #NEWDATA#
     }
-    //刷新UI,进行模块刷新
-    public void Refesh()
+    //打开时调用
+    public void Open()
     {
 
     }

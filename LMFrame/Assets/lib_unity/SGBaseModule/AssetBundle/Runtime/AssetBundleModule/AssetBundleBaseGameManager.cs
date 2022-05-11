@@ -180,12 +180,12 @@ namespace SG.AssetBundleBrowser.AssetBundlePacker
 
             if (!PreprocessFinished(current))
             {
-                DebugUtils.LogErrorWithEvent(31, "AssetBundleBaseGameManager", GamePackName + "  assetbundle manager Launch Fail!");
+                DebugUtils.LogError(GamePackName + "  assetbundle manager Launch Fail!");
             }
 
             if (current == null)
             {
-                DebugUtils.LogErrorWithEvent(1, "AssetBundleBaseGameManager", "Manifest Is Null");
+                DebugUtils.LogError("Manifest Is Null");
             }
             //TODO:  确认一下
             // if (do_initial_copy || !LIBII.SettingReader.ScriptableObject.IsNeedHotFix)

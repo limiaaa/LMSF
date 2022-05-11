@@ -16,11 +16,12 @@ namespace SG.UI
     /// <summary>
     /// UI页面加载模式
     /// </summary>
-    public enum UIPageLoadType{
+    public enum UIPageLoadType
+    {
         /// <summary>
         /// 继承游戏全局资源加载设置
         /// </summary>
-        OverrideGameSetting, 
+        OverrideGameSetting,
         /// <summary>
         /// 强制通过Resources.Load
         /// </summary>
@@ -44,17 +45,66 @@ namespace SG.UI
 
         private Action<string> openEventCallBack = null;
         private Action<string> closeEventCallBack = null;
+        private Action openPlaySoundCallBack = null;
+        private Action closePlaySoundCallBack = null;
 
         private List<ABaseUI> openedPageList = null;
-        public void InitEvent(Action<string> openevent, Action<string> closeevent)
+
+        public UILogicTimer mUILogicTimer = null;
+
+        private Dictionary<string, int> UIAnimationPlayDic = new Dictionary<string, int>();
+        public void InitEvent(Action<string> openevent, Action<string> closeevent, Action playopensound, Action playclosesound)
         {
             openEventCallBack = openevent;
             closeEventCallBack = closeevent;
         }
 
-        public void Init(string uiroot_path , bool forceReset = false , UIPageLoadType rootLoadtype = UIPageLoadType.OverrideGameSetting)
+        private void InitTimer()
+        {
+            if (mUILogicTimer == null)
+            {
+                GameObject go = new GameObject("UILogicTimer");
+                go.transform.SetParent(transform, false);
+                mUILogicTimer = go.AddComponent<UILogicTimer>();
+                mUILogicTimer.Init();
+            }
+        }
+
+        public void AddOnePageInAnimDic(string pageName)
+        {
+            if (!UIAnimationPlayDic.ContainsKey(pageName))
+            {
+                UIAnimationPlayDic.Add(pageName, 0);
+            }
+            else
+            {
+                UIAnimationPlayDic[pageName]++;
+            }
+        }
+
+        public void RemoveOnePageInAnimDic(string pageName)
+        {
+
+            if (!UIAnimationPlayDic.ContainsKey(pageName))
+            {
+                DebugUtils.Log(pageName + "不存在");
+            }
+            else
+            {
+                UIAnimationPlayDic.Remove(pageName);
+            }
+        }
+
+
+        public bool CheckAnimDic()
+        {
+            return UIAnimationPlayDic.Count > 0;
+        }
+
+        public void Init(string uiroot_path, bool forceReset = false, UIPageLoadType rootLoadtype = UIPageLoadType.OverrideGameSetting)
         {
             this.UIRootPath = uiroot_path;
+            InitTimer();
             _mAllPages = new Dictionary<string, ABaseUI>();
             if (forceReset && mUIRoot != null)
             {
@@ -67,7 +117,8 @@ namespace SG.UI
                 if (rootLoadtype == UIPageLoadType.OverrideGameSetting)
                 {
                     pb = this._GameSettingLoadPrefab(uiroot_path);
-                }else if (rootLoadtype == UIPageLoadType.ForceResources)
+                }
+                else if (rootLoadtype == UIPageLoadType.ForceResources)
                 {
                     pb = this._ResLoadPrefab(uiroot_path);
                 }
@@ -91,21 +142,21 @@ namespace SG.UI
             canvas_layer.Add(PageType.Fixed, mUIRoot.Find("Canvas2"));
             canvas_layer.Add(PageType.PopBox, mUIRoot.Find("Canvas3"));
             canvas_layer.Add(PageType.Effect, mUIRoot.Find("Canvas4"));
-            
-            SetSubCanvas(canvas_layer[PageType.Map] , 10);
-            SetSubCanvas(canvas_layer[PageType.Normal] , 20);
-            SetSubCanvas(canvas_layer[PageType.Fixed] , 30);
-            SetSubCanvas(canvas_layer[PageType.PopBox] , 40);
-            SetSubCanvas(canvas_layer[PageType.Effect] , 50);
+
+            SetSubCanvas(canvas_layer[PageType.Map], 10);
+            SetSubCanvas(canvas_layer[PageType.Normal], 20);
+            SetSubCanvas(canvas_layer[PageType.Fixed], 30);
+            SetSubCanvas(canvas_layer[PageType.PopBox], 40);
+            SetSubCanvas(canvas_layer[PageType.Effect], 50);
             if (mClickMask == null)
             {
                 mClickMask = mUIRoot.Find("ClickMask").gameObject;
-                if(mClickMask==null)
+                if (mClickMask == null)
                     DebugUtils.Log("注意UIRoot下丢失ClickMask，会影响全局点击遮罩功能！！！");
             }
             EnableMask(false);
             DontDestroyOnLoad(mUIRoot);
-            
+
             SpriteAtlasManager.atlasRequested += OnLoadAtlas;
 
             openedPageList = new List<ABaseUI>();
@@ -122,7 +173,7 @@ namespace SG.UI
         {
             string path = UIAtlasPath + atlasName + atlasPrifix;
 
-            var sa =ResourcesManager.Load<SpriteAtlas>(path);
+            var sa = ResourcesManager.Load<SpriteAtlas>(path);
             if (sa == null)
             {
                 Debug.LogError("加载图集失败:[" + path + "]");
@@ -130,7 +181,7 @@ namespace SG.UI
             act(sa);
         }
 
-        
+
         /// <summary>
         /// 设置UGUI图集统一路径（用到了UGUI的图集/否则可以不管）
         /// </summary>
@@ -145,7 +196,7 @@ namespace SG.UI
             GameObject mroot = new GameObject("UI_Root");
             mroot.AddComponent<RectTransform>();
             Canvas canvas = mroot.AddComponent<Canvas>();
-            
+
             CanvasScaler scaler = mroot.AddComponent<CanvasScaler>();
             scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             scaler.referenceResolution = new Vector2(768, 1366);
@@ -181,21 +232,21 @@ namespace SG.UI
             cam.orthographic = true;
             cam.orthographicSize = 5;
             cam.depth = 1;
-            cameraObj.transform.SetParent(mroot.transform , false);
+            cameraObj.transform.SetParent(mroot.transform, false);
             cam.transform.position = Vector3.back * 100;
-                
+
             for (int i = 0; i < 5; i++)
             {
                 GameObject subcanvasObj = new GameObject("Canvas" + i);
                 Canvas subcanvas = subcanvasObj.AddComponent<Canvas>();
-                
+
                 GraphicRaycaster subRaycaster = subcanvasObj.AddComponent<GraphicRaycaster>();
                 subRaycaster.blockingObjects = GraphicRaycaster.BlockingObjects.None;
                 subRaycaster.ignoreReversedGraphics = true;
                 subcanvasObj.transform.SetParent(mroot.transform);
-                
+
                 RectTransform rec = subcanvas.GetComponent<RectTransform>();
-                rec.anchorMin= Vector2.zero;
+                rec.anchorMin = Vector2.zero;
                 rec.anchorMax = Vector2.one;
                 rec.pivot = Vector2.one * 0.5f;
                 rec.offsetMax = Vector2.zero;
@@ -208,15 +259,15 @@ namespace SG.UI
             canvas.sortingLayerName = "Default";
             canvas.sortingOrder = 0;
             canvas.additionalShaderChannels = AdditionalCanvasShaderChannels.None;
-            
+
             mClickMask = new GameObject("ClickMask");
             RectTransform mask_rect = mClickMask.AddComponent<RectTransform>();
-            mask_rect.anchorMin= Vector2.zero;
+            mask_rect.anchorMin = Vector2.zero;
             mask_rect.anchorMax = Vector2.one;
             mask_rect.pivot = Vector2.one * 0.5f;
             mask_rect.offsetMax = Vector2.zero;
             mask_rect.offsetMin = Vector2.zero;
-            
+
             Canvas clicksubcanvas = mClickMask.AddComponent<Canvas>();
             clicksubcanvas.overrideSorting = true;
             clicksubcanvas.sortingOrder = 9999;
@@ -234,21 +285,24 @@ namespace SG.UI
             c.sortingOrder = order;
         }
 
-        public T SetPageLayer<T>(PageType type)where T:ABaseUI
+        public T SetPageLayer<T>(PageType type) where T : ABaseUI
         {
             T page = GetPage<T>();
-            page.transform.SetParent(canvas_layer[type] , false);
+            page.transform.SetParent(canvas_layer[type], false);
             return page;
         }
-        
-        public T OpenPage<T>(params object[] parmas) where T:ABaseUI
+
+        public T OpenPage<T>(params object[] parmas) where T : ABaseUI
         {
             ABaseUI page = OpenPage(typeof(T), parmas);
-            if(openEventCallBack != null)
+            if (openEventCallBack != null)
             {
                 openEventCallBack.Invoke(typeof(T).Name);
             }
-
+            if (page != null && page.mIsPlayOpenSound)
+            {
+                openPlaySoundCallBack?.Invoke();
+            }
             openedPageList.Add(page);
             return page as T;
         }
@@ -260,10 +314,10 @@ namespace SG.UI
             ABaseUI pageSrc = null;
             if (!_HasPage(_pageName))
             {
-                pageSrc = _LoadSetPage(type , parmas);
+                pageSrc = _LoadSetPage(type, parmas);
             }
             pageSrc = _mAllPages[_pageName];
-            
+
             if (pageSrc == null)
             {
                 Debug.LogError("打开页面失败@：" + _pageName);
@@ -315,20 +369,31 @@ namespace SG.UI
         /// </summary>
         public void CloseAllPage()
         {
-            foreach(var item in _mAllPages)
+            foreach (var item in _mAllPages)
             {
                 ClosePage(item.Key, false);
             }
         }
 
-        public void CloseAllPageWithOut(List<string> lst)
+        public void CloseAllPageWithOut(List<Type> lst, bool IsDestroy = false)
         {
+            List<string> pathList = new List<string>();
+            for (int i = 0; i < lst.Count; i++)
+            {
+                var pathName = GetUIPath(lst[i]);
+                pathList.Add(pathName);
+            }
+            List<string> needClose = new List<string>();
             foreach (var item in _mAllPages)
             {
-                if(!lst.Contains(item.Value.name))
+                if (!pathList.Contains(item.Key))
                 {
-                    ClosePage(item.Key, false);
+                    needClose.Add(item.Key);
                 }
+            }
+            for (int i = 0; i < needClose.Count; i++)
+            {
+                ClosePage(needClose[i], IsDestroy);
             }
         }
 
@@ -340,8 +405,8 @@ namespace SG.UI
             string _pageName = GetUIPath(typeof(T));
             foreach (var item in _mAllPages)
             {
-                if(!_pageName.EndsWith(item.Key))
-                   ClosePage(item.Key, false);
+                if (!_pageName.EndsWith(item.Key))
+                    ClosePage(item.Key, false);
             }
         }
 
@@ -361,11 +426,16 @@ namespace SG.UI
         public void ClosePage(Type type, bool forceDestroy = false, params object[] parmas)
         {
             string _pageName = GetUIPath(type);
-            ClosePage(_pageName, forceDestroy, parmas);
+            var pageTemp = GetPage(_pageName);
             if (closeEventCallBack != null)
             {
                 closeEventCallBack.Invoke(type.Name);
             }
+            if (pageTemp != null && pageTemp.mIsPlayCloseSound)
+            {
+                closePlaySoundCallBack?.Invoke();
+            }
+            ClosePage(_pageName, forceDestroy, parmas);
         }
 
         public Camera GetUICamera()
@@ -373,7 +443,7 @@ namespace SG.UI
             return mUICamera;
         }
 
-        private void ClosePage(string __pageName,bool forceDestroy = false, object[] parmas = null) 
+        private void ClosePage(string __pageName, bool forceDestroy = false, object[] parmas = null)
         {
             var pageTemp = GetPage(__pageName);
             if (pageTemp != null && openedPageList.Contains(pageTemp))
@@ -383,33 +453,34 @@ namespace SG.UI
 
             if (_HasPage(__pageName))
             {
-                 _mAllPages[__pageName].ClosePage(() =>
-                 {
-                     if (forceDestroy)
-                     {
-                         if (_HasPage(__pageName))
-                         {
-                             ABaseUI page = _mAllPages[__pageName];
-                             _mAllPages.Remove(__pageName);
-                             GameObject.Destroy(page.gameObject);
-                             page = null;
-                         }
-                     }
-                     else
-                     {
-                         _mAllPages[__pageName].gameObject.SetActive(false);
-                     }
-                 },parmas);
+                ABaseUI page = _mAllPages[__pageName];
+                if (forceDestroy)
+                {
+                    _mAllPages.Remove(__pageName);
+                    page.ClosePage(() =>
+                    {
+                        GameObject.Destroy(page.gameObject);
+                        page = null;
+                    });
+                }
+                else
+                {
+                    page.ClosePage(() =>
+                    {
+                        page.gameObject.SetActive(false);
+                    }, parmas);
+                }
+
             }
         }
 
-        public void RefreshPage<T>(params object[] parmas )where T : ABaseUI
+        public void RefreshPage<T>(params object[] parmas) where T : ABaseUI
         {
             string pagePath = GetUIPath(typeof(T));
             RefreshPage(pagePath, parmas);
         }
 
-        private void RefreshPage(string __pageName,object[] parmas = null) 
+        private void RefreshPage(string __pageName, object[] parmas = null)
         {
             if (_HasPage(__pageName))
             {
@@ -425,7 +496,7 @@ namespace SG.UI
             return canvas_layer[pageType];
         }
 
-        public T GetPage<T>( )where T:ABaseUI
+        public T GetPage<T>() where T : ABaseUI
         {
             string _pageName = GetUIPath(typeof(T));
             ABaseUI p = GetPage(_pageName, null);
@@ -457,11 +528,12 @@ namespace SG.UI
             if (attr.mPageLoadType == UIPageLoadType.OverrideGameSetting)
             {
                 pg_prefab = this._GameSettingLoadPrefab(path);
-            }else if (attr.mPageLoadType == UIPageLoadType.ForceResources)
+            }
+            else if (attr.mPageLoadType == UIPageLoadType.ForceResources)
             {
                 pg_prefab = this._ResLoadPrefab(path);
             }
-             
+
             pg = GameObject.Instantiate(pg_prefab) as GameObject;
 
             ABaseUI pageSrc = pg.GetComponent<ABaseUI>();
@@ -484,7 +556,7 @@ namespace SG.UI
             pg.transform.localScale = orgLocScale;
 
             RectTransform _old = pg_prefab.GetComponent<RectTransform>();
-            RectTransform _new  = pg.GetComponent<RectTransform>();
+            RectTransform _new = pg.GetComponent<RectTransform>();
             _new.anchoredPosition = _old.anchoredPosition;
             _new.anchorMax = _old.anchorMax;
             _new.anchorMin = _old.anchorMin;
@@ -495,7 +567,7 @@ namespace SG.UI
             return pageSrc;
         }
 
-       
+
         private void SetPageByType(ABaseUI pageSrc)
         {
             PageType pagetype = PageType.Normal;
@@ -505,41 +577,43 @@ namespace SG.UI
             }
             pagetype = pageSrc.mPageType;
 
-            pageSrc.transform.SetParent(canvas_layer[pagetype] , false);
+            pageSrc.transform.SetParent(canvas_layer[pagetype], false);
         }
 
-        private GameObject _GameSettingLoadPrefab(string __resName) {
+        private GameObject _GameSettingLoadPrefab(string __resName)
+        {
             GameObject pg_prefab = ResourcesManager.Load<GameObject>(__resName);
             if (pg_prefab == null)
             {
                 Debug.LogError("资源加载失败:[" + __resName + "] 请检查资源是否存在或名称是否正确!!!");
-                return null ;
+                return null;
             }
             return pg_prefab;
         }
-        
-        private GameObject _ResLoadPrefab(string __resName) {
+
+        private GameObject _ResLoadPrefab(string __resName)
+        {
             GameObject pg_prefab = Resources.Load<GameObject>(__resName);
             if (pg_prefab == null)
             {
                 Debug.LogError("资源加载失败:Resources.Load(" + __resName + ") 请检查资源是否存在或名称是否正确!!!");
-                return null ;
+                return null;
             }
             return pg_prefab;
         }
 
-        private string GetUIPath(Type uitype , out UIResPathAttribute attr) 
+        private string GetUIPath(Type uitype, out UIResPathAttribute attr)
         {
             string ui_path = "";
             Type t = uitype;
 
-            attr =  t.GetCustomAttribute(typeof(UIResPathAttribute)) as UIResPathAttribute;
+            attr = t.GetCustomAttribute(typeof(UIResPathAttribute)) as UIResPathAttribute;
             if (attr != null)
                 ui_path = attr.mPath;
             return ui_path;
         }
-        
-        private string GetUIPath(Type uitype ) 
+
+        private string GetUIPath(Type uitype)
         {
             string ui_path = "";
             Type t = uitype;
@@ -552,7 +626,7 @@ namespace SG.UI
 
         private UIResPathAttribute GetUIPageDefine(Type uitype)
         {
-            UIResPathAttribute attr =  uitype.GetCustomAttribute(typeof(UIResPathAttribute)) as UIResPathAttribute;
+            UIResPathAttribute attr = uitype.GetCustomAttribute(typeof(UIResPathAttribute)) as UIResPathAttribute;
             return attr;
         }
 

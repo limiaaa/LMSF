@@ -134,6 +134,7 @@ namespace SG.SDK.OpenSDKHelper
         /// <param name="onQueryHistoryPurchasedEnd"></param>
         public void QueryHistoryPurchased(Action<ResultQueryHistoryPurchased> onQueryHistoryPurchasedEnd)
         {
+#if USE_OPENSDK_IAP
             //DebugUtils.Log("OpenSDKIapHelper.{0} ", DebugUtils.FuncName());
             OpenSDK.Agent.QueryHistoryPurchased( resultJsonStr =>
             {
@@ -154,6 +155,8 @@ namespace SG.SDK.OpenSDKHelper
                     onQueryHistoryPurchasedEnd.Invoke(resultData);
                 }
             });
+#else
+#endif
         }
 
         private void testParseJson()

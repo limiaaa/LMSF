@@ -28,11 +28,11 @@ namespace SG.UI
                     AnimationClip mClipDic = mController[name];
                     float animTime = mClipDic.length;
                     _animator.Play(name, 0, 0);
-                    CoroutineMgr.Instance.Delay(animTime , OnComplated);
+                    UIManager.Instance.mUILogicTimer.Delay(animTime, OnComplated);
                 }
                 catch (Exception e)
                 {
-                    DebugUtils.LogErrorWithEvent(5, "UIUnityAnimation", "页面[{0}]打开动画缺失：>动画名称：【{1}】", mUIPanel.name, name);
+                    DebugUtils.LogError("页面[{0}]打开动画缺失：>动画名称：【{1}】", mUIPanel.name, name);
                     OnComplated?.Invoke();
                 }
             }
@@ -50,11 +50,11 @@ namespace SG.UI
                     AnimationClip mClipDic = mController[name];
                     float animTime = mClipDic.length;
                     _animator.Play(name, 0, 0);
-                    CoroutineMgr.Instance.Delay(animTime , OnComplated);
+                    UIManager.Instance.mUILogicTimer.Delay(animTime, OnComplated);
                 }
                 catch (Exception e)
                 {
-                    DebugUtils.LogErrorWithEvent(6, "UIUnityAnimation", "页面[{0}]关闭动画缺失：>动画名称：【{1}】", mUIPanel.name, name);
+                    DebugUtils.LogError("页面[{0}]关闭动画缺失：>动画名称：【{1}】", mUIPanel.name, name);
                     OnComplated?.Invoke();
                 }
             }

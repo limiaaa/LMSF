@@ -19,36 +19,36 @@ namespace SG.UI
         {
             this.mPath = path;
         }
-        
-        public UIResPathAttribute(string path , PageType pageType)
+
+        public UIResPathAttribute(string path, PageType pageType)
         {
             this.mPath = path;
             this.mPageType = pageType;
         }
-        
-        public UIResPathAttribute(string path , PageType pageType , UIPageLoadType loadType)
+
+        public UIResPathAttribute(string path, PageType pageType, UIPageLoadType loadType)
         {
             this.mPath = path;
             this.mPageType = pageType;
             this.mPageLoadType = loadType;
         }
-        
-        public UIResPathAttribute(string path , PageType pageType , bool isSafeArea)
+
+        public UIResPathAttribute(string path, PageType pageType, bool isSafeArea)
         {
             this.mPath = path;
             this.mPageType = pageType;
             this.IsSafeArea = isSafeArea;
         }
-        
-        public UIResPathAttribute(string path , PageType pageType , UIPageLoadType loadType , bool isSafeArea)
+
+        public UIResPathAttribute(string path, PageType pageType, UIPageLoadType loadType, bool isSafeArea)
         {
             this.mPath = path;
             this.mPageType = pageType;
             this.mPageLoadType = loadType;
             this.IsSafeArea = isSafeArea;
         }
-        
-        public UIResPathAttribute(string path , PageType pageType = PageType.Normal , UIPageLoadType loadType = UIPageLoadType.OverrideGameSetting , bool isSafeArea = false , Type mPageAnim = null)
+
+        public UIResPathAttribute(string path, PageType pageType = PageType.Normal, UIPageLoadType loadType = UIPageLoadType.OverrideGameSetting, bool isSafeArea = false, Type mPageAnim = null)
         {
             this.mPath = path;
             this.mPageType = pageType;
@@ -108,22 +108,31 @@ namespace SG.UI
         /// 页面名称
         /// </summary>
         public string mPageName;
-        
+
         /// <summary>
         /// 是否需要全面屏控制
         /// </summary>
         public bool mIsSafeArea = false;
-        
-        protected SafeArea mSafeArea;
 
-        
+        protected SafeArea mSafeArea;
+        /// <summary>
+        /// 打开UI是否播放音效 
+        /// </summary>
+        public bool mIsPlayOpenSound = false;
+        /// <summary>
+        /// 关闭UI是否播放音效 
+        /// </summary>
+        public bool mIsPlayCloseSound = false;
+
 
         public PageState mPageState = PageState.NotReady;
         /// <summary>
         /// 页面动画配置
         /// </summary>
         protected AUIAnimation mPageAnimation;
-        
+
+        public bool mIsCanUIClick = true;
+
         #region Unity CallBack
         protected virtual void Update()
         {
@@ -134,7 +143,7 @@ namespace SG.UI
         {
             this.mPageState = PageState.Created;
             BindUIElement();
-            this.OnInit();
+            this.OnInit(parmas);
         }
 
         public void OpenPage(params object[] parmas)
@@ -147,17 +156,21 @@ namespace SG.UI
             else
             {
                 this.mPageState = PageState.Opening;
+                mIsCanUIClick = true;
                 UIManager.Instance.EnableMask(true);
-                this.mPageAnimation.PlayStartAnimation(OpenAnimationName , ()=>
+                UIManager.Instance.AddOnePageInAnimDic(gameObject.name);
+                this.mPageAnimation.PlayStartAnimation(OpenAnimationName, () =>
                 {
-                    OnEndPlayOpenAnimation();
-                    this.mPageState = PageState.Opened;
-                    UIManager.Instance.EnableMask(false);
-                });
+                   UIManager.Instance.RemoveOnePageInAnimDic(gameObject.name);
+                   UIManager.Instance.EnableMask(UIManager.Instance.CheckAnimDic());
+                   OnEndPlayOpenAnimation();
+                   mIsCanUIClick = true;
+                   this.mPageState = PageState.Opened;
+               });
             }
         }
 
-        public virtual void ClosePage(Action onClose,params object[] parmas)
+        public virtual void ClosePage(Action onClose, params object[] parmas)
         {
             if (this.mPageAnimation == null)
             {
@@ -168,28 +181,32 @@ namespace SG.UI
             else
             {
                 UIManager.Instance.EnableMask(true);
-                this.mPageAnimation.PlayEndAnimation(CloseAnimationName , ()=>
-                {
-                    OnEndPlayCloseAnimation();
-                    this.mPageState = PageState.Closed;
-                    UIManager.Instance.EnableMask(false);
-                    this.OnClosePage(parmas);
-                    onClose?.Invoke();
-                });
+                mIsCanUIClick = true;
+                UIManager.Instance.AddOnePageInAnimDic(gameObject.name);
+                this.mPageAnimation.PlayEndAnimation(CloseAnimationName, () =>
+               {
+                   UIManager.Instance.RemoveOnePageInAnimDic(gameObject.name);
+                   UIManager.Instance.EnableMask(UIManager.Instance.CheckAnimDic());
+                   mIsCanUIClick = true;
+                   OnEndPlayCloseAnimation();
+                   this.mPageState = PageState.Closed;
+                   this.OnClosePage(parmas);
+                   onClose?.Invoke();
+               });
             }
         }
         /// <summary>
         /// 界面初始化，在页面资源加载完成后调用一次
         /// </summary>
-        protected virtual void OnInit(params object[] parmas){ }
+        protected virtual void OnInit(params object[] parmas) { }
         /// <summary>
         /// 每次打开页面调用
         /// </summary>
-        protected virtual void OnOpenPage(params object[] parmas){  }
+        protected virtual void OnOpenPage(params object[] parmas) { }
         /// <summary>
         /// 每次关闭页面回调
         /// </summary>
-        protected virtual void OnClosePage(params object[] parmas ) { }
+        protected virtual void OnClosePage(params object[] parmas) { }
         protected virtual void OnStartPlayOpenAnimation() { }
         protected virtual void OnEndPlayOpenAnimation() { }
         protected virtual void OnStartPlayCloseAnimation() { }
@@ -198,22 +215,22 @@ namespace SG.UI
         /// 每次需要刷新的时候调用
         /// </summary>
         /// 
-        public virtual void RefreshPage(params object[] parmas ) { }
+        public virtual void RefreshPage(params object[] parmas) { }
         /// <summary>
         /// 页面被删除的时候调用
         /// </summary>
         public virtual void OnDestroy() { }
 
-        public virtual void CloseSelf(bool forceDestroy = false, params object[] p )
+        public virtual void CloseSelf(bool forceDestroy = false, params object[] p)
         {
             string pname = this.GetType().Name;
             UIManager.Instance.ClosePage(this.GetType(), forceDestroy, p);
         }
-        
+
         public void SetPageTypeByAttribute()
         {
             Type t = this.GetType();
-            UIResPathAttribute attr =  t.GetCustomAttribute(typeof(UIResPathAttribute)) as UIResPathAttribute;
+            UIResPathAttribute attr = t.GetCustomAttribute(typeof(UIResPathAttribute)) as UIResPathAttribute;
             if (attr != null)
                 mPageType = attr.mPageType;
         }
@@ -221,30 +238,30 @@ namespace SG.UI
         public void SetSafeArea()
         {
             Type t = this.GetType();
-            UIResPathAttribute attr =  t.GetCustomAttribute(typeof(UIResPathAttribute)) as UIResPathAttribute;
+            UIResPathAttribute attr = t.GetCustomAttribute(typeof(UIResPathAttribute)) as UIResPathAttribute;
             if (attr != null)
                 mIsSafeArea = attr.IsSafeArea;
 
             if (mIsSafeArea && mSafeArea == null)
             {
                 mSafeArea = gameObject.GetComponent<SafeArea>();
-                if(mSafeArea==null)  mSafeArea = gameObject.AddComponent<SafeArea>();
+                if (mSafeArea == null) mSafeArea = gameObject.AddComponent<SafeArea>();
             }
 
             if (mIsSafeArea && mSafeArea != null) mSafeArea.ForceUpdateSafeArea();
         }
-        
+
         public void SetAnimationDefine()
         {
             Type t = this.GetType();
-            UIResPathAttribute attr =  t.GetCustomAttribute(typeof(UIResPathAttribute)) as UIResPathAttribute;
+            UIResPathAttribute attr = t.GetCustomAttribute(typeof(UIResPathAttribute)) as UIResPathAttribute;
             if (attr != null)
             {
                 if (attr.mPageAnimation != null)
                 {
                     if (attr.mPageAnimation.BaseType.Name != typeof(AUIAnimation).Name)
                     {
-                        DebugUtils.LogErrorWithEvent(4, "ResourceManager", "页面动画类型【{0}】,必须继承【AUIAnimation】，当前配置类型错误!!!请检查！！", attr.mPageAnimation.Name);
+                        DebugUtils.LogError("页面动画类型【{0}】,必须继承【AUIAnimation】，当前配置类型错误!!!请检查！！", attr.mPageAnimation.Name);
                     }
                     else
                     {
@@ -253,39 +270,39 @@ namespace SG.UI
                 }
             }
         }
-        
-        
+
+
 
         private void BindUIElement()
         {
-            Dictionary<string,FieldInfo> listInfo = new Dictionary<string, FieldInfo>();
-            GetAllFieldInfo(this.GetType(),listInfo);
+            Dictionary<string, FieldInfo> listInfo = new Dictionary<string, FieldInfo>();
+            GetAllFieldInfo(this.GetType(), listInfo);
             Type typeAttr = typeof(UIBinderAttribute);
             foreach (var item in listInfo)
             {
-                UIBinderAttribute attr = Attribute.GetCustomAttribute(item.Value,typeAttr) as UIBinderAttribute;
+                UIBinderAttribute attr = Attribute.GetCustomAttribute(item.Value, typeAttr) as UIBinderAttribute;
                 if (attr != null)
                 {
                     if (item.Value.FieldType.FullName == typeof(GameObject).FullName)
                     {
                         var v = GetChildGameObject(attr, item.Value.FieldType);
-                        item.Value.SetValue(this,v); 
+                        item.Value.SetValue(this, v);
                     }
                     else
                     {
                         var v = GetChildElement(attr, item.Value.FieldType);
-                        item.Value.SetValue(this,v);  
+                        item.Value.SetValue(this, v);
                     }
                 }
             }
             listInfo.Clear();
             listInfo = null;
         }
-        
+
         private Component GetChildElement(UIBinderAttribute attr, Type type)
         {
             Transform tran = this.transform.Find(attr.mPath);
-            
+
             if (tran != null)
             {
                 return tran.GetComponent(type);
@@ -293,7 +310,7 @@ namespace SG.UI
 
             return null;
         }
-        
+
         private GameObject GetChildGameObject(UIBinderAttribute attr, Type type)
         {
             Transform tran = this.transform.Find(attr.mPath);
@@ -304,7 +321,7 @@ namespace SG.UI
 
             return null;
         }
-        
+
         private void GetAllFieldInfo(Type type, Dictionary<string, FieldInfo> listInfo)
         {
             if (listInfo == null)
@@ -320,7 +337,7 @@ namespace SG.UI
 
             if (type.BaseType != null)
             {
-                GetAllFieldInfo(type.BaseType,listInfo);
+                GetAllFieldInfo(type.BaseType, listInfo);
             }
         }
     }

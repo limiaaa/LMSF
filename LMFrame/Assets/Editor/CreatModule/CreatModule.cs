@@ -28,9 +28,7 @@ public class CreatModule : Editor
     {
         CreatWindows.WindowsOpen();
     }
-
 }
-
 
 public class CreatWindows : EditorWindow
 {
@@ -39,7 +37,7 @@ public class CreatWindows : EditorWindow
     {
         Creater = PlayerPrefs.GetString("Creater", "");
         Explain = PlayerPrefs.GetString("Explain", "");
-        window = EditorWindow.GetWindow<CreatWindows>("ModuleCreat");
+        window = EditorWindow.GetWindow<CreatWindows>("模块创建");
     }
     //模块名
     public static string moduleName = "";
@@ -151,13 +149,22 @@ public class CreatWindows : EditorWindow
         {
             content = content.Replace("#REWARDADINTERFACE#", ",IListenerVideoAd");
         }
+        else
+        {
+            content = content.Replace("#REWARDADINTERFACE#", "");
+        }
         if (needInsertAdInterface)
         {
             content = content.Replace("#INSERTADINTERFACE#", ",IListenerInterstitialAd");
         }
+        else
+        {
+            content = content.Replace("#INSERTADINTERFACE#", "");
+        }
+
         if (needRewardAdInterface|| needInsertAdInterface)
         {
-            content = content.Replace("#ADTYPE#", "SDKManager.MY_AD_TYPE adType;");
+            content = content.Replace("#ADTYPE#", "SDKManager.MY_AD_TYPE AdType;");
             content = content.Replace("#ADBLOCK#", GetAdBlock());
         }
         else
@@ -172,7 +179,7 @@ public class CreatWindows : EditorWindow
         content = content.Replace("#LAYER#", LayerTag[openTag]);
         if (needAnimation)
         {
-            content = content.Replace("#ANIMATION#", "mPageAnimation = typeof(UITweenAnimation)");
+            content = content.Replace("#ANIMATION#", ",mPageAnimation = typeof(UITweenAnimation)");
         }
         else
         {

@@ -65,10 +65,6 @@ namespace SG.Utils
                                  this.transform.parent.childCount + " child(ren)");
                 Destroy(this.gameObject);
             }
-
-#if UNITY_EDITOR
-        if (Application.isPlaying)
-#endif
             if (gameObject.transform.parent)
                 DontDestroyOnLoad(gameObject.transform.parent.gameObject);
 
