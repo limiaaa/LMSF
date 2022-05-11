@@ -7,6 +7,7 @@ using UnityEngine;
 public class GameData
 {
     public Global.GameLanguage mCurrentLanguage = Global.GameLanguage.en;
+    public bool IsVibration = true;
 }
 [Serializable]
 public class GlobalData
