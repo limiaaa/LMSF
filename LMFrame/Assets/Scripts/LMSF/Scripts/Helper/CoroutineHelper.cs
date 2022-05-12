@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace LMSF.Utils
-{
     public class CoroutineHelper :MonoSingleton<CoroutineHelper>
     {
         public Dictionary<string, IEnumerator> FuncDic = null;
@@ -87,6 +85,4 @@ namespace LMSF.Utils
             }
             ModuleDic = new Dictionary<string, Dictionary<string, IEnumerator>>();
         }
-
     }
-}

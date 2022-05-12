@@ -14,7 +14,6 @@ public class UtilsInitManager : MonoSingleton<UtilsInitManager>
         TimeManager.Instance.InitGameFunc();
         LocalDataUtils.InitLocalDataFunc();
         RvCoinManager.Instance.RefeshRvCoinFunc();
-        DelayTimeManager.Instance.Init();
         if (IAPManager.Instance.NeedShop)
         {
             IAPManager.Instance.InitIAP();

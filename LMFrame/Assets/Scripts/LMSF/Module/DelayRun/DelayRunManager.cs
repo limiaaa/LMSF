@@ -20,7 +20,7 @@ public class DelayRunManager : MonoSingleton<DelayRunManager>
     private void RecoverHeartByTime()
     {
         Debug.Log("----------------开始体力迭代----------------");
-        int timer = 0;
+        int DelayTimerHelper = 0;
         //过去了多久+跑了多久
         long Usetime = TimeManager.Instance.ThisLoginAndLastExit+ LocalDataUtils.GetLocalData("HeartTime", 0);
 
@@ -29,7 +29,7 @@ public class DelayRunManager : MonoSingleton<DelayRunManager>
         //再算出溢出值
         //int MoreTime = (int)(Usetime % (ConstConfig.HpReply * 60));
         //初始值就是溢出值
-        //timer = MoreTime;
+        //DelayTimerHelper = MoreTime;
         //Debug.Log("溢出时间:" + MoreTime);
         TimeManager.Instance.AddFuncToTime("AddHeart", (Time) =>
         {
@@ -37,16 +37,16 @@ public class DelayRunManager : MonoSingleton<DelayRunManager>
             //if (LocalDataUtils.GetItemNum(GameItemType.Heart) >= ConstConfig.BeginingHp)
             //{
             //    RemindHeartTime = -1;
-            //    timer = 0;
+            //    DelayTimerHelper = 0;
             //    return;
             //}
-            //timer++;
-            //RemindHeartTime = ConstConfig.HpReply * 60 - timer;
-            //LocalDataFunc.Instance.SetLocalData("HeartTime", timer);
-            //if (timer >= ConstConfig.HpReply*60)
+            //DelayTimerHelper++;
+            //RemindHeartTime = ConstConfig.HpReply * 60 - DelayTimerHelper;
+            //LocalDataFunc.Instance.SetLocalData("HeartTime", DelayTimerHelper);
+            //if (DelayTimerHelper >= ConstConfig.HpReply*60)
             //{
             //    RemindHeartTime = 0;
-            //    timer = 0;
+            //    DelayTimerHelper = 0;
             //    LocalDataMgr.Instance.AddItemNum(GameItemType.Heart, 1, "auto");
             //    UITopManager.Instance.RefeshTop();
             //}
@@ -73,15 +73,15 @@ public class DelayRunManager : MonoSingleton<DelayRunManager>
     private bool IsCoinByAdColdTime = false;
     private void RecoverCoinByAdByTime()
     {
-        //long timer = 0;
+        //long DelayTimerHelper = 0;
         ////过去了多久+跑了多久
-        //timer = TimeManager.Instance.ThisLoginAndLastExit + LocalDataUtils.GetLocalData("CoinByAdTime", 0);
+        //DelayTimerHelper = TimeManager.Instance.ThisLoginAndLastExit + LocalDataUtils.GetLocalData("CoinByAdTime", 0);
         //if (LocalDataUtils.GetLocalData("CoinByAdTime", 0) != 0)
         //{
         //    IsCoinByAdColdTime=true;
         //}
         ////如果过去的时间已经过了冷却
-        //if(timer>= ConstConfig.CoinTimeCd * 60)
+        //if(DelayTimerHelper>= ConstConfig.CoinTimeCd * 60)
         //{
         //    IsCoinByAdColdTime=false;
         //}
@@ -91,7 +91,7 @@ public class DelayRunManager : MonoSingleton<DelayRunManager>
         //    if (PropManager.Instance.GetDailyRemindNumber() <= 0)
         //    {
         //        RemindCoinByAdTime = 0;
-        //        timer = 0;
+        //        DelayTimerHelper = 0;
         //        IsCoinByAdColdTime = false;
         //        return;
         //    }
@@ -99,16 +99,16 @@ public class DelayRunManager : MonoSingleton<DelayRunManager>
         //    if (!IsCoinByAdColdTime)
         //    {
         //        RemindCoinByAdTime = 0;
-        //        timer = 0;
+        //        DelayTimerHelper = 0;
         //        return;
         //    }
-        //    timer++;
-        //    RemindCoinByAdTime = ConstConfig.CoinTimeCd * 60 - timer;
-        //    LocalDataFunc.Instance.SetLocalData("CoinByAdTime", (int)timer);
-        //    if (timer >= ConstConfig.CoinTimeCd * 60)
+        //    DelayTimerHelper++;
+        //    RemindCoinByAdTime = ConstConfig.CoinTimeCd * 60 - DelayTimerHelper;
+        //    LocalDataFunc.Instance.SetLocalData("CoinByAdTime", (int)DelayTimerHelper);
+        //    if (DelayTimerHelper >= ConstConfig.CoinTimeCd * 60)
         //    {
         //        RemindCoinByAdTime = 0;
-        //        timer = 0;
+        //        DelayTimerHelper = 0;
         //        IsCoinByAdColdTime = false;
         //        this.SendMsg(GameEventType.RefeshCoinShop, null);
         //    }
@@ -159,7 +159,7 @@ public class DelayRunManager : MonoSingleton<DelayRunManager>
         //    if (reportCd >= LocalDataMgr.ReportUserProfileCD)
         //    {
         //        reportCd = 0;
-        //        LocalDataMgr.Instance.UserProfileOnTimer();
+        //        LocalDataMgr.Instance.UserProfileOnDelayTimerHelper();
         //    }
         //});
     }

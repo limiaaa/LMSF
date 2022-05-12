@@ -64,22 +64,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\lib_unity\SGBaseModule\Plugins\7zip\Common\CRC.cs" />
-    <Compile Include="Assets\lib_unity\SGBaseModule\Plugins\7zip\Common\CommandLineParser.cs" />
-    <Compile Include="Assets\lib_unity\SGBaseModule\Plugins\7zip\Common\InBuffer.cs" />
-    <Compile Include="Assets\lib_unity\SGBaseModule\Plugins\7zip\Common\OutBuffer.cs" />
-    <Compile Include="Assets\lib_unity\SGBaseModule\Plugins\7zip\Compress\LZ\IMatchFinder.cs" />
-    <Compile Include="Assets\lib_unity\SGBaseModule\Plugins\7zip\Compress\LZ\LzBinTree.cs" />
-    <Compile Include="Assets\lib_unity\SGBaseModule\Plugins\7zip\Compress\LZ\LzInWindow.cs" />
-    <Compile Include="Assets\lib_unity\SGBaseModule\Plugins\7zip\Compress\LZ\LzOutWindow.cs" />
-    <Compile Include="Assets\lib_unity\SGBaseModule\Plugins\7zip\Compress\LZMA\LzmaBase.cs" />
-    <Compile Include="Assets\lib_unity\SGBaseModule\Plugins\7zip\Compress\LZMA\LzmaDecoder.cs" />
-    <Compile Include="Assets\lib_unity\SGBaseModule\Plugins\7zip\Compress\LZMA\LzmaEncoder.cs" />
-    <Compile Include="Assets\lib_unity\SGBaseModule\Plugins\7zip\Compress\RangeCoder\RangeCoder.cs" />
-    <Compile Include="Assets\lib_unity\SGBaseModule\Plugins\7zip\Compress\RangeCoder\RangeCoderBit.cs" />
-    <Compile Include="Assets\lib_unity\SGBaseModule\Plugins\7zip\Compress\RangeCoder\RangeCoderBitTree.cs" />
-    <Compile Include="Assets\lib_unity\SGBaseModule\Plugins\7zip\ICoder.cs" />
-    <None Include="Assets\lib_unity\SGBaseModule\Plugins\7zip\SevenZip.asmdef" />
+    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Common\CRC.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Common\CommandLineParser.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Common\InBuffer.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Common\OutBuffer.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\LZ\IMatchFinder.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\LZ\LzBinTree.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\LZ\LzInWindow.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\LZ\LzOutWindow.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\LZMA\LzmaBase.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\LZMA\LzmaDecoder.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\LZMA\LzmaEncoder.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\RangeCoder\RangeCoder.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\RangeCoder\RangeCoderBit.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\RangeCoder\RangeCoderBitTree.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\ICoder.cs" />
+    <None Include="Assets\Scripts\LMSF\Plugins\7zip\SevenZip.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.27f1c1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -278,29 +278,29 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/lib_unity/SGBaseModule/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
     <Reference Include="SimpleJson">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/lib_unity/SGBaseModule/Plugins/SimpleJson.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/lib_unity/SGBaseModule/Plugins/DOTween/DOTween.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween43">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/lib_unity/SGBaseModule/Plugins/DOTween/DOTween43.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween46">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/lib_unity/SGBaseModule/Plugins/DOTween/DOTween46.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween50">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/lib_unity/SGBaseModule/Plugins/DOTween/DOTween50.dll</HintPath>
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/SimpleJson.dll</HintPath>
     </Reference>
     <Reference Include="DOTweenEditor">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/lib_unity/SGBaseModule/Plugins/DOTween/Editor/DOTweenEditor.dll</HintPath>
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/DOTween/Editor/DOTweenEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/DOTween/DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween43">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/DOTween/DOTween43.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween50">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/DOTween/DOTween50.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween46">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/DOTween/DOTween46.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/lib_unity/SGBaseModule/Plugins/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.27f1c1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

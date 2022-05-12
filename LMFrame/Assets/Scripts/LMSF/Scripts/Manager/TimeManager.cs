@@ -156,7 +156,7 @@ public class TimeManager : MonoSingleton<TimeManager>
             }
             else
             {
-                return DelayTimeManager.Instance.delay_time_run_loop(timeSpace,
+                return LogicDelayTimerHelperMgr.Instance.DelayLoop(timeSpace,
                 () =>
                 {
                     left = endTimeTs - GetTimeOffsetUtc();

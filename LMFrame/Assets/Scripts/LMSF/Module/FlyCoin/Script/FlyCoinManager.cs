@@ -13,7 +13,7 @@ namespace LMSF.Module
         string FlyObjPath = Global.FlyCoinPath;
         //public void FlyCoin(Vector3 StartPos, Vector3 EndPos, int FlyCoin, Action EndFunc = null)
         //{
-        //    GameObject FlyObj = ResourcesManager.Load(FlyObjPath) as GameObject;
+        //    GameObject FlyObj = ResourceManager.Load(FlyObjPath) as GameObject;
         //    FlyObj = Instantiate<GameObject>(FlyObj);
         //    FlyObj.transform.SetParent(UIManager.Instance.GetCanvasLayer(PageType.PopBox), false);
         //    FlyObj.transform.position = StartPos;
@@ -33,7 +33,7 @@ namespace LMSF.Module
         ///// <param name="RunCoinEndFunc"></param>
         //public void FlyCoinWithRunNumber(Vector3 StartPos, Vector3 EndPos, int FlyCoin, int AddNumber, Text CoinText, Action FlyEndFunc = null, Action RunCoinEndFunc = null)
         //{
-        //    GameObject FlyObj = ResourcesManager.Load(FlyObjPath) as GameObject;
+        //    GameObject FlyObj = ResourceManager.Load(FlyObjPath) as GameObject;
         //    FlyObj = Instantiate<GameObject>(FlyObj);
         //    FlyObj.transform.SetParent(UIManager.Instance.GetCanvasLayer(PageType.PopBox), false);
         //    FlyObj.transform.position = StartPos;

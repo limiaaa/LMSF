@@ -1,5 +1,0 @@
-java -jar C:\Users\XX\Desktop\bundletool-all-1.0.0.jar build-apks --bundle=C:\Users\XX\Desktop\test23.aab --output=C:\Users\XX\Desktop\test23.apks --ks=G:\Client\Trunk\key\user.keystore --ks-pass=pass:abcdef --ks-key-alias=yunzhong --key-pass=pass:abcdef --device-spec=C:\Users\XX\Desktop\config.json
-
-java -jar C:\Users\ly\Desktop\bundletool.jar build-apks --bundle=C:\Users\ly\Desktop\Match_Tile_Master_2021112071800.aab --output=C:\Users\ly\Desktop\Match_Tile_Master_2021112071800.apks --ks=D:\data\cmwork\re\clt_puzzlex\clt_puzzlex\tools\puzzlex.keystore --ks-pass=pass:123123 --ks-key-alias=tilemaster --key-pass=pass:123123 --device-spec=C:\Users\ly\Desktop\config.json
-
-java -jar bundletool.jar install-apks --apks=C:\Users\ly\Desktop\Match_Tile_Master_2021112161818.apk

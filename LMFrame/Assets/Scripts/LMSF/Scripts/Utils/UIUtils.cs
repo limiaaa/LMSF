@@ -114,7 +114,7 @@ namespace LMSF.Utils
             }
             ani.Play(name);
             //SoundMgr.Instance.PlaySoundEffect(SoundTypes.tap_button.ToString());
-            DelayTimeManager.Instance.delay_time_run(callBackTime, () =>
+            LogicDelayTimerHelperMgr.Instance.Delay(callBackTime, () =>
             {
                 act?.Invoke();
             });

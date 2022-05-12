@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using System;
-namespace LMSF.Utils
-{ 
     public class Singleton<T> where T : new()
     {
         private static T _instance;
@@ -17,4 +15,3 @@ namespace LMSF.Utils
             }
         }
     }
-}

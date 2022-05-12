@@ -239,26 +239,26 @@
     <Reference Include="UnityEditor.UI">
       <HintPath>Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>Assets/lib_unity/SGBaseModule/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
     <Reference Include="SimpleJson">
-      <HintPath>Assets/lib_unity/SGBaseModule/Plugins/SimpleJson.dll</HintPath>
+      <HintPath>Assets/Scripts/LMSF/Plugins/SimpleJson.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>Assets/Scripts/LMSF/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
-      <HintPath>Assets/lib_unity/SGBaseModule/Plugins/DOTween/DOTween.dll</HintPath>
+      <HintPath>Assets/Scripts/LMSF/Plugins/DOTween/DOTween.dll</HintPath>
     </Reference>
     <Reference Include="DOTween43">
-      <HintPath>Assets/lib_unity/SGBaseModule/Plugins/DOTween/DOTween43.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween46">
-      <HintPath>Assets/lib_unity/SGBaseModule/Plugins/DOTween/DOTween46.dll</HintPath>
+      <HintPath>Assets/Scripts/LMSF/Plugins/DOTween/DOTween43.dll</HintPath>
     </Reference>
     <Reference Include="DOTween50">
-      <HintPath>Assets/lib_unity/SGBaseModule/Plugins/DOTween/DOTween50.dll</HintPath>
+      <HintPath>Assets/Scripts/LMSF/Plugins/DOTween/DOTween50.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween46">
+      <HintPath>Assets/Scripts/LMSF/Plugins/DOTween/DOTween46.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>Assets/lib_unity/SGBaseModule/Plugins/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
+      <HintPath>Assets/Scripts/LMSF/Plugins/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2019.4.27f1c1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>

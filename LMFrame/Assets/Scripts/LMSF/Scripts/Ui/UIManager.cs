@@ -279,7 +279,7 @@ public class UIManager : MonoSingleton<UIManager>
     }
     private GameObject LoadPrefab(string resName)
     {
-        //GameObject prefab = ResourcesManager.Load<GameObject>(resName);
+        //GameObject prefab = ResourceManager.Load<GameObject>(resName);
         GameObject prefab = null;
         if (prefab == null)
         {

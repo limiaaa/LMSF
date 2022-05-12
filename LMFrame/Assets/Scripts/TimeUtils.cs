@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 
-    public static class TimeUtils
+public static class TimeUtils
     {
         /// <summary>
         /// 将秒转化成：时：分：秒
@@ -114,9 +116,27 @@ using UnityEngine;
             var target = Timestamp2DateTime(timestampSec);
             return DateTime.DaysInMonth(target.Year, target.Month);
         }
-
         public static int GetMonthDays(DateTime dt)
         {
             return DateTime.DaysInMonth(dt.Year, dt.Month);
         }
+
+    static IEnumerator GetTime()
+    {
+        UnityWebRequest unityWeb = UnityWebRequest.Get("http://time.weather.gov.hk/cgi-bin/time5a.pr?a=7");
+        unityWeb.timeout = 15;
+        Debug.Log("开始获取网络时间");
+        yield return unityWeb.SendWebRequest();
+        TimeZoneInfo localZone = TimeZoneInfo.Local;
+        if (unityWeb.downloadHandler.text == "" || unityWeb.downloadHandler.text.Trim() == "")//如果获取网络时间失败,改为获取系统时间
+        {
+        }
+        else//成功获取网络时间
+        {
+            TimeSpan ts = new TimeSpan(DateTime.UtcNow.Ticks - new DateTime(1970, 1, 1, 0, 0, 0).Ticks);
+            string[] timeStr = unityWeb.downloadHandler.text.Split('=');
+            int time1 = (int)ts.TotalSeconds;
+            int time2 = (int)(Convert.ToDecimal(timeStr[1]) / 1000);
+        }
     }
+}

@@ -18,8 +18,8 @@ public class PreloadManager : MonoSingleton<PreloadManager>
     }
     void PreloadUiAtlas()
     {
-        //ResourcesManager.Load<SpriteAtlas>(string.Format(SpriteAtlasPath, "Lobby"),true);
-        //ResourcesManager.Load<SpriteAtlas>(string.Format(SpriteAtlasPath, "Game"), true);
+        //ResourceManager.Load<SpriteAtlas>(string.Format(SpriteAtlasPath, "Lobby"),true);
+        //ResourceManager.Load<SpriteAtlas>(string.Format(SpriteAtlasPath, "Game"), true);
     }
 
 }

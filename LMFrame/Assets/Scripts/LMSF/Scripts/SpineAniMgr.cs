@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
-using SG.Utils;
+
 using Spine.Unity;
-using SG.AssetBundleBrowser.AssetBundlePacker;
+
 /// <summary>
 /// spine动画管理
 /// </summary>
@@ -13,7 +13,7 @@ public class SpineAniMgr : MonoSingleton<SpineAniMgr>
 
     public SkeletonAnimation LoadSpineAni(string path)
     {
-        var obj = ResourcesManager.Load<GameObject>(path);
+        var obj = ResourceManager.Load<GameObject>(path);
         if (obj)
         {
             var comp = GameObject.Instantiate(obj).transform.GetComponent<SkeletonAnimation>();
@@ -33,7 +33,7 @@ public class SpineAniMgr : MonoSingleton<SpineAniMgr>
     // {
     //    if(spine!= null)
     //    {
-    //        SkeletonDataAsset spineAsset = ResourcesManager.Load<SkeletonDataAsset>(path);
+    //        SkeletonDataAsset spineAsset = ResourceManager.Load<SkeletonDataAsset>(path);
     //        if(spineAsset != null)
     //        {
     //            spine.skeletonDataAsset = spineAsset;

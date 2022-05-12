@@ -82,16 +82,16 @@ public class FlyCoinHelper : MonoBehaviour
             toPos.Add(pos);
             fromPos.Add(obj.transform.position);
         }
-        float timer = 0;
-        while (timer < timeToBoom)
+        float DelayTimerHelper = 0;
+        while (DelayTimerHelper < timeToBoom)
         {
-            timer += Time.deltaTime;
+            DelayTimerHelper += Time.deltaTime;
             for (int i = 0; i < currencyObj.Count; i++)
             {
                 Vector3 from = fromPos[i];
                 Vector3 to = toPos[i];
                 Transform obj = currencyObj[i];
-                Vector3 pos = Vector3.Lerp(currencyObj[i].transform.position, to, timer / timeToBoom);
+                Vector3 pos = Vector3.Lerp(currencyObj[i].transform.position, to, DelayTimerHelper / timeToBoom);
                 obj.transform.position = pos;
             }
             yield return null;
@@ -103,15 +103,15 @@ public class FlyCoinHelper : MonoBehaviour
         List<Vector3> fromPos = new List<Vector3>();
         foreach (Transform obj in currencyObj)
             fromPos.Add(obj.transform.position);
-        float timer = 0;
-        while (timer < timeToCollect)
+        float DelayTimerHelper = 0;
+        while (DelayTimerHelper < timeToCollect)
         {
-            timer += Time.deltaTime;
+            DelayTimerHelper += Time.deltaTime;
             for (int i = 0; i < currencyObj.Count; i++)
             {
                 Vector3 from = fromPos[i];
                 Transform obj = currencyObj[i];
-                Vector3 pos = Vector3.Lerp(from, to, timer / timeToCollect);
+                Vector3 pos = Vector3.Lerp(from, to, DelayTimerHelper / timeToCollect);
                 obj.transform.position = pos;
             }
             yield return null;

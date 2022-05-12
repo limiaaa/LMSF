@@ -1,9 +1,8 @@
 ﻿using System;
 using DG.Tweening;
-using SG.AssetBundleBrowser.AssetBundlePacker;
+
 using SG.Haptics;
 using SG.UI;
-using SG.Utils;
 using System.Collections;
 using System.Reflection;
 using UnityEngine;
@@ -11,7 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
-    UILoadingAssetSub loadingui;
+    //UILoadingAssetSub loadingui;
     IEnumerator Start()
     {
         DebugUtils.Log("**************设备信息相关deviceUniqueIdentifier：" + SystemInfo.deviceUniqueIdentifier);
@@ -21,9 +20,18 @@ public class Main : MonoBehaviour
         SelfUtilsAndManagerInit();
         //启动资源加载
         UIManager.Instance.Init("UI/UI_Root", true, UIPageLoadType.ForceResources);
-        loadingui = UIManager.Instance.OpenPage<UILoadingAssetSub>();
+        //loadingui = UIManager.Instance.OpenPage<UILoadingAssetSub>();
         yield return new WaitForSeconds(0.2f);
-        AssetBundleManager.Instance.GetNowLoadingValue();
+        //AssetBundleManager.Instance.GetNowLoadingValue();
+        //AssetBundleManager.Instance.GetNowLoadingValue();
+        //bool needCopy = AssetBundleManager.Instance.GetIsNeedCopyFiles();
+        //if (needCopy)
+        //{
+        //    while (AssetBundleManager.Instance.GetNowLoadingValue() < 0.9f)
+        //    {
+        //        yield return new WaitForSeconds(0.1f);
+        //    }
+        //}
         yield return DoSlider(80);
         AsyncOperation op = SceneManager.LoadSceneAsync("game");
         op.allowSceneActivation = false;
@@ -40,8 +48,9 @@ public class Main : MonoBehaviour
     }
     void SystemAndOtherInit()
     {
+        
         //正式开始游戏逻辑
-        bool isDebug = SG.SettingReader.ScriptableObject.IsLogEnabled;
+        bool isDebug = GameSetting.Instance.OpenLog;
         DebugUtils.IsOpenLog = isDebug;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         Application.logMessageReceived += UnityLogHandler;
@@ -49,15 +58,13 @@ public class Main : MonoBehaviour
         HapticsManager.Init();
         HapticsManager.Active = LocalJsonDataUtils.Instance.gameData.IsVibration;
         //路径初始化
-        if (SG.SettingReader.ScriptableObject.isLoadFromAssetBundle || !Application.isEditor)
+        if (!GameSetting.Instance.IsDeveloperment || !Application.isEditor)
         {
-            SceneResourcesManager.LoadPattern = new AssetBundleLoadPattern();
-            ResourcesManager.LoadPattern = new AssetBundleLoadPattern();
+
         }
         else
         {
-            SceneResourcesManager.LoadPattern = new DefaultLoadPattern();
-            ResourcesManager.LoadPattern = new DefaultLoadPattern();
+          
         }
     }
     void SelfUtilsAndManagerInit()
@@ -72,7 +79,7 @@ public class Main : MonoBehaviour
         TimeManager.Instance.LogTimeData();
         UtilsInitManager.Instance.InitAfterUIInit();
         PreloadManager.Instance.Init();
-        UIManager.Instance.ClosePage<UILoadingAssetSub>(true);
+        //UIManager.Instance.ClosePage<UILoadingAssetSub>(true);
     }
     float currentProgressValue = 0;
     IEnumerator DoSlider(float value)
@@ -80,7 +87,7 @@ public class Main : MonoBehaviour
         float waitTime = (value - currentProgressValue) / 100;
         Tween tween = DOTween.To(() => currentProgressValue, x => currentProgressValue = x, value, waitTime).SetEase(Ease.Linear).OnUpdate(() =>
         {
-            loadingui.SetProgress(currentProgressValue / 100);
+            //loadingui.SetProgress(currentProgressValue / 100);
         });
         yield return new WaitForSeconds(waitTime);
     }
