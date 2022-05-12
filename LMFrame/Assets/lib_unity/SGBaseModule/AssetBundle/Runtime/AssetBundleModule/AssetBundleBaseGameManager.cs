@@ -250,11 +250,11 @@ namespace SG.AssetBundleBrowser.AssetBundlePacker
 
                     //保证路径存在
                     string directory = Path.GetDirectoryName(dest);
-                    if (!string.IsNullOrEmpty(directory) && Directory.Exists(directory))
-                    {
-                        DebugUtils.Log(GamePackName + "   Delete directory:" + directory);
-                        Directory.Delete(directory, true);
-                    }
+                    //if (!string.IsNullOrEmpty(directory) && Directory.Exists(directory))
+                    //{
+                    //    DebugUtils.Log(GamePackName + "   Delete directory:" + directory);
+                    //    Directory.Delete(directory, true);
+                    //}
 
                     if (!Directory.Exists(directory))
                         Directory.CreateDirectory(directory);

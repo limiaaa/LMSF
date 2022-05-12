@@ -11,36 +11,44 @@ using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
+    UILoadingAssetSub loadingui;
     IEnumerator Start()
     {
-        SystemAndDebugInit();
-        GameUtilInit();
-        ResourceChangePath();
-
+        DebugUtils.Log("**************设备信息相关deviceUniqueIdentifier：" + SystemInfo.deviceUniqueIdentifier);
+        DebugUtils.Log("**************设备信息相关deviceName：" + SystemInfo.deviceName);
+        DebugUtils.Log("**************设备信息相关deviceModel：" + SystemInfo.deviceModel);
+        SystemAndOtherInit();
+        SelfUtilsAndManagerInit();
+        //启动资源加载
+        UIManager.Instance.Init("UI/UI_Root", true, UIPageLoadType.ForceResources);
+        loadingui = UIManager.Instance.OpenPage<UILoadingAssetSub>();
+        yield return new WaitForSeconds(0.2f);
+        AssetBundleManager.Instance.GetNowLoadingValue();
+        yield return DoSlider(80);
+        AsyncOperation op = SceneManager.LoadSceneAsync("game");
+        op.allowSceneActivation = false;
+        while (op.progress < 0.9f)
+        {
+            ;
+        }
+        yield return DoSlider(100);
+        InitAfterLoadScene();
+        yield return new WaitForSeconds(0.2f);
+        op.allowSceneActivation = true;
+        //MyTest.Instance.StartMyTest();
+        //MapItemEffective.Init();
     }
-    void SystemAndDebugInit()
+    void SystemAndOtherInit()
     {
+        //正式开始游戏逻辑
         bool isDebug = SG.SettingReader.ScriptableObject.IsLogEnabled;
         DebugUtils.IsOpenLog = isDebug;
-        Debug.unityLogger.logEnabled = isDebug;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-
         Application.logMessageReceived += UnityLogHandler;
-
-    }
-    void GameUtilInit()
-    {
-        //TODO配置表初始化
-
-        //读档
-        LocalJsonDataUtils.Instance.LoadAll();
-        //工具类初始化
-        UtilsInitManager.Instance.InitManager();
-        //开启全生命周期迭代，适用于数值的改变,UI刷新需手动控制
-        DelayRunManager.Instance.StartTimeDelay();
-        UIManager.Instance.Init("UI/UI_Root", true, UIPageLoadType.ForceResources);
-
-        //开始资源加载
+        LocalJsonDataUtils.Instance.LoadAll(); // 读档
+        HapticsManager.Init();
+        HapticsManager.Active = LocalJsonDataUtils.Instance.gameData.IsVibration;
+        //路径初始化
         if (SG.SettingReader.ScriptableObject.isLoadFromAssetBundle || !Application.isEditor)
         {
             SceneResourcesManager.LoadPattern = new AssetBundleLoadPattern();
@@ -51,45 +59,30 @@ public class Main : MonoBehaviour
             SceneResourcesManager.LoadPattern = new DefaultLoadPattern();
             ResourcesManager.LoadPattern = new DefaultLoadPattern();
         }
-        StartCoroutine(ResourceChangePath());
     }
-
-    void ResourceChangePath()
+    void SelfUtilsAndManagerInit()
     {
-        UILoadingAssetSub loadingui = UIManager.Instance.OpenPage<UILoadingAssetSub>();
-        float loadingValue = 0;
-        if (AssetBundleManager.Instance.GetIsNeedCopyFiles())
-        {
-            while (AssetBundleManager.Instance.GetNowLoadingValue() < 0.9f)
-            {
-                loadingui.SetProgress(20f);
-            }
-            loadingValue = 20;
-        }
-
-
-
+        //工具类初始化，比如迭代器
+        UtilsInitManager.Instance.InitManager();
+        //开启全生命周期迭代，适用于数值的改变,UI刷新需手动控制
+        DelayRunManager.Instance.StartTimeDelay();
+    }
+    void InitAfterLoadScene()
+    {
         TimeManager.Instance.LogTimeData();
-        AsyncOperation op = SceneManager.LoadSceneAsync("game");
-        op.allowSceneActivation = false;
-        while (op.progress < 0.9f)
-        {
-            ;
-        }
-
-        HapticsManager.Init();
-        HapticsManager.Active = LocalJsonDataUtils.Instance.gameData.IsVibration;
-        op.allowSceneActivation = true;
         UtilsInitManager.Instance.InitAfterUIInit();
         PreloadManager.Instance.Init();
+        UIManager.Instance.ClosePage<UILoadingAssetSub>(true);
     }
-
-    void SetProgress(float loadingValue)
+    float currentProgressValue = 0;
+    IEnumerator DoSlider(float value)
     {
-        Tween tween = DOTween.To(() => loadingValue, x => loadingValue = x, 100, 1.5f).SetEase(Ease.Linear).OnUpdate(() =>
+        float waitTime = (value - currentProgressValue) / 100;
+        Tween tween = DOTween.To(() => currentProgressValue, x => currentProgressValue = x, value, waitTime).SetEase(Ease.Linear).OnUpdate(() =>
         {
-            loadingui.SetProgress(loadingValue / 100);
+            loadingui.SetProgress(currentProgressValue / 100);
         });
+        yield return new WaitForSeconds(waitTime);
     }
     private void UnityLogHandler(string condition, string stackTrace, LogType type)
     {
