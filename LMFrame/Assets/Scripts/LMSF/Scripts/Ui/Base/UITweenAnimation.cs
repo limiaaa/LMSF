@@ -23,7 +23,7 @@ namespace SG.UI
             }
             mUIPanel.localScale = Vector3.zero;
             mUIPanel.DOScale(Vector3.one, 0.5f).SetEase(Ease.InSine);
-            LogicDelayTimerHelperMgr.Instance.Delay(0.5f, OnComplated);
+            DelyTimerManager.Instance.Delay(0.5f, OnComplated);
         }
 
         public override void PlayEndAnimation(string name , Action OnComplated=null)
@@ -35,7 +35,7 @@ namespace SG.UI
             }
             mUIPanel.localScale = Vector3.one;
             mUIPanel.DOScale(Vector3.zero, 0.5f).SetEase(Ease.OutSine);
-            LogicDelayTimerHelperMgr.Instance.Delay(0.5f, OnComplated);
+            DelyTimerManager.Instance.Delay(0.5f, OnComplated);
         }
     }
 }

@@ -1,12 +1,13 @@
 using UnityEngine;
 using System.Collections;
 using UnityEditor;
+using System.IO;
 
 public class ArtistFont : MonoBehaviour
 {	public static void BatchCreateArtistFont()
 	{
 		string dirName = "";
-		string fntname = EditorUtils.SelectObjectPathInfo(ref dirName).Split('.')[0];
+		string fntname = SelectObjectPathInfo(ref dirName).Split('.')[0];
 		Debug.Log(fntname);
 		Debug.Log(dirName);
 
@@ -58,4 +59,16 @@ public class ArtistFont : MonoBehaviour
 		CustomFont.material = mat;
         EditorUtility.SetDirty(CustomFont);
     }
+	public static string SelectObjectPathInfo(ref string dirName)
+	{
+		if (UnityEditor.Selection.activeInstanceID < 0)
+		{
+			return "";
+		}
+
+		string path = UnityEditor.AssetDatabase.GetAssetPath(UnityEditor.Selection.activeInstanceID);
+
+		dirName = Path.GetDirectoryName(path) + "/";
+		return Path.GetFileName(path);
+	}
 }

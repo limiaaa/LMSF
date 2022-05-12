@@ -3,14 +3,14 @@
 [CreateAssetMenu(fileName = "Tools", menuName = "BuildGameSetting")]
 public class GameSetting : ScriptableObject
 {
-    public bool OpenLog;
+    public bool DebugEnable;
 
     [Header("SeverInfo")]
     public string SeverKey;
 
 
     [Header("DownloadInfo")]
-    public bool IsDeveloperment = true;
+    public bool IsDeveloper = true;
 
     [Header("本地AB")]
     public string[] BundleFolders;
@@ -45,13 +45,7 @@ public class GameSetting : ScriptableObject
         UnityEditor.AssetDatabase.Refresh();
     }
 
-    [UnityEditor.MenuItem("Tools/选中GameSetting")]
-    private static void OpenDevSettings()
-    {
-        var settings = Instance;
-        UnityEditor.EditorGUIUtility.PingObject(settings);
-        UnityEditor.Selection.activeObject = settings;
-    }
+
 #endif
     
 }

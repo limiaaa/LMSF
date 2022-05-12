@@ -643,6 +643,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GameSetting\GameSetting.cs" />
     <Compile Include="Assets\Scripts\Helper\DelayTimerHelper.cs" />
     <Compile Include="Assets\Scripts\Helper\HTTPHelper.cs" />
@@ -737,11 +738,10 @@
     <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\SpineUtils.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\UIUtils.cs" />
     <Compile Include="Assets\Scripts\LMSF\Utils\UIAtlasUtil.cs" />
+    <Compile Include="Assets\Scripts\Manager\DelyTimerManager.cs" />
     <Compile Include="Assets\Scripts\Manager\HTTPManager.cs" />
-    <Compile Include="Assets\Scripts\Manager\LogicTimerMgr.cs" />
     <Compile Include="Assets\Scripts\Manager\ResourceManager.cs" />
     <Compile Include="Assets\Scripts\MemoryPoolTest.cs" />
-    <Compile Include="Assets\Scripts\NetTime.cs" />
     <Compile Include="Assets\Scripts\TimeUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\TextUtil\CircleOutline.cs" />
     <Compile Include="Assets\Scripts\Utils\TextUtil\ListPool.cs" />

@@ -66,7 +66,6 @@
   <ItemGroup>
     <Compile Include="Assets\Editor\CreatModule\CreatModule.cs" />
     <Compile Include="Assets\Editor\EditorHelper.cs" />
-    <Compile Include="Assets\Editor\EditorUtils.cs" />
     <Compile Include="Assets\Editor\FindResReferences.cs" />
     <Compile Include="Assets\Editor\Font\ArtistFont.cs" />
     <Compile Include="Assets\Editor\Font\BMFont.cs" />

@@ -82,16 +82,16 @@ public class FlyCoinHelper : MonoBehaviour
             toPos.Add(pos);
             fromPos.Add(obj.transform.position);
         }
-        float DelayTimerHelper = 0;
-        while (DelayTimerHelper < timeToBoom)
+        float DelyTimerManager = 0;
+        while (DelyTimerManager < timeToBoom)
         {
-            DelayTimerHelper += Time.deltaTime;
+            DelyTimerManager += Time.deltaTime;
             for (int i = 0; i < currencyObj.Count; i++)
             {
                 Vector3 from = fromPos[i];
                 Vector3 to = toPos[i];
                 Transform obj = currencyObj[i];
-                Vector3 pos = Vector3.Lerp(currencyObj[i].transform.position, to, DelayTimerHelper / timeToBoom);
+                Vector3 pos = Vector3.Lerp(currencyObj[i].transform.position, to, DelyTimerManager / timeToBoom);
                 obj.transform.position = pos;
             }
             yield return null;
@@ -103,15 +103,15 @@ public class FlyCoinHelper : MonoBehaviour
         List<Vector3> fromPos = new List<Vector3>();
         foreach (Transform obj in currencyObj)
             fromPos.Add(obj.transform.position);
-        float DelayTimerHelper = 0;
-        while (DelayTimerHelper < timeToCollect)
+        float DelyTimerManager = 0;
+        while (DelyTimerManager < timeToCollect)
         {
-            DelayTimerHelper += Time.deltaTime;
+            DelyTimerManager += Time.deltaTime;
             for (int i = 0; i < currencyObj.Count; i++)
             {
                 Vector3 from = fromPos[i];
                 Transform obj = currencyObj[i];
-                Vector3 pos = Vector3.Lerp(from, to, DelayTimerHelper / timeToCollect);
+                Vector3 pos = Vector3.Lerp(from, to, DelyTimerManager / timeToCollect);
                 obj.transform.position = pos;
             }
             yield return null;

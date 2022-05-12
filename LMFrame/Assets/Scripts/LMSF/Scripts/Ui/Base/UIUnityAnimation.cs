@@ -28,7 +28,7 @@ namespace SG.UI
                     AnimationClip mClipDic = mController[name];
                     float animTime = mClipDic.length;
                     _animator.Play(name, 0, 0);
-                    LogicDelayTimerHelperMgr.Instance.Delay(animTime, OnComplated);
+                    DelyTimerManager.Instance.Delay(animTime, OnComplated);
                 }
                 catch (Exception e)
                 {
@@ -50,7 +50,7 @@ namespace SG.UI
                     AnimationClip mClipDic = mController[name];
                     float animTime = mClipDic.length;
                     _animator.Play(name, 0, 0);
-                    LogicDelayTimerHelperMgr.Instance.Delay(animTime, OnComplated);
+                    DelyTimerManager.Instance.Delay(animTime, OnComplated);
                 }
                 catch (Exception e)
                 {

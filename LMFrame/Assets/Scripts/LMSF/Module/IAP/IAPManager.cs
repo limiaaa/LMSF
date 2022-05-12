@@ -81,7 +81,7 @@ public class IAPManager : MonoSingleton<IAPManager>
             if (isPlayerClick)
             {
                 UIMaskManager.Instance.OpenAniMask(2.1f);
-                LogicDelayTimerHelperMgr.Instance.Delay_WithoutTimeScale(2, () =>
+                DelyTimerManager.Instance.Delay_WithoutTimeScale(2, () =>
                 {
                     Debug.Log("IAP_进入订单验证_" + confirmpendstate);
                     if (confirmpendstate == PurchaseProcessingResult.Pending)

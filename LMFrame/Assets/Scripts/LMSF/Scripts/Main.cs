@@ -50,7 +50,7 @@ public class Main : MonoBehaviour
     {
         
         //正式开始游戏逻辑
-        bool isDebug = GameSetting.Instance.OpenLog;
+        bool isDebug = GameSetting.Instance.DebugEnable;
         DebugUtils.IsOpenLog = isDebug;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         Application.logMessageReceived += UnityLogHandler;
@@ -58,7 +58,7 @@ public class Main : MonoBehaviour
         HapticsManager.Init();
         HapticsManager.Active = LocalJsonDataUtils.Instance.gameData.IsVibration;
         //路径初始化
-        if (!GameSetting.Instance.IsDeveloperment || !Application.isEditor)
+        if (!GameSetting.Instance.IsDeveloper || !Application.isEditor)
         {
 
         }
