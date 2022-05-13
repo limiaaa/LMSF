@@ -71,7 +71,7 @@ public class UIManager : MonoSingleton<UIManager>
 
         CanvasScaler scaler = mroot.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        scaler.referenceResolution = new Vector2(768, 1366);
+        scaler.referenceResolution = new Vector2(720, 1280);
         scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
         scaler.matchWidthOrHeight = 1;
         scaler.referencePixelsPerUnit = 100;
@@ -179,7 +179,6 @@ public class UIManager : MonoSingleton<UIManager>
         UIResPathAttribute attr = GetUIPageDefine(type);
         if (attr == null) return null;
         string path = attr.mPath;
-
         GameObject pg_prefab = null;
         GameObject pg = null;
         if (attr.mPageLoadType == UIPageLoadType.OverrideGameSetting)

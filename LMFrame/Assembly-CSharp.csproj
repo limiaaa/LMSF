@@ -64,37 +64,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Example\EmailExample.cs" />
+    <Compile Include="Assets\Scripts\Example\FacebookExample.cs" />
+    <Compile Include="Assets\Scripts\Example\FirebaseExample.cs" />
+    <Compile Include="Assets\Scripts\Example\LinqExample.cs" />
     <Compile Include="Assets\Scripts\GameSetting\GameSetting.cs" />
-    <Compile Include="Assets\Scripts\Helper\DelayTimerHelper.cs" />
-    <Compile Include="Assets\Scripts\Helper\HTTPHelper.cs" />
-    <Compile Include="Assets\Scripts\LMSF\EmailExample.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Module\DelayRun\DelayRunManager.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Module\FlyCoin\Script\FlyCoinHelper.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Module\FlyCoin\Script\FlyCoinManager.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Module\Guide\NewGuideManager.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Module\Guide\UINewGuide.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Module\IAP\IAPHelper.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Module\IAP\IAPManager.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Module\Init\UtilsInitManager.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Module\Mask\UIMask.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Module\Mask\UIMaskManager.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Module\Public\UILoadingAsset.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Module\RedPoint\RedPointManager.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Other\Compress\Compress.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Other\CryptUtils.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Other\Download\URLVerify.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Other\Download\WebRequestDownload.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Other\Download\WebRequestDownloadTest.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Other\Download\WebRequestExtensions.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Other\LocalDataUtils.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Other\Platform\Platform.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Other\ResourcePath.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Other\SimpleJson\SimpleJsonReader.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Other\SimpleJson\SimpleJsonWriter.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Other\Utility\Extensions.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Other\Utility\ZipHelper.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Other\Utils.cs" />
     <Compile Include="Assets\Scripts\LMSF\Plugins\JsonNet\JsonNetSample\JsonNetSample.cs" />
     <Compile Include="Assets\Scripts\LMSF\Plugins\LitJson\IJsonWrapper.cs" />
     <Compile Include="Assets\Scripts\LMSF\Plugins\LitJson\JsonData.cs" />
@@ -108,80 +82,83 @@
     <Compile Include="Assets\Scripts\LMSF\Plugins\LitJson\Netstandard15Polyfill.cs" />
     <Compile Include="Assets\Scripts\LMSF\Plugins\LitJson\ParserToken.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Event\EventDispatcher.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Event\GameEventMgr.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Example\LinqExample.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Example\UIManagerExample\MonoBehaviourTest.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Example\UIManagerExample\TestBaseUI.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Extends\GameObjectExtend.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Extends\IenumerableExtend.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Extends\TransformExtend.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Extends\Vector3Extend.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\File\FileHelper.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Extends\ComponentExtend.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Global.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Haptics\Sample\HapticsDemo.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Haptics\Scripts\HapticsAndroid.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Haptics\Scripts\HapticsBase.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Haptics\Scripts\HapticsManager.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Haptics\Scripts\HapticsiOS.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Helper\CoroutineHelper.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Helper\DeviceHelper.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Helper\DelayTimerHelper.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Helper\HTTPHelper.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\LocalData\GameData.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\LocalData\LocalDataUtils.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\LocalData\LocalJsonDataUtils.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Main.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Manager\CoroutineManager.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Manager\DelyTimerManager.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Manager\GameEventManager.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Manager\HTTPManager.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Manager\PreloadManager.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Manager\ResourceManager.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Manager\RvCoinManager.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Manager\SoundManager.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Manager\TimeManager.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\MathUtils.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Path\ResourcePath.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Platform\Platform.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\SDKHelpers\FacebookHelper.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\SDKHelpers\FirebaseHelper.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\SafeArea.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\SpineAniMgr.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Test\SingleTonTest.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Test\Test.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\UI\Base\AUIAnimation.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\UI\Base\BaseUI.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\UI\Base\UITweenAnimation.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\UI\Base\UIUnityAnimation.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\MemoryPoolTest.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\SafeArea\SafeArea.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\SimpleJson\SimpleJsonReader.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\SimpleJson\SimpleJsonWriter.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Text\CircleOutline.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Text\ListPool.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Text\ModifiedShadow.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Text\ObjectPool.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Text\Outline8.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Text\TextRoll.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Text\TextSpacing.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Text\TextVerticalGradientThreeColor.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Text\TextVerticalGradientTwoColor.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Text\UGUITextGradient.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Tweening\TweenAlpha.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Tweening\TweenColor.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Tweening\TweenPosition.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Tweening\TweenRotation.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Tweening\TweenScale.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Tweening\TweenSize.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Tweening\UITweener.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\UI\BaseUI.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\UI\UIManager.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Utility\Extensions.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\CommonUtils.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\CryptUtils.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\DebugUtils.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\DoTweenUtils.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\File\LocalFileUtils.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\FileUtls.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\LitJsonUtils.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\LocalDataUtils.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\LocalFileUtils.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\LocalJsonDataUtils.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\MathUtils.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\MonoSingleton.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\Singleton.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\Other\CRCUtils.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\Other\CryptUtils.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\Other\MD5Utils.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\Other\ZipUtils.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\PathUtils.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\Singleton\MonoSingleton.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\Singleton\Singleton.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\SpineUtils.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\SystemeUtls.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\TimeUtils.cs" />
+    <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\UIAtlasUtil.cs" />
     <Compile Include="Assets\Scripts\LMSF\Scripts\Utils\UIUtils.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Utils\UIAtlasUtil.cs" />
-    <Compile Include="Assets\Scripts\Manager\DelyTimerManager.cs" />
-    <Compile Include="Assets\Scripts\Manager\HTTPManager.cs" />
-    <Compile Include="Assets\Scripts\Manager\ResourceManager.cs" />
-    <Compile Include="Assets\Scripts\MemoryPoolTest.cs" />
-    <Compile Include="Assets\Scripts\TimeUtils.cs" />
-    <Compile Include="Assets\Scripts\Utils\TextUtil\CircleOutline.cs" />
-    <Compile Include="Assets\Scripts\Utils\TextUtil\ListPool.cs" />
-    <Compile Include="Assets\Scripts\Utils\TextUtil\ModifiedShadow.cs" />
-    <Compile Include="Assets\Scripts\Utils\TextUtil\ObjectPool.cs" />
-    <Compile Include="Assets\Scripts\Utils\TextUtil\Outline8.cs" />
-    <Compile Include="Assets\Scripts\Utils\TextUtil\TextRoll.cs" />
-    <Compile Include="Assets\Scripts\Utils\TextUtil\TextSpacing.cs" />
-    <Compile Include="Assets\Scripts\Utils\TextUtil\TextVerticalGradientThreeColor.cs" />
-    <Compile Include="Assets\Scripts\Utils\TextUtil\TextVerticalGradientTwoColor.cs" />
-    <Compile Include="Assets\Scripts\Utils\TextUtil\UGUITextGradient.cs" />
-    <Compile Include="Assets\Scripts\Utils\TweeningUtils\TweenAlpha.cs" />
-    <Compile Include="Assets\Scripts\Utils\TweeningUtils\TweenColor.cs" />
-    <Compile Include="Assets\Scripts\Utils\TweeningUtils\TweenPosition.cs" />
-    <Compile Include="Assets\Scripts\Utils\TweeningUtils\TweenRotation.cs" />
-    <Compile Include="Assets\Scripts\Utils\TweeningUtils\TweenScale.cs" />
-    <Compile Include="Assets\Scripts\Utils\TweeningUtils\TweenSize.cs" />
-    <Compile Include="Assets\Scripts\Utils\TweeningUtils\UITweener.cs" />
-    <Compile Include="Assets\lib_unity\SGBaseModule\AssetBundle\Runtime\EventDelegateDef.cs" />
+    <Compile Include="Assets\Scripts\Module\DelayRun\DelayRunManager.cs" />
+    <Compile Include="Assets\Scripts\Module\FlyCoin\Script\FlyCoinHelper.cs" />
+    <Compile Include="Assets\Scripts\Module\FlyCoin\Script\FlyCoinManager.cs" />
+    <Compile Include="Assets\Scripts\Module\Guide\NewGuideManager.cs" />
+    <Compile Include="Assets\Scripts\Module\Guide\UINewGuide.cs" />
+    <Compile Include="Assets\Scripts\Module\IAP\IAPHelper.cs" />
+    <Compile Include="Assets\Scripts\Module\IAP\IAPManager.cs" />
+    <Compile Include="Assets\Scripts\Module\Init\UtilsInitManager.cs" />
+    <Compile Include="Assets\Scripts\Module\Mask\UIMask.cs" />
+    <Compile Include="Assets\Scripts\Module\Mask\UIMaskManager.cs" />
+    <Compile Include="Assets\Scripts\Module\Public\UILoadingAsset.cs" />
+    <Compile Include="Assets\Scripts\Module\RedPoint\RedPointManager.cs" />
     <None Include="Assets\Scripts\LMSF\Plugins\Spine\version.txt" />
     <None Include="Assets\Scripts\LMSF\Plugins\DOTween\readme.txt" />
     <None Include="Assets\Scripts\LMSF\Plugins\DOTween\DOTween50.xml" />
@@ -372,11 +349,11 @@
     <Reference Include="UnityEditor">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.27f1c1/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleJson">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/SimpleJson.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleJson">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/SimpleJson.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
       <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/DOTween/DOTween.dll</HintPath>
@@ -384,11 +361,11 @@
     <Reference Include="DOTween43">
       <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/DOTween/DOTween43.dll</HintPath>
     </Reference>
-    <Reference Include="DOTween50">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/DOTween/DOTween50.dll</HintPath>
-    </Reference>
     <Reference Include="DOTween46">
       <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/DOTween/DOTween46.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween50">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/DOTween/DOTween50.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
@@ -740,6 +717,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="SevenZip.csproj">
+      <Project>{51246899-FF8A-0F5E-13D0-E0CD360AE285}</Project>
+      <Name>SevenZip</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.VSCode.Editor.csproj">
       <Project>{9AE7FC18-82C9-E41B-A610-03CAF4E79FF1}</Project>
       <Name>Unity.VSCode.Editor</Name>
@@ -791,10 +772,6 @@
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{CE8255F8-C429-8D7D-6C52-0B1DFA6ECB1E}</Project>
       <Name>UnityEditor.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="SevenZip.csproj">
-      <Project>{51246899-FF8A-0F5E-13D0-E0CD360AE285}</Project>
-      <Name>SevenZip</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

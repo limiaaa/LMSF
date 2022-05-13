@@ -2,38 +2,43 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
-
-namespace SG.EventSystem.EventDispatcher
-{
-    /// <summary>
-    /// 消息处理器
-    /// </summary>
     public class MsgHandler
     {
         private IMsgReceiver receiver;
         private Action<AEventArgs> callback;
-
         public MsgHandler(IMsgReceiver receiver, Action<AEventArgs> callback)
         {
             this.receiver = receiver;
             this.callback = callback;
         }
-
         public IMsgReceiver Receiver
         {
             get { return receiver; }
         }
-
         public Action<AEventArgs> Callback
         {
             get { return callback; }
         }
     }
+    public interface IMsgReceiver
+    {
+    }
+    public interface IMsgSender
+    {
+    }
+    public abstract class AEventArgs
+    {
+        public static T Parse<T>(AEventArgs instance) where T : AEventArgs
+        {
+            return instance as T;
+        }
 
-    /// <summary>
-    /// 全局消息管理器
-    /// </summary>
-    public static class GloabelMessageManager
+        public int EventType { get; }
+    }
+/// <summary>
+/// 全局消息管理器
+/// </summary>
+public static class GloabelMessageManager
     {
         /// <summary>
         /// 所有的全局消息列表
@@ -181,4 +186,3 @@ namespace SG.EventSystem.EventDispatcher
             }
         }
     }
-}

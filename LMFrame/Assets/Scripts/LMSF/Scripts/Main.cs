@@ -32,31 +32,22 @@ public class Main : MonoBehaviour
         //        yield return new WaitForSeconds(0.1f);
         //    }
         //}
-        yield return DoSlider(80);
-        AsyncOperation op = SceneManager.LoadSceneAsync("game");
-        op.allowSceneActivation = false;
-        while (op.progress < 0.9f)
-        {
-            ;
-        }
         yield return DoSlider(100);
         InitAfterLoadScene();
         yield return new WaitForSeconds(0.2f);
-        op.allowSceneActivation = true;
         //MyTest.Instance.StartMyTest();
         //MapItemEffective.Init();
     }
     void SystemAndOtherInit()
     {
-        
         //正式开始游戏逻辑
         bool isDebug = GameSetting.Instance.DebugEnable;
         DebugUtils.IsOpenLog = isDebug;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         Application.logMessageReceived += UnityLogHandler;
-        LocalJsonDataUtils.Instance.LoadAll(); // 读档
+        LocalJsonDataUtils.LoadAll(); // 读档
         HapticsManager.Init();
-        HapticsManager.Active = LocalJsonDataUtils.Instance.gameData.IsVibration;
+        HapticsManager.Active = LocalJsonDataUtils.GetGameData().IsVibration;
         //路径初始化
         if (!GameSetting.Instance.IsDeveloper || !Application.isEditor)
         {

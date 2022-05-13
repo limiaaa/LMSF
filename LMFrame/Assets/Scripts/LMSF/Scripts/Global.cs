@@ -6,6 +6,9 @@ public static class Global
 {
 
     public static string FlyCoinPath = "Assets/LMSF/Module/FlyCoin/Resource/Prefeb/FlyCoin.prefab";
+
+    public static string CommonPrefabsPath = "Assets/MainApp/Prefabs/";
+
     /// <summary>
     /// 多语言映射表
     /// </summary>
@@ -31,11 +34,11 @@ public static class Global
     {
         public static GameLanguage mRuntimeLanguage
         {
-            get { return LocalJsonDataUtils.Instance.gameData.mCurrentLanguage; }
+            get { return LocalJsonDataUtils.GetGameData().mCurrentLanguage; }
             set
             {
-                LocalJsonDataUtils.Instance.gameData.mCurrentLanguage = value;
-                LocalJsonDataUtils.Instance.SavegameData();
+                LocalJsonDataUtils.GetGameData().mCurrentLanguage = value;
+                LocalJsonDataUtils.SavegameData();
             }
         }
     }
