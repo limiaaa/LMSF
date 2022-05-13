@@ -61,14 +61,14 @@ public class Main : MonoBehaviour
     void SelfUtilsAndManagerInit()
     {
         //工具类初始化，比如迭代器
-        UtilsInitManager.Instance.InitManager();
+        FrameWorkInitManager.Instance.InitManager();
         //开启全生命周期迭代，适用于数值的改变,UI刷新需手动控制
         DelayRunManager.Instance.StartTimeDelay();
     }
     void InitAfterLoadScene()
     {
         TimeManager.Instance.LogTimeData();
-        UtilsInitManager.Instance.InitAfterUIInit();
+        FrameWorkInitManager.Instance.InitAfterUIInit();
         PreloadManager.Instance.Init();
         //UIManager.Instance.ClosePage<UILoadingAssetSub>(true);
     }
