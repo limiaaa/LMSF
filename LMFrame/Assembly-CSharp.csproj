@@ -81,18 +81,6 @@
     <Compile Include="Assets\Scripts\Module\Mask\UIMaskManager.cs" />
     <Compile Include="Assets\Scripts\Module\Public\UILoadingAsset.cs" />
     <Compile Include="Assets\Scripts\Module\RedPoint\RedPointManager.cs" />
-    <Compile Include="Assets\Scripts\Plugins\JsonNet\JsonNetSample\JsonNetSample.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\IJsonWrapper.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\JsonData.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\JsonException.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\JsonHelper.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\JsonMapper.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\JsonMockWrapper.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\JsonReader.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\JsonWriter.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\Lexer.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\Netstandard15Polyfill.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\ParserToken.cs" />
     <Compile Include="Assets\Scripts\Scripts\Event\EventDispatcher.cs" />
     <Compile Include="Assets\Scripts\Scripts\Extends\ComponentExtend.cs" />
     <Compile Include="Assets\Scripts\Scripts\GameManager.cs" />
@@ -159,11 +147,6 @@
     <Compile Include="Assets\Scripts\Scripts\Utils\TimeUtils.cs" />
     <Compile Include="Assets\Scripts\Scripts\Utils\UIAtlasUtil.cs" />
     <Compile Include="Assets\Scripts\Scripts\Utils\UIUtils.cs" />
-    <None Include="Assets\Scripts\Plugins\Spine\version.txt" />
-    <None Include="Assets\Scripts\Plugins\DOTween\readme.txt" />
-    <None Include="Assets\Scripts\Plugins\DOTween\DOTween50.xml" />
-    <None Include="Assets\Scripts\Plugins\DOTween\DOTween46.xml" />
-    <None Include="Assets\Scripts\Plugins\DOTween\DOTween43.xml" />
     <None Include="Assets\CommRes\Gray\Gray.shader" />
     <None Include="Assets\Scripts\Scripts\Haptics\Plugins\Android\AndroidManifest.xml" />
     <Reference Include="UnityEngine">
@@ -350,25 +333,25 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.27f1c1/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
     <Reference Include="SimpleJson">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/Plugins/SimpleJson.dll</HintPath>
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins/SimpleJson.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/Plugins/DOTween/DOTween.dll</HintPath>
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins/DOTween/DOTween.dll</HintPath>
     </Reference>
     <Reference Include="DOTween43">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/Plugins/DOTween/DOTween43.dll</HintPath>
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins/DOTween/DOTween43.dll</HintPath>
     </Reference>
     <Reference Include="DOTween50">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/Plugins/DOTween/DOTween50.dll</HintPath>
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins/DOTween/DOTween50.dll</HintPath>
     </Reference>
     <Reference Include="DOTween46">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/Plugins/DOTween/DOTween46.dll</HintPath>
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins/DOTween/DOTween46.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/Plugins/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.27f1c1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -717,6 +700,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{CBDE2260-110F-D5A1-40D4-800ED37C424C}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.VSCode.Editor.csproj">
       <Project>{9AE7FC18-82C9-E41B-A610-03CAF4E79FF1}</Project>
       <Name>Unity.VSCode.Editor</Name>

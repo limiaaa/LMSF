@@ -53,6 +53,9 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Purchasing.Stores">
       <HintPath>Library/ScriptAssemblies/UnityEngine.Purchasing.Stores.dll</HintPath>
     </Reference>
@@ -276,25 +279,25 @@
       <HintPath>Library/ScriptAssemblies/spine-unity-editor.dll</HintPath>
     </Reference>
     <Reference Include="SimpleJson">
-      <HintPath>Assets/Scripts/Plugins/SimpleJson.dll</HintPath>
+      <HintPath>Assets/Plugins/SimpleJson.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>Assets/Scripts/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>Assets/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
-      <HintPath>Assets/Scripts/Plugins/DOTween/DOTween.dll</HintPath>
+      <HintPath>Assets/Plugins/DOTween/DOTween.dll</HintPath>
     </Reference>
     <Reference Include="DOTween43">
-      <HintPath>Assets/Scripts/Plugins/DOTween/DOTween43.dll</HintPath>
+      <HintPath>Assets/Plugins/DOTween/DOTween43.dll</HintPath>
     </Reference>
     <Reference Include="DOTween50">
-      <HintPath>Assets/Scripts/Plugins/DOTween/DOTween50.dll</HintPath>
+      <HintPath>Assets/Plugins/DOTween/DOTween50.dll</HintPath>
     </Reference>
     <Reference Include="DOTween46">
-      <HintPath>Assets/Scripts/Plugins/DOTween/DOTween46.dll</HintPath>
+      <HintPath>Assets/Plugins/DOTween/DOTween46.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>Assets/Scripts/Plugins/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
+      <HintPath>Assets/Plugins/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2019.4.27f1c1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>
@@ -660,18 +663,6 @@
     <Compile Include="Assets\Scripts\Module\Mask\UIMaskManager.cs" />
     <Compile Include="Assets\Scripts\Module\Public\UILoadingAsset.cs" />
     <Compile Include="Assets\Scripts\Module\RedPoint\RedPointManager.cs" />
-    <Compile Include="Assets\Scripts\Plugins\JsonNet\JsonNetSample\JsonNetSample.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\IJsonWrapper.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\JsonData.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\JsonException.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\JsonHelper.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\JsonMapper.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\JsonMockWrapper.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\JsonReader.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\JsonWriter.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\Lexer.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\Netstandard15Polyfill.cs" />
-    <Compile Include="Assets\Scripts\Plugins\LitJson\ParserToken.cs" />
     <Compile Include="Assets\Scripts\Scripts\Event\EventDispatcher.cs" />
     <Compile Include="Assets\Scripts\Scripts\Extends\ComponentExtend.cs" />
     <Compile Include="Assets\Scripts\Scripts\GameManager.cs" />
@@ -741,19 +732,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\CommRes\Gray\Gray.shader" />
-    <None Include="Assets\Scripts\Plugins\DOTween\DOTween.XML" />
-    <None Include="Assets\Scripts\Plugins\DOTween\DOTween.dll" />
-    <None Include="Assets\Scripts\Plugins\DOTween\DOTween43.dll" />
-    <None Include="Assets\Scripts\Plugins\DOTween\DOTween43.xml" />
-    <None Include="Assets\Scripts\Plugins\DOTween\DOTween46.dll" />
-    <None Include="Assets\Scripts\Plugins\DOTween\DOTween46.xml" />
-    <None Include="Assets\Scripts\Plugins\DOTween\DOTween50.dll" />
-    <None Include="Assets\Scripts\Plugins\DOTween\DOTween50.xml" />
-    <None Include="Assets\Scripts\Plugins\DOTween\readme.txt" />
-    <None Include="Assets\Scripts\Plugins\ICSharpCode.SharpZipLib.dll" />
-    <None Include="Assets\Scripts\Plugins\JsonNet\JsonNet\Newtonsoft.Json.dll" />
-    <None Include="Assets\Scripts\Plugins\SimpleJson.dll" />
-    <None Include="Assets\Scripts\Plugins\Spine\version.txt" />
     <None Include="Assets\Scripts\Scripts\Haptics\Plugins\Android\AndroidManifest.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
