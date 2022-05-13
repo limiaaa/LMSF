@@ -240,25 +240,25 @@
       <HintPath>Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="SimpleJson">
-      <HintPath>Assets/Scripts/LMSF/Plugins/SimpleJson.dll</HintPath>
+      <HintPath>Assets/Scripts/Plugins/SimpleJson.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>Assets/Scripts/LMSF/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>Assets/Scripts/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
-      <HintPath>Assets/Scripts/LMSF/Plugins/DOTween/DOTween.dll</HintPath>
+      <HintPath>Assets/Scripts/Plugins/DOTween/DOTween.dll</HintPath>
     </Reference>
     <Reference Include="DOTween43">
-      <HintPath>Assets/Scripts/LMSF/Plugins/DOTween/DOTween43.dll</HintPath>
+      <HintPath>Assets/Scripts/Plugins/DOTween/DOTween43.dll</HintPath>
     </Reference>
     <Reference Include="DOTween50">
-      <HintPath>Assets/Scripts/LMSF/Plugins/DOTween/DOTween50.dll</HintPath>
+      <HintPath>Assets/Scripts/Plugins/DOTween/DOTween50.dll</HintPath>
     </Reference>
     <Reference Include="DOTween46">
-      <HintPath>Assets/Scripts/LMSF/Plugins/DOTween/DOTween46.dll</HintPath>
+      <HintPath>Assets/Scripts/Plugins/DOTween/DOTween46.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>Assets/Scripts/LMSF/Plugins/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
+      <HintPath>Assets/Scripts/Plugins/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2019.4.27f1c1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>
@@ -607,24 +607,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Common\CRC.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Common\CommandLineParser.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Common\InBuffer.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Common\OutBuffer.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\LZ\IMatchFinder.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\LZ\LzBinTree.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\LZ\LzInWindow.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\LZ\LzOutWindow.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\LZMA\LzmaBase.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\LZMA\LzmaDecoder.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\LZMA\LzmaEncoder.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\RangeCoder\RangeCoder.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\RangeCoder\RangeCoderBit.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\Compress\RangeCoder\RangeCoderBitTree.cs" />
-    <Compile Include="Assets\Scripts\LMSF\Plugins\7zip\ICoder.cs" />
+    <Compile Include="Assets\Scripts\Plugins\7zip\Common\CRC.cs" />
+    <Compile Include="Assets\Scripts\Plugins\7zip\Common\CommandLineParser.cs" />
+    <Compile Include="Assets\Scripts\Plugins\7zip\Common\InBuffer.cs" />
+    <Compile Include="Assets\Scripts\Plugins\7zip\Common\OutBuffer.cs" />
+    <Compile Include="Assets\Scripts\Plugins\7zip\Compress\LZ\IMatchFinder.cs" />
+    <Compile Include="Assets\Scripts\Plugins\7zip\Compress\LZ\LzBinTree.cs" />
+    <Compile Include="Assets\Scripts\Plugins\7zip\Compress\LZ\LzInWindow.cs" />
+    <Compile Include="Assets\Scripts\Plugins\7zip\Compress\LZ\LzOutWindow.cs" />
+    <Compile Include="Assets\Scripts\Plugins\7zip\Compress\LZMA\LzmaBase.cs" />
+    <Compile Include="Assets\Scripts\Plugins\7zip\Compress\LZMA\LzmaDecoder.cs" />
+    <Compile Include="Assets\Scripts\Plugins\7zip\Compress\LZMA\LzmaEncoder.cs" />
+    <Compile Include="Assets\Scripts\Plugins\7zip\Compress\RangeCoder\RangeCoder.cs" />
+    <Compile Include="Assets\Scripts\Plugins\7zip\Compress\RangeCoder\RangeCoderBit.cs" />
+    <Compile Include="Assets\Scripts\Plugins\7zip\Compress\RangeCoder\RangeCoderBitTree.cs" />
+    <Compile Include="Assets\Scripts\Plugins\7zip\ICoder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Scripts\LMSF\Plugins\7zip\SevenZip.asmdef" />
+    <None Include="Assets\Scripts\Plugins\7zip\SevenZip.asmdef" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

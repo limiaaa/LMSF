@@ -268,29 +268,29 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
     <Reference Include="SimpleJson">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/SimpleJson.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/DOTween/DOTween.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween43">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/DOTween/DOTween43.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween46">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/DOTween/DOTween46.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween50">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/DOTween/DOTween50.dll</HintPath>
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/Plugins/SimpleJson.dll</HintPath>
     </Reference>
     <Reference Include="DOTweenEditor">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/DOTween/Editor/DOTweenEditor.dll</HintPath>
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/Plugins/DOTween/Editor/DOTweenEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/Plugins/DOTween/DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween43">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/Plugins/DOTween/DOTween43.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween50">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/Plugins/DOTween/DOTween50.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween46">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/Plugins/DOTween/DOTween46.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/LMSF/Plugins/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Scripts/Plugins/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.27f1c1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
