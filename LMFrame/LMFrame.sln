@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.VSCode.Editor", "Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{D78FC5FD-4ACA-93F5-0ECD-87A1E14C20E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.AssetBundleBrowser.Editor", "Unity.AssetBundleBrowser.Editor.csproj", "{0049A6F8-5CC4-1A27-411D-A4086638A4CD}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spine-unity.Player", "spine-unity.Player.csproj", "{704FC200-5905-6DFC-402F-AC3F0A04F9C2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenZip.Player", "SevenZip.Player.csproj", "{0F93E51B-CBA5-E193-D6A4-B502D207F498}"
@@ -147,6 +149,10 @@ Global
 		{D78FC5FD-4ACA-93F5-0ECD-87A1E14C20E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D78FC5FD-4ACA-93F5-0ECD-87A1E14C20E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D78FC5FD-4ACA-93F5-0ECD-87A1E14C20E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0049A6F8-5CC4-1A27-411D-A4086638A4CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0049A6F8-5CC4-1A27-411D-A4086638A4CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0049A6F8-5CC4-1A27-411D-A4086638A4CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0049A6F8-5CC4-1A27-411D-A4086638A4CD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{704FC200-5905-6DFC-402F-AC3F0A04F9C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{704FC200-5905-6DFC-402F-AC3F0A04F9C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{704FC200-5905-6DFC-402F-AC3F0A04F9C2}.Release|Any CPU.ActiveCfg = Release|Any CPU

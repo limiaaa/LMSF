@@ -1,0 +1,17 @@
+主要添加lua打包按钮，资源加密按钮，增加file文件
+1.增加
+AssetBundleEncrypt(加密)
+BuildLuaAssetBundle(Lua打包)
+CreateAssetBundleConfig(file信息表)
+XConfigList()
+
+
+1.在AssetDatabaseABDataSource中
+102行	增加加密判断
+2.在AssetBundleBuildTab中
+228行	增加lua按钮
+259行	增加加密按钮
+394行	判断lua是否勾选打包lua
+399行	判断是否加密
+460行	修改输出文件夹名称
+	
