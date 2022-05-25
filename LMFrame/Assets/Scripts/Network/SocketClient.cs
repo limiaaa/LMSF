@@ -134,8 +134,8 @@ public class SocketClient
                 int mainId = buffer.ReadInt();
                 byte[] messageBuffer = buffer.ReadBytes();
                 long curTime = 0;
-                string MD5ByteValue = AESProgram.GetMD5(AESProgram.byteTostring(messageBuffer) + curTime.ToString());
-                byte[] MD5Change = AESProgram.AESEncrypt(MD5ByteValue, AppConst.AESEncryptKey, AppConst.AESEncryptIV);
+                string MD5ByteValue = MD5Utils.Md5(ByteUtils.byteTostring(messageBuffer) + curTime.ToString());
+                byte[] MD5Change = CryptUtils.EncryptAES(MD5ByteValue, AppConst.AESEncryptKey, AppConst.AESEncryptIV);
                 int MD5Changelen = MD5Change.Length;
                 int md5Len = MD5ByteValue.Length;
                 ushort msglen = (ushort)(messageBuffer.Length + MD5Change.Length + 24);

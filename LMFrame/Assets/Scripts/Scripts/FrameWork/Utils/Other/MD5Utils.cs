@@ -14,14 +14,17 @@ public static class MD5Utils
 
     public static string Md5(string text)
     {
-        return Md5(Encoding.Default.GetBytes(text));
+        return Md5(Encoding.UTF8.GetBytes(text));
     }
 
-    public static string Md5(string text, Encoding encoding /*Encoding.Default*/)
+    public static string Md5(string text, Encoding encoding=null /*Encoding.Default*/)
     {
+        if (encoding == null)
+        {
+            encoding = Encoding.UTF8;
+        }
         return Md5(encoding.GetBytes(text));
     }
-
     public static string Md5(byte[] bytes)
     {
         byte[] hash;

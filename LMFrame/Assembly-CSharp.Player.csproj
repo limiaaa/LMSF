@@ -53,12 +53,6 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll</HintPath>
-    </Reference>
-    <Reference Include="SevenZip">
-      <HintPath>Library/ScriptAssemblies/SevenZip.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.Purchasing.Stores">
       <HintPath>Library/ScriptAssemblies/UnityEngine.Purchasing.Stores.dll</HintPath>
     </Reference>
@@ -67,9 +61,6 @@
     </Reference>
     <Reference Include="UnityEngine.Purchasing">
       <HintPath>Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
-    </Reference>
-    <Reference Include="spine-unity">
-      <HintPath>Library/ScriptAssemblies/spine-unity.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
@@ -82,6 +73,12 @@
     </Reference>
     <Reference Include="UnityEngine.Purchasing.SecurityStub">
       <HintPath>Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityStub.dll</HintPath>
+    </Reference>
+    <Reference Include="SevenZip">
+      <HintPath>Library/ScriptAssemblies/SevenZip.dll</HintPath>
+    </Reference>
+    <Reference Include="spine-unity">
+      <HintPath>Library/ScriptAssemblies/spine-unity.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.27f1c1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/Variations/mono/Managed/UnityEngine.dll</HintPath>
@@ -269,38 +266,38 @@
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>Library/ScriptAssemblies/UnityEditor.Purchasing.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.AssetBundleBrowser.Editor">
+      <HintPath>Library/ScriptAssemblies/Unity.AssetBundleBrowser.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="spine-unity-editor">
-      <HintPath>Library/ScriptAssemblies/spine-unity-editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.AssetBundleBrowser.Editor">
-      <HintPath>Library/ScriptAssemblies/Unity.AssetBundleBrowser.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>Assets/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
+    <Reference Include="spine-unity-editor">
+      <HintPath>Library/ScriptAssemblies/spine-unity-editor.dll</HintPath>
     </Reference>
     <Reference Include="SimpleJson">
-      <HintPath>Assets/Plugins/SimpleJson.dll</HintPath>
+      <HintPath>Assets/Plugins_3th/SimpleJson.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>Assets/Plugins_3th/ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
-      <HintPath>Assets/Plugins/DOTween/DOTween.dll</HintPath>
+      <HintPath>Assets/Plugins_3th/DOTween/DOTween.dll</HintPath>
     </Reference>
     <Reference Include="DOTween43">
-      <HintPath>Assets/Plugins/DOTween/DOTween43.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween46">
-      <HintPath>Assets/Plugins/DOTween/DOTween46.dll</HintPath>
+      <HintPath>Assets/Plugins_3th/DOTween/DOTween43.dll</HintPath>
     </Reference>
     <Reference Include="DOTween50">
-      <HintPath>Assets/Plugins/DOTween/DOTween50.dll</HintPath>
+      <HintPath>Assets/Plugins_3th/DOTween/DOTween50.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween46">
+      <HintPath>Assets/Plugins_3th/DOTween/DOTween46.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>Assets/Plugins/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
+      <HintPath>Assets/Plugins_3th/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2019.4.27f1c1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>
@@ -649,11 +646,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Plugins_3th\JsonNet\JsonNetSample\JsonNetSample.cs" />
+    <Compile Include="Assets\Plugins_3th\LitJson\IJsonWrapper.cs" />
+    <Compile Include="Assets\Plugins_3th\LitJson\JsonData.cs" />
+    <Compile Include="Assets\Plugins_3th\LitJson\JsonException.cs" />
+    <Compile Include="Assets\Plugins_3th\LitJson\JsonHelper.cs" />
+    <Compile Include="Assets\Plugins_3th\LitJson\JsonMapper.cs" />
+    <Compile Include="Assets\Plugins_3th\LitJson\JsonMockWrapper.cs" />
+    <Compile Include="Assets\Plugins_3th\LitJson\JsonReader.cs" />
+    <Compile Include="Assets\Plugins_3th\LitJson\JsonWriter.cs" />
+    <Compile Include="Assets\Plugins_3th\LitJson\Lexer.cs" />
+    <Compile Include="Assets\Plugins_3th\LitJson\Netstandard15Polyfill.cs" />
+    <Compile Include="Assets\Plugins_3th\LitJson\ParserToken.cs" />
+    <Compile Include="Assets\Scripts\AppConst.cs" />
     <Compile Include="Assets\Scripts\Example\EmailExample.cs" />
     <Compile Include="Assets\Scripts\Example\FacebookExample.cs" />
     <Compile Include="Assets\Scripts\Example\FirebaseExample.cs" />
     <Compile Include="Assets\Scripts\Example\LinqExample.cs" />
     <Compile Include="Assets\Scripts\GameSetting\GameSetting.cs" />
+    <Compile Include="Assets\Scripts\Network\ByteBuffer.cs" />
+    <Compile Include="Assets\Scripts\Network\Converter.cs" />
+    <Compile Include="Assets\Scripts\Network\Protocal.cs" />
+    <Compile Include="Assets\Scripts\Network\SocketClient.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Event\EventDispatcher.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Extends\ComponentExtend.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\FrameWorkInitManager.cs" />
@@ -708,6 +722,7 @@
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Utils\LitJsonUtils.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Utils\LocalFileUtils.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Utils\MathUtils.cs" />
+    <Compile Include="Assets\Scripts\Scripts\FrameWork\Utils\Other\ByteUtils.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Utils\Other\CRCUtils.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Utils\Other\CryptUtils.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Utils\Other\MD5Utils.cs" />
@@ -732,9 +747,25 @@
     <Compile Include="Assets\Scripts\Scripts\LocalData\GameData.cs" />
     <Compile Include="Assets\Scripts\Scripts\Main.cs" />
     <Compile Include="Assets\Scripts\Scripts\MemoryPoolTest.cs" />
+    <Compile Include="Assets\Scripts\Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\CommRes\Gray\Gray.shader" />
+    <None Include="Assets\LuaPath\LuaPath.txt" />
+    <None Include="Assets\Plugins_3th\AssetBundleBrowser\AB工具修改文档.txt" />
+    <None Include="Assets\Plugins_3th\DOTween\DOTween.XML" />
+    <None Include="Assets\Plugins_3th\DOTween\DOTween.dll" />
+    <None Include="Assets\Plugins_3th\DOTween\DOTween43.dll" />
+    <None Include="Assets\Plugins_3th\DOTween\DOTween43.xml" />
+    <None Include="Assets\Plugins_3th\DOTween\DOTween46.dll" />
+    <None Include="Assets\Plugins_3th\DOTween\DOTween46.xml" />
+    <None Include="Assets\Plugins_3th\DOTween\DOTween50.dll" />
+    <None Include="Assets\Plugins_3th\DOTween\DOTween50.xml" />
+    <None Include="Assets\Plugins_3th\DOTween\readme.txt" />
+    <None Include="Assets\Plugins_3th\ICSharpCode.SharpZipLib.dll" />
+    <None Include="Assets\Plugins_3th\JsonNet\JsonNet\Newtonsoft.Json.dll" />
+    <None Include="Assets\Plugins_3th\SimpleJson.dll" />
+    <None Include="Assets\Plugins_3th\Spine\version.txt" />
     <None Include="Assets\Scripts\Scripts\FrameWork\Haptics\Plugins\Android\AndroidManifest.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

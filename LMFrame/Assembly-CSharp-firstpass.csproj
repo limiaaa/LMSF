@@ -672,6 +672,10 @@
       <Project>{4F21C18B-12CD-1B81-7D41-061B5B7AFCCB}</Project>
       <Name>UnityEngine.Purchasing.SecurityCore</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.AssetBundleBrowser.Editor.csproj">
+      <Project>{0049A6F8-5CC4-1A27-411D-A4086638A4CD}</Project>
+      <Name>Unity.AssetBundleBrowser.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.2D.Sprite.Editor.csproj">
       <Project>{F78635AB-D753-8933-72DE-F21F9D62338C}</Project>
       <Name>Unity.2D.Sprite.Editor</Name>
@@ -687,10 +691,6 @@
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{CE8255F8-C429-8D7D-6C52-0B1DFA6ECB1E}</Project>
       <Name>UnityEditor.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.AssetBundleBrowser.Editor.csproj">
-      <Project>{0049A6F8-5CC4-1A27-411D-A4086638A4CD}</Project>
-      <Name>Unity.AssetBundleBrowser.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

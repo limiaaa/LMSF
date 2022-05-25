@@ -75,6 +75,28 @@
     <Compile Include="Assets\Editor\Font\ByteReader.cs" />
     <Compile Include="Assets\Editor\FontMakerWizard.cs" />
     <Compile Include="Assets\Editor\TextureSetting.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\AssetBundleBrowserMain.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\AssetBundleBuildTab.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\AssetBundleDataSource\ABDataSource.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\AssetBundleDataSource\ABDataSourceProvider.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\AssetBundleDataSource\AssetDatabaseABDataSource.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\AssetBundleEncrypt.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\AssetBundleManageTab.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\AssetBundleModel\ABModel.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\AssetBundleModel\ABModelAssetInfo.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\AssetBundleModel\ABModelBundleInfo.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\AssetBundleTree.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\AssetListTree.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\BuildLuaAssetBundle.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\BundleDetailList.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\CreateAssetBundleConfig.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\InspectTab\AssetBundleInspectTab.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\InspectTab\AssetBundleRecord.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\InspectTab\InspectSingleBundle.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\InspectTab\InspectTreeView.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\MessageList.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\MessageSystem.cs" />
+    <Compile Include="Assets\Plugins_3th\AssetBundleBrowser\Editor\XConfigList.cs" />
     <None Include="Assets\Editor\CreatModule\ModuleTemp\TempData.txt" />
     <None Include="Assets\Editor\CreatModule\ModuleTemp\TempModuleNameList.txt" />
     <None Include="Assets\Editor\CreatModule\ModuleTemp\TempView.txt" />
@@ -277,29 +299,29 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins/ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
     <Reference Include="SimpleJson">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins/SimpleJson.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins/DOTween/DOTween.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween43">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins/DOTween/DOTween43.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween46">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins/DOTween/DOTween46.dll</HintPath>
-    </Reference>
-    <Reference Include="DOTween50">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins/DOTween/DOTween50.dll</HintPath>
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins_3th/SimpleJson.dll</HintPath>
     </Reference>
     <Reference Include="DOTweenEditor">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins/DOTween/Editor/DOTweenEditor.dll</HintPath>
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins_3th/DOTween/Editor/DOTweenEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins_3th/ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins_3th/DOTween/DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween43">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins_3th/DOTween/DOTween43.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween50">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins_3th/DOTween/DOTween50.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween46">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins_3th/DOTween/DOTween46.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins_3th/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.27f1c1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -657,17 +679,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{CBDE2260-110F-D5A1-40D4-800ED37C424C}</Project>
-      <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{7F85F45D-D1AD-F8C6-8DF1-36E759E12FC4}</Project>
       <Name>Assembly-CSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="SevenZip.csproj">
-      <Project>{51246899-FF8A-0F5E-13D0-E0CD360AE285}</Project>
-      <Name>SevenZip</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VSCode.Editor.csproj">
       <Project>{9AE7FC18-82C9-E41B-A610-03CAF4E79FF1}</Project>
@@ -685,10 +699,6 @@
       <Project>{BCB79B9D-3519-7564-4C92-1D3073B674CF}</Project>
       <Name>UnityEngine.Purchasing</Name>
     </ProjectReference>
-    <ProjectReference Include="spine-unity.csproj">
-      <Project>{BE6CB0FF-0D66-9A5E-4CAB-8DAACB4DC6F8}</Project>
-      <Name>spine-unity</Name>
-    </ProjectReference>
     <ProjectReference Include="UnityEditor.Purchasing.csproj">
       <Project>{8C597752-58BA-A6E3-2AB6-74D84A9790D2}</Project>
       <Name>UnityEditor.Purchasing</Name>
@@ -705,13 +715,13 @@
       <Project>{4F21C18B-12CD-1B81-7D41-061B5B7AFCCB}</Project>
       <Name>UnityEngine.Purchasing.SecurityCore</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.AssetBundleBrowser.Editor.csproj">
+      <Project>{0049A6F8-5CC4-1A27-411D-A4086638A4CD}</Project>
+      <Name>Unity.AssetBundleBrowser.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.2D.Sprite.Editor.csproj">
       <Project>{F78635AB-D753-8933-72DE-F21F9D62338C}</Project>
       <Name>Unity.2D.Sprite.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="spine-unity-editor.csproj">
-      <Project>{75F42622-B6BF-43E3-5ACA-2E08FAAC0ABE}</Project>
-      <Name>spine-unity-editor</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.Purchasing.SecurityStub.csproj">
       <Project>{175032BD-92D2-8D77-3436-32666CA50C13}</Project>
@@ -721,9 +731,17 @@
       <Project>{CE8255F8-C429-8D7D-6C52-0B1DFA6ECB1E}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.AssetBundleBrowser.Editor.csproj">
-      <Project>{0049A6F8-5CC4-1A27-411D-A4086638A4CD}</Project>
-      <Name>Unity.AssetBundleBrowser.Editor</Name>
+    <ProjectReference Include="SevenZip.csproj">
+      <Project>{51246899-FF8A-0F5E-13D0-E0CD360AE285}</Project>
+      <Name>SevenZip</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-unity.csproj">
+      <Project>{BE6CB0FF-0D66-9A5E-4CAB-8DAACB4DC6F8}</Project>
+      <Name>spine-unity</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-unity-editor.csproj">
+      <Project>{75F42622-B6BF-43E3-5ACA-2E08FAAC0ABE}</Project>
+      <Name>spine-unity-editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

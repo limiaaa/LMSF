@@ -2,10 +2,12 @@
 using System.Text;
 using UnityEngine;
 using System.Security.Cryptography;
+using System.IO;
+using System.Collections;
 
-    public static class CryptUtils
-    {
-        #region Libii 加密解密
+public static class CryptUtils
+{
+    #region Libii 加密解密
 
         #region C
 
@@ -144,56 +146,130 @@ using System.Security.Cryptography;
             return ret;
         }
 
-        #endregion
+    #endregion
+    #region 3DES 加密解密
 
-        #region 3DES 加密解密
-
-        private static byte[] TripleDESEncrypt(byte[] data, string key, string iv)
-        {
-            TripleDESCryptoServiceProvider des;
-            des         = new TripleDESCryptoServiceProvider();
-            des.Key     = Encoding.ASCII.GetBytes(key);
-            des.IV      = Encoding.ASCII.GetBytes(iv);
-            des.Mode    = CipherMode.CBC;
-            des.Padding = PaddingMode.PKCS7;
-            return des.CreateEncryptor().TransformFinalBlock(data, 0, data.Length);
-        }
-
-        private static byte[] TripleDESDecrypt(byte[] data, string key, string iv)
-        {
-            TripleDESCryptoServiceProvider des;
-            des         = new TripleDESCryptoServiceProvider();
-            des.Key     = Encoding.ASCII.GetBytes(key);
-            des.IV      = Encoding.ASCII.GetBytes(iv);
-            des.Mode    = CipherMode.CBC;
-            des.Padding = PaddingMode.PKCS7;
-            return des.CreateDecryptor().TransformFinalBlock(data, 0, data.Length);
-        }
-
-        #endregion
-
-        #region AES 加密解密
-
-        private static byte[] AESEncrypt(byte[] data, string key, string iv)
-        {
-            Rijndael aes = Rijndael.Create();
-            aes.Key     = Encoding.ASCII.GetBytes(key);
-            aes.IV      = Encoding.ASCII.GetBytes(iv);
-            aes.Mode    = CipherMode.CBC;
-            aes.Padding = PaddingMode.PKCS7;
-            return aes.CreateEncryptor().TransformFinalBlock(data, 0, data.Length);
-        }
-
-        private static byte[] AESDecrypt(byte[] data, string key, string iv)
-        {
-            Rijndael aes = Rijndael.Create();
-            aes.Key     = Encoding.ASCII.GetBytes(key);
-            aes.IV      = Encoding.ASCII.GetBytes(iv);
-            aes.Mode    = CipherMode.CBC;
-            aes.Padding = PaddingMode.PKCS7;
-            return aes.CreateDecryptor().TransformFinalBlock(data, 0, data.Length);
-        }
-
-        #endregion
+    private static byte[] TripleDESEncrypt(byte[] data, string key, string iv)
+    {
+        TripleDESCryptoServiceProvider des;
+        des         = new TripleDESCryptoServiceProvider();
+        des.Key     = Encoding.ASCII.GetBytes(key);
+        des.IV      = Encoding.ASCII.GetBytes(iv);
+        des.Mode    = CipherMode.CBC;
+        des.Padding = PaddingMode.PKCS7;
+        return des.CreateEncryptor().TransformFinalBlock(data, 0, data.Length);
     }
+
+    private static byte[] TripleDESDecrypt(byte[] data, string key, string iv)
+    {
+        TripleDESCryptoServiceProvider des;
+        des         = new TripleDESCryptoServiceProvider();
+        des.Key     = Encoding.ASCII.GetBytes(key);
+        des.IV      = Encoding.ASCII.GetBytes(iv);
+        des.Mode    = CipherMode.CBC;
+        des.Padding = PaddingMode.PKCS7;
+        return des.CreateDecryptor().TransformFinalBlock(data, 0, data.Length);
+    }
+
+    #endregion
+    #region AES 加密解密
+    private static byte[] AESEncrypt(byte[] data, string key, string iv)
+    {
+        Rijndael aes = Rijndael.Create();
+        aes.Key     = Encoding.ASCII.GetBytes(key);
+        aes.IV      = Encoding.ASCII.GetBytes(iv);
+        aes.Mode    = CipherMode.CBC;
+        aes.Padding = PaddingMode.PKCS7;
+        return aes.CreateEncryptor().TransformFinalBlock(data, 0, data.Length);
+    }
+    private static byte[] AESDecrypt(byte[] data, string key, string iv)
+    {
+        Rijndael aes = Rijndael.Create();
+        aes.Key     = Encoding.ASCII.GetBytes(key);
+        aes.IV      = Encoding.ASCII.GetBytes(iv);
+        aes.Mode    = CipherMode.CBC;
+        aes.Padding = PaddingMode.PKCS7;
+        return aes.CreateDecryptor().TransformFinalBlock(data, 0, data.Length);
+    }
+    public static byte[] EncryptAES(string Data, string keyTmp, string iv)
+    {
+        RijndaelManaged rijndaelManaged = new RijndaelManaged();
+        rijndaelManaged.Mode = CipherMode.CBC;
+        rijndaelManaged.Padding = PaddingMode.Zeros;
+        rijndaelManaged.KeySize = 128;
+        rijndaelManaged.BlockSize = 128;
+        byte[] bytes = Encoding.UTF8.GetBytes(keyTmp);
+        byte[] array = new byte[16];
+        int num = bytes.Length;
+        if (num > array.Length)
+        {
+            num = array.Length;
+        }
+        Array.Copy(bytes, array, num);
+        rijndaelManaged.Key = array;
+        rijndaelManaged.IV = Encoding.UTF8.GetBytes(iv);
+        ICryptoTransform cryptoTransform = rijndaelManaged.CreateEncryptor();
+        byte[] bytes2 = Encoding.UTF8.GetBytes(Data);
+        return cryptoTransform.TransformFinalBlock(bytes2, 0, bytes2.Length);
+    }
+    public static byte[] DecodeAES(string text, string key, string iv)
+    {
+        RijndaelManaged rijndaelManaged = new RijndaelManaged();
+        rijndaelManaged.Mode = CipherMode.CBC;
+        rijndaelManaged.Padding = PaddingMode.Zeros;
+        rijndaelManaged.KeySize = 128;
+        rijndaelManaged.BlockSize = 128;
+        byte[] array = Convert.FromBase64String(text);
+        byte[] bytes = Encoding.UTF8.GetBytes(key);
+        byte[] array2 = new byte[16];
+        int num = bytes.Length;
+        if (num > array2.Length)
+        {
+            num = array2.Length;
+        }
+        Array.Copy(bytes, array2, num);
+        rijndaelManaged.Key = array2;
+        rijndaelManaged.IV = Encoding.UTF8.GetBytes(iv);
+        ICryptoTransform cryptoTransform = rijndaelManaged.CreateDecryptor();
+        return cryptoTransform.TransformFinalBlock(array, 0, array.Length);
+    }
+#endregion
+    #region AssetBundle加密解密
+//16进制key值
+public static string encryKey = "limilimi";
+//加密AssetBundle
+public static void EncryptAssetBundle(string abPath)
+{
+    byte[] EncryKey = Encoding.UTF8.GetBytes(encryKey);
+    byte[] bytes = File.ReadAllBytes(abPath);
+    for (int i = 0; i < bytes.Length; ++i)
+    {
+        bytes[i] ^= EncryKey[i % 4];
+    }
+    File.WriteAllBytes(abPath, bytes);
+}
+//解密AssetBundle
+public static void DecryptAssetBundle(byte[] data)
+{
+    byte[] EncryKey = Encoding.UTF8.GetBytes(encryKey);
+    for (int i = 0; i < data.Length; ++i)
+    {
+        data[i] ^= EncryKey[i % 4];
+    }
+}
+public static IEnumerator DecryptAssetBundleAsync(byte[] data)
+{
+    byte[] EncryKey = Encoding.UTF8.GetBytes(encryKey);
+    for (int i = 0; i < data.Length; ++i)
+    {
+        data[i] ^= EncryKey[i % 4];
+
+        if (i % 2048 == 0)
+        {
+            yield return new UnityEngine.WaitForEndOfFrame();
+        }
+    }
+}
+#endregion
+}
 
