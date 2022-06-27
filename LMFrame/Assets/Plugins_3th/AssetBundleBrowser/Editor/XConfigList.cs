@@ -40,7 +40,6 @@ namespace AssetBundleBrowser
 		}
 		private const string CONFIG_EXTENTION = ".txt";
 		public static string[] ADD_TO_MAIN_LIST = { "lua", "assetbundleinfo" };
-		private const string CONFIG_INFO = "abundleinfo";
 		public ConfigVo CreateMainConfigVo(string targetPath, List<ConfigVo> configList)
 		{
 
@@ -73,7 +72,7 @@ namespace AssetBundleBrowser
 					mainVo.contentList.Add(CreateConfigLine(configList[i].configPath, targetPath + Path.DirectorySeparatorChar));
 				}
 			}
-			mainVo.contentList.Add(CreateConfigLine(targetPath + Path.DirectorySeparatorChar + CONFIG_INFO, targetPath + Path.DirectorySeparatorChar));
+			mainVo.contentList.Add(CreateConfigLine(targetPath + Path.DirectorySeparatorChar + AppConst.MainAbName, targetPath + Path.DirectorySeparatorChar));
 			return mainVo;
 		}
 

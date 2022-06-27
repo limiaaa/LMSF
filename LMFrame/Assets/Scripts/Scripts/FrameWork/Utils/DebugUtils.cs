@@ -39,6 +39,7 @@ using UnityEngine;
             {
                 temp = String.Format(msg, objects);
             }
+            Log(temp, Color.white);
         }
         public static void LogWarning(string fmt, params object[] objects)
         {

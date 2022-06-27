@@ -2,7 +2,6 @@
 using DG.Tweening;
 
 using SG.Haptics;
-using SG.UI;
 using System.Collections;
 using System.Reflection;
 using UnityEngine;
@@ -17,54 +16,29 @@ public class Main : MonoBehaviour
         DebugUtils.Log("**************设备信息相关deviceName：" + SystemInfo.deviceName);
         DebugUtils.Log("**************设备信息相关deviceModel：" + SystemInfo.deviceModel);
         SystemAndOtherInit();
-        SelfUtilsAndManagerInit();
+        //工具类初始化，比如迭代器,时间管理工具,本地存储等
+        FrameWorkInitManager.Instance.InitManager();
         //启动资源加载
         UIManager.Instance.Init("UI/UI_Root", true, UIPageLoadType.ForceResources);
         //loadingui = UIManager.Instance.OpenPage<UILoadingAssetSub>();
-        yield return new WaitForSeconds(0.2f);
-        //AssetBundleManager.Instance.GetNowLoadingValue();
-        //AssetBundleManager.Instance.GetNowLoadingValue();
-        //bool needCopy = AssetBundleManager.Instance.GetIsNeedCopyFiles();
-        //if (needCopy)
-        //{
-        //    while (AssetBundleManager.Instance.GetNowLoadingValue() < 0.9f)
-        //    {
-        //        yield return new WaitForSeconds(0.1f);
-        //    }
-        //}
         yield return DoSlider(100);
         InitAfterLoadScene();
         yield return new WaitForSeconds(0.2f);
-        //MyTest.Instance.StartMyTest();
-        //MapItemEffective.Init();
+
     }
+    //系统数据初始化
     void SystemAndOtherInit()
     {
         //正式开始游戏逻辑
         bool isDebug = GameSetting.Instance.DebugEnable;
         DebugUtils.IsOpenLog = isDebug;
+        Debug.unityLogger.logEnabled = isDebug;
+        //不休眠
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        //添加错误堆栈信息
         Application.logMessageReceived += UnityLogHandler;
-        LocalJsonDataUtils.LoadAll(); // 读档
-        HapticsManager.Init();
-        HapticsManager.Active = LocalJsonDataUtils.GetGameData().IsVibration;
-        //路径初始化
-        if (!GameSetting.Instance.IsDeveloper || !Application.isEditor)
-        {
-
-        }
-        else
-        {
-          
-        }
     }
-    void SelfUtilsAndManagerInit()
-    {
-        //工具类初始化，比如迭代器
-        FrameWorkInitManager.Instance.InitManager();
-        //开启全生命周期迭代，适用于数值的改变,UI刷新需手动控制
-        DelayRunManager.Instance.StartTimeDelay();
-    }
+    //在切换场景后调用的方法
     void InitAfterLoadScene()
     {
         TimeManager.Instance.LogTimeData();
@@ -72,6 +46,25 @@ public class Main : MonoBehaviour
         PreloadManager.Instance.Init();
         //UIManager.Instance.ClosePage<UILoadingAssetSub>(true);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     float currentProgressValue = 0;
     IEnumerator DoSlider(float value)
     {
@@ -84,7 +77,10 @@ public class Main : MonoBehaviour
     }
     private void UnityLogHandler(string condition, string stackTrace, LogType type)
     {
-        throw new NotImplementedException();
+        if (type == LogType.Error)
+        {
+
+        }
     }
     private void Update()
     {

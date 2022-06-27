@@ -37,7 +37,7 @@
 
 
         /// <summary>
-        /// MonoSingleton起始点
+        /// 没有任何实现的函数，用于保证MonoSingleton在使用前已创建
         /// </summary>
         public void Startup()
         {
@@ -49,16 +49,7 @@
             {
                 mInstance = this as T;
             }
-
-            if (this != mInstance)
-            {
-                Debug.LogWarning("Destroy unused instances of " + typeof(T).Name + "   Boot has/have " +
-                                 this.transform.parent.childCount + " child(ren)");
-                Destroy(this.gameObject);
-            }
-            if (gameObject.transform.parent)
-                DontDestroyOnLoad(gameObject.transform.parent.gameObject);
-
+            Destroy(this.gameObject);
             Init();
         }
 

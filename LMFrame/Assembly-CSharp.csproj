@@ -86,6 +86,9 @@
     <Compile Include="Assets\Scripts\Network\Converter.cs" />
     <Compile Include="Assets\Scripts\Network\Protocal.cs" />
     <Compile Include="Assets\Scripts\Network\SocketClient.cs" />
+    <Compile Include="Assets\Scripts\Scripts\FrameWork\AssetBundle\ManifestManager.cs" />
+    <Compile Include="Assets\Scripts\Scripts\FrameWork\AssetBundle\ResourceManager.cs" />
+    <Compile Include="Assets\Scripts\Scripts\FrameWork\AssetBundle\ResourcePath.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Event\EventDispatcher.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Extends\ComponentExtend.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\FrameWorkInitManager.cs" />
@@ -97,8 +100,9 @@
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Helper\DelayTimerHelper.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Helper\HTTPHelper.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Manager\CoroutineManager.cs" />
+    <Compile Include="Assets\Scripts\Scripts\FrameWork\Manager\FpsManager.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Manager\GameEventManager.cs" />
-    <Compile Include="Assets\Scripts\Scripts\FrameWork\Manager\ResourceManager.cs" />
+    <Compile Include="Assets\Scripts\Scripts\FrameWork\Manager\ObjectManager.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Manager\RvCoinManager.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Module\DelayRun\DelayRunManager.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Module\FlyCoin\Script\FlyCoinHelper.cs" />
@@ -150,7 +154,6 @@
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Utils\SpineUtils.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Utils\SystemeUtls.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Utils\TimeUtils.cs" />
-    <Compile Include="Assets\Scripts\Scripts\FrameWork\Utils\UIAtlasUtil.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Utils\UIUtils.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\_NeedInit\DelyTimerManager.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\_NeedInit\HTTPManager.cs" />
@@ -175,6 +178,7 @@
     <None Include="Assets\Scripts\Scripts\FrameWork\Haptics\Plugins\Android\AndroidManifest.xml" />
     <None Include="Assets\Plugins_3th\AssetBundleBrowser\AB工具修改文档.txt" />
     <None Include="Assets\LuaPath\LuaPath.txt" />
+    <None Include="Assets\Shaders\Gray.shader" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.27f1c1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -358,11 +362,11 @@
     <Reference Include="UnityEditor">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.27f1c1/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleJson">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins_3th/SimpleJson.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins_3th/ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleJson">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins_3th/SimpleJson.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
       <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins_3th/DOTween/DOTween.dll</HintPath>
@@ -370,11 +374,11 @@
     <Reference Include="DOTween43">
       <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins_3th/DOTween/DOTween43.dll</HintPath>
     </Reference>
-    <Reference Include="DOTween50">
-      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins_3th/DOTween/DOTween50.dll</HintPath>
-    </Reference>
     <Reference Include="DOTween46">
       <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins_3th/DOTween/DOTween46.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween50">
+      <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins_3th/DOTween/DOTween50.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>F:/LMSF/LMSF/LMFrame/Assets/Plugins_3th/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
@@ -726,6 +730,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="SevenZip.csproj">
+      <Project>{51246899-FF8A-0F5E-13D0-E0CD360AE285}</Project>
+      <Name>SevenZip</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.VSCode.Editor.csproj">
       <Project>{9AE7FC18-82C9-E41B-A610-03CAF4E79FF1}</Project>
       <Name>Unity.VSCode.Editor</Name>
@@ -741,6 +749,10 @@
     <ProjectReference Include="UnityEngine.Purchasing.csproj">
       <Project>{BCB79B9D-3519-7564-4C92-1D3073B674CF}</Project>
       <Name>UnityEngine.Purchasing</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-unity.csproj">
+      <Project>{BE6CB0FF-0D66-9A5E-4CAB-8DAACB4DC6F8}</Project>
+      <Name>spine-unity</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.Purchasing.csproj">
       <Project>{8C597752-58BA-A6E3-2AB6-74D84A9790D2}</Project>
@@ -766,6 +778,10 @@
       <Project>{F78635AB-D753-8933-72DE-F21F9D62338C}</Project>
       <Name>Unity.2D.Sprite.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="spine-unity-editor.csproj">
+      <Project>{75F42622-B6BF-43E3-5ACA-2E08FAAC0ABE}</Project>
+      <Name>spine-unity-editor</Name>
+    </ProjectReference>
     <ProjectReference Include="UnityEngine.Purchasing.SecurityStub.csproj">
       <Project>{175032BD-92D2-8D77-3436-32666CA50C13}</Project>
       <Name>UnityEngine.Purchasing.SecurityStub</Name>
@@ -773,18 +789,6 @@
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{CE8255F8-C429-8D7D-6C52-0B1DFA6ECB1E}</Project>
       <Name>UnityEditor.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="SevenZip.csproj">
-      <Project>{51246899-FF8A-0F5E-13D0-E0CD360AE285}</Project>
-      <Name>SevenZip</Name>
-    </ProjectReference>
-    <ProjectReference Include="spine-unity.csproj">
-      <Project>{BE6CB0FF-0D66-9A5E-4CAB-8DAACB4DC6F8}</Project>
-      <Name>spine-unity</Name>
-    </ProjectReference>
-    <ProjectReference Include="spine-unity-editor.csproj">
-      <Project>{75F42622-B6BF-43E3-5ACA-2E08FAAC0ABE}</Project>
-      <Name>spine-unity-editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

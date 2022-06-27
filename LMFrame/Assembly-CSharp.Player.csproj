@@ -53,6 +53,9 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="SevenZip">
+      <HintPath>Library/ScriptAssemblies/SevenZip.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Purchasing.Stores">
       <HintPath>Library/ScriptAssemblies/UnityEngine.Purchasing.Stores.dll</HintPath>
     </Reference>
@@ -61,6 +64,9 @@
     </Reference>
     <Reference Include="UnityEngine.Purchasing">
       <HintPath>Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
+    </Reference>
+    <Reference Include="spine-unity">
+      <HintPath>Library/ScriptAssemblies/spine-unity.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
@@ -73,12 +79,6 @@
     </Reference>
     <Reference Include="UnityEngine.Purchasing.SecurityStub">
       <HintPath>Library/ScriptAssemblies/UnityEngine.Purchasing.SecurityStub.dll</HintPath>
-    </Reference>
-    <Reference Include="SevenZip">
-      <HintPath>Library/ScriptAssemblies/SevenZip.dll</HintPath>
-    </Reference>
-    <Reference Include="spine-unity">
-      <HintPath>Library/ScriptAssemblies/spine-unity.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.27f1c1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/Variations/mono/Managed/UnityEngine.dll</HintPath>
@@ -272,17 +272,17 @@
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
     <Reference Include="spine-unity-editor">
       <HintPath>Library/ScriptAssemblies/spine-unity-editor.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleJson">
-      <HintPath>Assets/Plugins_3th/SimpleJson.dll</HintPath>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>Assets/Plugins_3th/ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleJson">
+      <HintPath>Assets/Plugins_3th/SimpleJson.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets/Plugins_3th/DOTween/DOTween.dll</HintPath>
@@ -290,11 +290,11 @@
     <Reference Include="DOTween43">
       <HintPath>Assets/Plugins_3th/DOTween/DOTween43.dll</HintPath>
     </Reference>
-    <Reference Include="DOTween50">
-      <HintPath>Assets/Plugins_3th/DOTween/DOTween50.dll</HintPath>
-    </Reference>
     <Reference Include="DOTween46">
       <HintPath>Assets/Plugins_3th/DOTween/DOTween46.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween50">
+      <HintPath>Assets/Plugins_3th/DOTween/DOTween50.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Assets/Plugins_3th/JsonNet/JsonNet/Newtonsoft.Json.dll</HintPath>
@@ -668,6 +668,9 @@
     <Compile Include="Assets\Scripts\Network\Converter.cs" />
     <Compile Include="Assets\Scripts\Network\Protocal.cs" />
     <Compile Include="Assets\Scripts\Network\SocketClient.cs" />
+    <Compile Include="Assets\Scripts\Scripts\FrameWork\AssetBundle\ManifestManager.cs" />
+    <Compile Include="Assets\Scripts\Scripts\FrameWork\AssetBundle\ResourceManager.cs" />
+    <Compile Include="Assets\Scripts\Scripts\FrameWork\AssetBundle\ResourcePath.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Event\EventDispatcher.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Extends\ComponentExtend.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\FrameWorkInitManager.cs" />
@@ -679,8 +682,9 @@
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Helper\DelayTimerHelper.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Helper\HTTPHelper.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Manager\CoroutineManager.cs" />
+    <Compile Include="Assets\Scripts\Scripts\FrameWork\Manager\FpsManager.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Manager\GameEventManager.cs" />
-    <Compile Include="Assets\Scripts\Scripts\FrameWork\Manager\ResourceManager.cs" />
+    <Compile Include="Assets\Scripts\Scripts\FrameWork\Manager\ObjectManager.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Manager\RvCoinManager.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Module\DelayRun\DelayRunManager.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Module\FlyCoin\Script\FlyCoinHelper.cs" />
@@ -732,7 +736,6 @@
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Utils\SpineUtils.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Utils\SystemeUtls.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Utils\TimeUtils.cs" />
-    <Compile Include="Assets\Scripts\Scripts\FrameWork\Utils\UIAtlasUtil.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\Utils\UIUtils.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\_NeedInit\DelyTimerManager.cs" />
     <Compile Include="Assets\Scripts\Scripts\FrameWork\_NeedInit\HTTPManager.cs" />
@@ -767,6 +770,7 @@
     <None Include="Assets\Plugins_3th\SimpleJson.dll" />
     <None Include="Assets\Plugins_3th\Spine\version.txt" />
     <None Include="Assets\Scripts\Scripts\FrameWork\Haptics\Plugins\Android\AndroidManifest.xml" />
+    <None Include="Assets\Shaders\Gray.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

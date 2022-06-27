@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using LMSF.Utils;
+using SG.Haptics;
 using UnityEngine;
 
 /// <summary>
@@ -11,6 +12,10 @@ public class FrameWorkInitManager : MonoSingleton<FrameWorkInitManager>
 {
     public void InitManager()
     {
+        LocalJsonDataUtils.LoadAll(); // 读档
+        ManifestManager.Instance.InitManifestManager();
+        InitHaptics();
+        InitPathAndAssetBundle();
         TimeManager.Instance.InitGameFunc();
         LocalDataUtils.InitLocalDataFunc();
         RvCoinManager.Instance.RefeshRvCoinFunc();
@@ -28,6 +33,9 @@ public class FrameWorkInitManager : MonoSingleton<FrameWorkInitManager>
             SetDefaultLang();
             PlayerPrefs.SetInt("SetDefaultLang", 1);
         }
+
+        //开启全生命周期迭代，适用于数值的改变,UI刷新需手动控制
+        DelayRunManager.Instance.StartTimeDelay();
     }
     public void InitAfterUIInit()
     {
@@ -41,30 +49,27 @@ public class FrameWorkInitManager : MonoSingleton<FrameWorkInitManager>
         }
     }
 
-    //需要零点刷新的初始化
-    void SomeThingRefeshByZeroTime()
+    //初始化震动工具
+    void InitHaptics()
     {
-        //新签到相关
-        //UIDailySignInManager.Instance.AddDailySignInModuleInRefeshEveryDay();
-        //UITurnTableManager.Instance.AddTurnTableModuleInRefeshEveryDay();
-    }
-    //每次进入游戏如果是新的一天刷新
-    public void RefeshEveryDay()
-    {
-        ////今天是否进入过每日签到 签到相关
-        //LocalDataUtils.SetLocalData("DailySignInTodayIsEnter", 1);
-        //LocalDataUtils.SetLocalData("TodayDailySingnInRewardIsGet", 1);
-        ////今天是否进入过转盘
-        //LocalDataUtils.SetLocalData("IsEnterTurnTableInToday", 1);
-        ////刷新转盘次数
-        //LocalDataUtils.SetLocalData("RemindWheelNumberEveryDay", ConstConfig.TurnTableNum);
+        //震动
+        HapticsManager.Init();
+        HapticsManager.Active = LocalJsonDataUtils.GetGameData().IsVibration;
     }
 
+    //初始化路径工具
+    void InitPathAndAssetBundle()
+    {
+        //路径初始化
+        if (!GameSetting.Instance.IsDeveloper || !Application.isEditor)
+        {
+        }
+        else
+        {
+        }
+    }
 
-
-
-
-
+    //设置默认语言
     void SetDefaultLang()
     {
         LangKey();
@@ -100,5 +105,25 @@ public class FrameWorkInitManager : MonoSingleton<FrameWorkInitManager>
         LangMap.Add("cs", "Czech");
         LangMap.Add("dan", "Danish");
         LangMap.Add("nl", "Dutch");
+    }
+
+
+    //需要零点刷新的初始化
+    void SomeThingRefeshByZeroTime()
+    {
+        //新签到相关
+        //UIDailySignInManager.Instance.AddDailySignInModuleInRefeshEveryDay();
+        //UITurnTableManager.Instance.AddTurnTableModuleInRefeshEveryDay();
+    }
+    //每次进入游戏如果是新的一天刷新
+    public void RefeshEveryDay()
+    {
+        ////今天是否进入过每日签到 签到相关
+        //LocalDataUtils.SetLocalData("DailySignInTodayIsEnter", 1);
+        //LocalDataUtils.SetLocalData("TodayDailySingnInRewardIsGet", 1);
+        ////今天是否进入过转盘
+        //LocalDataUtils.SetLocalData("IsEnterTurnTableInToday", 1);
+        ////刷新转盘次数
+        //LocalDataUtils.SetLocalData("RemindWheelNumberEveryDay", ConstConfig.TurnTableNum);
     }
 }

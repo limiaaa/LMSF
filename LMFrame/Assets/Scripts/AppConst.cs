@@ -26,6 +26,10 @@ public static class AppConst
 	public static string AssetDir = "StreamingAssets";           //素材目录 
 	public static string AESEncryptKey = "TWf7g1Gt701h0.#0";
 	public static string AESEncryptIV = "YgnHV16#8HQFc&16";
+	public static string MainAbName = "abundleinfo";
+	public static string MainMainfestName = "AssetBundleManifest";
+	
+
 	public static bool EncryptABBol = false;
 	//机器码
 	public static string EquipmentCode = string.Empty;
@@ -38,4 +42,14 @@ public static class AppConst
 			return Application.dataPath + "/" + AppName;
 		}
 	}
+
+
+
+
+
+
+
+
+
+
 }

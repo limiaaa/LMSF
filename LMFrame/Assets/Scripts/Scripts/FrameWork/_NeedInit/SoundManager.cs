@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using SG.UI;
 
 
 public class SoundManager : MonoSingleton<SoundManager>
@@ -41,7 +40,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         //if (!LocalDataManager.Instance.GetMusicState())
         //    SetBgmVolume(0);
-        AudioClip bgm = ResourceManager.Load<AudioClip>(string.Format(AudioPath, name));
+        AudioClip bgm = ResourceManager.Instance.LoadAsset<AudioClip>("",string.Format(AudioPath, name));
         if (bgm != Audio_Bgm.clip)
         {
             Audio_Bgm.clip = bgm;
@@ -53,7 +52,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         //if (!LocalDataManager.Instance.GetMusicState())
         //    SetBgmVolume(0);
-        AudioClip bgm = ResourceManager.Load<AudioClip>(string.Format(AudioPath, name));
+        AudioClip bgm = ResourceManager.Instance.LoadAsset<AudioClip>("", string.Format(AudioPath, name));
         Audio_Bgm.clip = bgm;
         Audio_Bgm.loop = Loop;
         Audio_Bgm.Play();
@@ -86,7 +85,7 @@ public class SoundManager : MonoSingleton<SoundManager>
         //if (!LocalDataManager.Instance.GetSoundState())
         //    SetSoundEffectVolume(0);
 
-        AudioClip audioClip = ResourceManager.Load<AudioClip>(string.Format(AudioPath, name));
+        AudioClip audioClip = ResourceManager.Instance.LoadAsset<AudioClip>("", string.Format(AudioPath, name));
         if (audioClip != null)
         {
             if (!AudioSourceDic.ContainsKey(name))
@@ -118,7 +117,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         //if (!LocalDataManager.Instance.GetSoundState())
         //    SetSoundEffectVolume(0);
-        AudioClip audioClip = ResourceManager.Load<AudioClip>(string.Format(AudioPath, name));
+        AudioClip audioClip = ResourceManager.Instance.LoadAsset<AudioClip>("",string.Format(AudioPath, name));
         if (audioClip != null)
         {
             AudioSource audioSource = null;
