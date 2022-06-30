@@ -5,6 +5,13 @@ Shader "shader/DefaultGray" {
     {
         [PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
         _Color("Tint", Color) = (1,1,1,1)
+
+        _StencilComp ("Stencil Comparison", Float) = 8.0
+        _Stencil ("Stencil ID", Float) = 0.0
+        _StencilOp ("Stencil Operation", Float) = 0.0
+        _StencilWriteMask ("Stencil Write Mask", Float) = 255.0
+        _StencilReadMask ("Stencil Read Mask", Float) = 255.0
+        _ColorMask ("Color Mask", Float) = 15.0
     }
 
         SubShader
@@ -17,6 +24,17 @@ Shader "shader/DefaultGray" {
         "PreviewType" = "Plane"
         "CanUseSpriteAtlas" = "True"
     }
+    	Stencil
+        {
+            Ref				[_Stencil]
+			Comp			[_StencilComp]
+			Pass				[_StencilOp]
+			ReadMask	    [_StencilReadMask]
+			WriteMask	[_StencilWriteMask]
+        }
+
+        ColorMask [_ColorMask]
+
         // 源rgba*源a + 背景rgba*(1-源A值)   
         Blend SrcAlpha OneMinusSrcAlpha
 
